@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>TÍTULO DO TÓPICO • Resumo</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+/* complementos leves, mantendo estética existente */
+.container-resumo { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
+.header-resumo { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+.header-resumo h1 { margin:0; font-size: clamp(1.4rem, 2.5vw, 2rem); }
+.badge-topico { background:#eef2ff; color:#1f2a7a; padding:.25rem .5rem; border-radius: 999px; font-weight:600; }
+.player-wrap { position:relative; padding-top:56.25%; border-radius: 16px; overflow:hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); margin: 1rem 0 1.5rem; }
+.player-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:1rem; }
+.card { background:#fff; border-radius:16px; padding:1rem; box-shadow:0 6px 18px rgba(0,0,0,.06); }
+.card h3 { margin:.25rem 0 .5rem; font-size:1rem; }
+.filters { display:grid; grid-template-columns: repeat(3, minmax(160px, 1fr)); gap:.75rem; margin:1rem 0; }
+@media (max-width: 720px) { .filters { grid-template-columns: 1fr; } }
+.select, .input { width:100%; padding:.6rem .8rem; border:1px solid #e5e7eb; border-radius:12px; }
+.btn { padding:.6rem .9rem; border:0; border-radius:12px; cursor:pointer; font-weight:600; }
+.btn-primary { background:#1f2a7a; color:#fff; }
+.section-title { margin-top:1.25rem; margin-bottom:.5rem; font-size:1.1rem; font-weight:700; }
+.small { font-size:.9rem; color:#555; }
+hr.sep { border:0; height:1px; background:#eee; margin:1.25rem 0; }
+.note { background:#f8fafc; padding: .75rem 1rem; border-radius:12px; }
+</style>
+<link href="../css/fix-logo-gap.css" rel="stylesheet"/><style>
+.site-footer{background:#ffffff;border-top:1px solid #e5e7eb;margin-top:40px}
+.site-footer .footer-inner{max-width:1100px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-footer .copyright{color:#4b5563;font:500 14px/1.4 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+.site-footer .footer-social{display:flex;align-items:center;gap:10px}
+.site-footer .footer-social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;border:1px solid #e5e7eb;background:#ffffff;transition:background .2s, transform .2s, box-shadow .2s}
+.site-footer .footer-social a:hover{background:#f3f4f6;transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.site-footer .footer-social svg{width:18px;height:18px;color:#111827}
+@media (max-width:640px){
+  .site-footer .footer-inner{padding:16px 14px}
+  .site-footer .copyright{font-size:13px}
+}
+
+/* ===== Hero otimizado ===== */
+.novidades-image{position:relative; overflow:visible;}
+.novidades-image img{
+  display:block;
+  height:auto;
+  max-width:none;     /* permite passar do container */
+  width:120%;         /* 20% maior que o container */
+  transform:translateX(5%); /* move um pouco para a direita */
+  will-change:transform;
+}
+/* Responsivo: reduz a expansão em telas pequenas */
+@media (max-width: 768px){
+  .novidades-image img{ width:110%; transform:translateX(3%); }
+}
+
+/* ===== Ajuste vertical da estátua ===== */
+.novidades-image{position:relative; overflow:visible;}
+.novidades-image img{
+  display:block;
+  max-width:100%;    /* largura normal do container */
+  width:100%;
+  height:auto;
+  margin-top:-10%;   /* sobe um pouco para passar do container */
+}
+@media (max-width: 768px){
+  .novidades-image img{ margin-top:-5%; }
+}
+
+/* ===== Hero: imagem absoluta sem alterar o container ===== */
+.novidades-container{ /* não mexe na altura do container roxo */ }
+.novidades-image{
+  position:relative;          /* contexto para position:absolute da img */
+  min-height: 360px;          /* garante área fixa do hero (ajuste se quiser) */
+  overflow: visible;          /* permite a imagem 'vazar' visualmente */
+}
+.novidades-image img{
+  position:absolute;          /* tira a imagem do fluxo para não aumentar o container */
+  top:-16%;                   /* sobe (apenas vertical) */
+  left:-18%;                  /* vai para a esquerda */
+  width:140%;                 /* maior, sem afetar o container */
+  height:auto;
+  max-width:none;
+  display:block;
+  margin:0;
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image{ min-height: 260px; }
+  .novidades-image img{
+    top:-10%;
+    left:-10%;
+    width:125%;
+  }
+}
+
+/* ===== Hero ajustado ===== */
+.novidades-container{}
+.novidades-image{
+  position:relative;
+  overflow:visible;
+}
+.novidades-image img{
+  position:relative;      /* volta ao fluxo relativo para não sumir */
+  display:block;
+  width:100%;             /* ocupa largura total do container */
+  height:auto;
+  max-width:none;
+  margin-left:-8%;        /* move um pouco para a esquerda */
+  margin-top:-8%;         /* sobe um pouco para dar destaque */
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image img{
+    width:100%;
+    margin-left:-5%;
+    margin-top:-5%;
+  }
+}
+
+/* ===== Hero refinado ===== */
+.novidades-image img{
+  position:relative;
+  display:block;
+  width:105%;            /* aumenta um pouco a escala */
+  height:auto;
+  max-width:none;
+  margin-left:-8%;       /* mantém o deslocamento para esquerda */
+  margin-top:-1%;        /* desce um pouco para centralizar melhor */
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image img{
+    width:103%;
+    margin-left:-5%;
+    margin-top:-1%;
+  }
+}
+
+/* ===== Hero com efeito de zoom-in ===== */
+.novidades-image img{
+  animation: zoomInHero 1.8s ease-out forwards;
+  transform-origin: center bottom; /* foco no pé da estátua */
+}
+@keyframes zoomInHero{
+  0% { transform: scale(0.95); opacity: 0; }
+  60% { transform: scale(1.07); opacity: 1; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* ===== Destaques (inspirado no estudeprisma.com/novidades) ===== */
+.destaques-wrap{max-width:1100px;margin:0 auto;padding:18px 16px 28px}
+.destaques-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card-destaque{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease}
+.card-destaque:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.card-thumb{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:10px;top:10px;background:#111827;color:#fff;border-radius:9999px;padding:6px 10px;font:700 11px/1 ui-sans-serif,system-ui;letter-spacing:.2px}
+.card-body{display:flex;flex-direction:column;gap:8px;padding:12px}
+.card-title{font:700 16px/1.25 ui-sans-serif,system-ui;color:#111827}
+.card-desc{font:500 13px/1.35 ui-sans-serif,system-ui;color:#4b5563;min-height:42px}
+.card-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
+.meta-left{display:flex;align-items:center;gap:8px;font:600 12px/1 ui-sans-serif,system-ui;color:#374151}
+.meta-pill{display:inline-flex;align-items:center;gap:6px;background:#eef2f7;color:#1f2937;border-radius:9999px;padding:6px 10px;font:700 11px/1 ui-sans-serif,system-ui}
+.meta-right a{display:inline-flex;align-items:center;gap:8px;border:1px solid #111827;border-radius:9999px;padding:8px 12px;font:700 12px/1 ui-sans-serif,system-ui;color:#111827;text-decoration:none}
+.meta-right a .play{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #111827}
+@media (max-width:640px){
+  .destaques-wrap{padding:14px}
+  .card-title{font-size:15px}
+}
+
+</style>
+</head>
+<body>
+<header class="header-resumo container-resumo">
+<img alt="CEPMG" src="logo-cepmg.png" style="height:52px; width:auto;"/>
+<div>
+<div class="badge-topico" id="disciplina-badge">Resumo</div>
+<h1 id="titulo-topico">TÍTULO DO TÓPICO</h1>
+<div class="small" id="canal-info">Selecione um tópico abaixo para abrir a busca do canal indicado.</div>
+</div>
+</header>
+<main class="container-resumo">
+<section>
+<div class="player-wrap">
+<iframe allowfullscreen="" id="player" src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" title="Player do tópico"></iframe>
+</div>
+<div class="note small">
+      Abra qualquer tópico na lista abaixo e clique em <b>Ver vídeos</b> para pesquisar diretamente no YouTube dentro do(s) canal(is) indicado(s).<br/>
+      Para tocar um vídeo específico aqui no player, use o parâmetro <code>?v=ID_DO_VIDEO&amp;tit=T%C3%ADtulo&amp;disc=Disciplina</code> na URL.
+    </div>
+</section>
+<hr class="sep"/>
+<section>
+<div class="filters">
+<select class="select" id="disciplina"></select>
+<select class="select" id="canal"></select>
+<select class="select" id="topico"></select>
+</div>
+<button class="btn btn-primary" id="btnBuscar">Ver vídeos</button>
+</section>
+<section>
+<h2 class="section-title">Tópicos por disciplina</h2>
+<div class="grid" id="cards"></div>
+</section>
+</main>
+<script>
+const CATALOGO = {"Matemática": {"canais": ["Professor Ferreto"], "topicos": ["Aritmética básica", "Porcentagem", "Razão e Proporção", "Funções", "Equações e Inequações", "Progressões (PA/PG)", "Geometria Plana", "Geometria Espacial", "Trigonometria", "Probabilidade", "Estatística", "Análise Combinatória", "Matemática Financeira"]}, "Física": {"canais": ["Universo Narrado", "Professor Boaro"], "topicos": ["Cinemática", "Dinâmica (Leis de Newton)", "Trabalho e Energia", "Impulso e Momento", "Gravitação", "Hidrostática", "Termologia", "Ondulatória", "Óptica", "Eletrostática", "Eletrodinâmica", "Magnetismo"]}, "História": {"canais": ["Parabólica", "Débora Aladim"], "topicos": ["Brasil Colônia", "Brasil Império", "República Velha", "Era Vargas", "Ditadura Militar", "Redemocratização", "Antiguidade Clássica", "Idade Média", "Idade Moderna", "Revolução Francesa", "Revolução Industrial", "Século XX (Guerras Mundiais)", "Guerra Fria"]}, "Biologia": {"canais": ["Biologia com Landim", "Prof Samuel Cunha"], "topicos": ["Citologia", "Histologia", "Embriologia", "Genética", "Evolução", "Ecologia", "Fisiologia Humana", "Parasitologia", "Botânica", "Zoologia"]}, "Geografia": {"canais": ["Thais Formaggio"], "topicos": ["Cartografia", "Geologia e Relevo", "Climatologia", "Hidrografia", "Demografia", "Agropecuária", "Indústria e Serviços", "Globalização", "Geopolítica", "Urbanização", "Meio Ambiente"]}, "Química": {"canais": ["Química com o Cabral", "Monstro da Química"], "topicos": ["Atomística", "Tabela Periódica", "Ligações Químicas", "Estequiometria", "Soluções", "Termoquímica", "Cinética Química", "Equilíbrio Químico", "Eletroquímica", "Química Orgânica", "Propriedades da Matéria"]}, "Português": {"canais": ["Professora Pamba"], "topicos": ["Interpretação de Texto", "Gramática (Morfologia)", "Gramática (Sintaxe)", "Figuras de Linguagem", "Variação Linguística", "Gêneros Textuais", "Semântica"]}, "Redação": {"canais": ["Foco no Mil", "Luma e Ponto"], "topicos": ["Competências do ENEM", "Projeto de Texto", "Tese e Repertório", "Coesão e Coerência", "Intervenção", "Estrutura de Parágrafos", "Análise de Propostas"]}, "Inglês": {"canais": ["Curso ENEM Gratuito"], "topicos": ["Compreensão de Texto", "Falsos Cognatos", "Inferência e Contexto", "Estruturas Comuns", "Interpretar Gráficos e Imagens"]}};
+
+function el(tag, props = {}, children = []) {
+  const e = document.createElement(tag);
+  Object.entries(props).forEach(([k,v]) => (k in e) ? e[k]=v : e.setAttribute(k,v));
+  [].concat(children).forEach(c => e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
+  return e;
+}
+
+const selDisc = document.getElementById('disciplina');
+const selCanal = document.getElementById('canal');
+const selTopico = document.getElementById('topico');
+const cardsDiv = document.getElementById('cards');
+const btnBuscar = document.getElementById('btnBuscar');
+
+function popularDisciplinas() {
+  selDisc.innerHTML = '';
+  Object.keys(CATALOGO).forEach(d => selDisc.appendChild(el('option', { value: d }, [d])));
+}
+function popularCanais(disc) {
+  selCanal.innerHTML = '';
+  CATALOGO[disc].canais.forEach(c => selCanal.appendChild(el('option', { value: c }, [c])));
+}
+function popularTopicos(disc) {
+  selTopico.innerHTML = '';
+  CATALOGO[disc].topicos.forEach(t => selTopico.appendChild(el('option', { value: t }, [t])));
+}
+
+function buildCards() {
+  cardsDiv.innerHTML = '';
+  Object.entries(CATALOGO).forEach(([disc, data]) => {
+    data.topicos.forEach(topic => {
+      const card = el('div', { className: 'card' }, [
+        el('h3', {}, [topic]),
+        el('div', { className: 'small' }, ['Disciplina: ', disc]),
+        el('div', { style: 'margin:.5rem 0 .75rem' }, [
+          el('div', { className: 'small' }, ['Canais indicados: ', data.canais.join(' • ')])
+        ]),
+        el('div', {}, data.canais.map(canal => el('a', {
+          href: 'https://www.youtube.com/results?search_query=' + encodeURIComponent(topic + ' ' + canal),
+          target: '_blank',
+          className: 'btn',
+          style: 'margin:.25rem .25rem .25rem 0; display:inline-block; text-decoration:none;'
+        }, ['Ver vídeos — ', canal]))),
+        el('div', { className: 'small', style:'margin-top:.5rem' }, [
+          'Abrir este tópico no player: ',
+          el('a', {
+            href: location.pathname + '?tit=' + encodeURIComponent(topic) + '&disc=' + encodeURIComponent(disc) + '&v=dQw4w9WgXcQ'
+          }, ['resumo.html?tit=...&disc=...&v=ID'])
+        ])
+      ]);
+      cardsDiv.appendChild(card);
+    });
+  });
+}
+
+function lerParams() {
+  const p = new URLSearchParams(location.search);
+  const v = p.get('v');
+  const tit = p.get('tit') || 'TÍTULO DO TÓPICO';
+  const disc = p.get('disc') || 'Resumo';
+  if (v) document.getElementById('player').src = 'https://www.youtube-nocookie.com/embed/' + v;
+  document.getElementById('titulo-topico').textContent = tit;
+  document.getElementById('disciplina-badge').textContent = disc;
+  const canalInfo = document.getElementById('canal-info');
+  canalInfo.textContent = 'Tópico: ' + tit + ' • ' + disc;
+}
+
+btnBuscar.addEventListener('click', () => {
+  const canal = selCanal.value;
+  const topico = selTopico.value;
+  const url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(topico + ' ' + canal);
+  window.open(url, '_blank');
+});
+
+selDisc.addEventListener('change', () => {
+  const d = selDisc.value;
+  popularCanais(d);
+  popularTopicos(d);
+});
+
+popularDisciplinas();
+popularCanais(selDisc.value || Object.keys(CATALOGO)[0]);
+popularTopicos(selDisc.value || Object.keys(CATALOGO)[0]);
+buildCards();
+lerParams();
+</script>
+
+<footer class="site-footer"><div class="footer-inner"><div class="footer-left"><span class="copyright">© 2025 - Um produto Estudantes de Atitude</span></div><div class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/estudantes_de_atitude_cepmgsv/" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@CepmgSebasti%C3%A3odoVale" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.1 3.5 12 3.5 12 3.5s-7.1 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.9 20.5 12 20.5 12 20.5s7.1 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5z" fill="currentColor"></path></svg></a></div></div></footer>
+</body>
+</html>

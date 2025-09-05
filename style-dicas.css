@@ -1,0 +1,25 @@
+/* ===== Categoria: Dicas de Estudo (listagem) ===== */
+:root{
+  --max: 1100px;
+  --gap: 22px;
+  --radius: 16px;
+  --border: 1px solid #e5e7eb;
+  --shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+.category-header{max-width:var(--max);margin:24px auto 8px;padding:0 16px;}
+.category-header h1{font:800 28px/1.2 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0 0 6px;letter-spacing:-.02em;color:#111827;}
+.category-sub{font:400 16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#4b5563;margin:0 0 10px;}
+.category-wrap{max-width:var(--max);margin:0 auto 32px;padding:0 16px;}
+.post-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);}
+.post-card{grid-column:span 6;display:grid;grid-template-columns:1fr;background:#fff;border:var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .16s ease,box-shadow .16s ease;}
+.post-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.10);}
+@media (max-width:900px){.post-card{grid-column:1/-1;}}
+.post-card .thumb{display:block;aspect-ratio:1200/630;background:#f8fafc;}
+.post-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.post-body{padding:14px 16px 16px;}
+.post-body .title{display:block;font:700 18px/1.35 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#111827;margin-bottom:6px;text-decoration:none;border:none !important;background:none !important;}
+.post-body .title::before{content:none !important;}
+.post-body .title:hover{text-decoration:underline;}
+.post-body .excerpt{font:400 14px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#4b5563;margin:0 0 10px;}
+.meta{display:flex;align-items:center;gap:8px;color:#6b7280;font:500 12px/1 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
+.meta .pill{background:#EEF2FF;color:#4338CA;padding:6px 10px;border-radius:999px;border:1px solid #E0E7FF;}

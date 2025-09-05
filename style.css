@@ -1,0 +1,1187 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #0053a0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #ddd;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li a {
+  display: block;
+  padding: 10px;
+  background-color: #e3e3e3;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #000;
+  border-radius: 5px;
+}
+
+li a:hover {
+  background-color: #d0d0d0;
+}
+
+
+/* Estilo para vídeos responsivos */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin: 20px 0;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.introducao-aula {
+    margin-bottom: 30px;
+}
+
+
+/* Estilo para vídeos responsivos */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin: 20px 0;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Cards de tópicos */
+.topicos-estudo {
+    margin: 20px 0;
+}
+.topico-card {
+    background: #f8f8f8;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.topico-titulo {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    font-size: 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.topico-titulo:hover {
+    background: #45a049;
+}
+.topico-conteudo {
+    display: none;
+    padding: 15px;
+    background-color: #f9fafb;
+}
+.video-final {
+    margin-top: 40px;
+    background: #eef3f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Menu lateral */
+.menu-header { background-color: #f9fafb; padding: 10px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.menu-logo { height: 40px; }
+.menu-toggle { font-size: 24px; background: rgba(255,255,255,0.12); border: none; cursor: pointer; padding:8px; border-radius:8px; position: relative; top: -6px; transition: background 0.15s ease, transform 0.12s ease; }
+.menu-toggle:active { transform: translateY(-1px); }
+.menu-toggle:hover { background: rgba(255,255,255,0.18); }
+/* Player container injected for topic pages */
+#topic-player { max-width:900px; margin: 18px auto; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+#topic-player .player-wrap { position: relative; padding-top: 56.25%; height:0; overflow:hidden; border-radius:6px; }
+#topic-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+#topic-player .topic-summary { margin-top:12px; color:#1f2937; font-size:15px; line-height:1.5; }
+#topic-player .topic-title { font-size:18px; font-weight:700; margin-bottom:8px; color:#0f172a; }
+.sidebar { position: fixed; top: 0; left: -260px; width: 250px; height: 100%; background: #f9f9f9; box-shadow: 2px 0 5px rgba(0,0,0,0.1); padding: 20px; transition: left 0.3s; overflow-y: auto; }
+.sidebar.active { left: 0; }
+.menu-item { margin: 15px 0; }
+.menu-item a, .menu-item span { text-decoration: none; color: #333; font-size: 16px; display: block; }
+.menu-item.login a { font-weight: bold; }
+.menu-item small { color: #777; font-size: 12px; }
+.disciplinas-list { margin-top: 10px; padding-left: 20px; }
+
+/* Menu lateral responsivo com animação */
+.menu-header { 
+  background-color: #f9fafb; 
+  padding: 10px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; 
+}
+.menu-logo { height: 40px; }
+.menu-toggle { font-size: 24px; background: rgba(255,255,255,0.12); border: none; cursor: pointer; padding:8px; border-radius:8px; position: relative; top: -6px; transition: background 0.15s ease, transform 0.12s ease; }
+.menu-toggle:active { transform: translateY(-1px); }
+.menu-toggle:hover { background: rgba(255,255,255,0.18); }
+/* Player container injected for topic pages */
+#topic-player { max-width:900px; margin: 18px auto; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+#topic-player .player-wrap { position: relative; padding-top: 56.25%; height:0; overflow:hidden; border-radius:6px; }
+#topic-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+#topic-player .topic-summary { margin-top:12px; color:#1f2937; font-size:15px; line-height:1.5; }
+#topic-player .topic-title { font-size:18px; font-weight:700; margin-bottom:8px; color:#0f172a; }
+.sidebar { 
+  position: fixed; 
+  top: 0; 
+  left: -260px; 
+  width: 250px; 
+  height: 100%; 
+  background: #f9f9f9; 
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+  padding: 20px; 
+  transition: transform 0.3s ease; 
+  overflow-y: auto; 
+  transform: translateX(-100%);
+  z-index: 999;
+}
+.sidebar.active { 
+  transform: translateX(0); 
+}
+.menu-item { margin: 15px 0; }
+.menu-item a, .menu-item span { 
+  text-decoration: none; 
+  color: #333; 
+  font-size: 16px; 
+  display: block; 
+}
+.menu-item.login a { font-weight: bold; }
+.menu-item small { color: #777; font-size: 12px; }
+.disciplinas-list { margin-top: 10px; padding-left: 20px; }
+
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+  .sidebar { width: 220px; }
+  .menu-item a, .menu-item span { font-size: 14px; }
+}
+
+/* Remover barra branca e ajustar topo do menu */
+.menu-header {
+  background: none !important;
+  padding: 0 !important;
+  margin-bottom: 15px;
+}
+.menu-logo {
+  display: none; /* Esconde imagem vazia */
+}
+.menu-toggle { font-size: 24px; background: rgba(255,255,255,0.12); border: none; cursor: pointer; padding:8px; border-radius:8px; position: relative; top: -6px; transition: background 0.15s ease, transform 0.12s ease; }
+.menu-toggle:active { transform: translateY(-1px); }
+.menu-toggle:hover { background: rgba(255,255,255,0.18); }
+/* Player container injected for topic pages */
+#topic-player { max-width:900px; margin: 18px auto; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+#topic-player .player-wrap { position: relative; padding-top: 56.25%; height:0; overflow:hidden; border-radius:6px; }
+#topic-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+#topic-player .topic-summary { margin-top:12px; color:#1f2937; font-size:15px; line-height:1.5; }
+#topic-player .topic-title { font-size:18px; font-weight:700; margin-bottom:8px; color:#0f172a; }
+
+/* Estado inicial fechado */
+.sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 9999;
+}
+/* Estado aberto */
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* ===== Hamburguer interno (mínimo, não altera sidebar) ===== */
+#menu-toggle-interno{
+  position: fixed;
+  top: 10px;
+  left: 0;            /* será definido via JS */
+  background: white;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: none;      /* só aparece com sidebar aberta */
+  z-index: 10000;
+}
+#sidebar.active #menu-toggle-interno{ display: inline-flex; }
+
+/* --- Slide suave do bloco de Disciplinas --- */
+#sidebar .disciplinas-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+#sidebar .disciplinas-panel.open {
+  /* max-height será controlado pelo JS (inline), mas deixamos um fallback grande */
+  max-height: 1000px;
+}
+
+/* Animao suave para Disciplinas */
+.disciplinas-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.disciplinas-list.open {
+    max-height: 500px; /* altura suficiente para todo o contedo */
+}
+
+
+
+/* --- MENU (reworked to match video-style with SVG icons and smooth open/close) --- */
+:root {
+  --menu-font: ui-sans-serif, -apple-system, system-ui, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+  --icon-size: 20px;
+  --menu-speed: 280ms;
+}
+
+.menu-header {
+  background-color: #f9fafb;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-family: var(--menu-font);
+}
+
+.menu-logo { height: 40px; }
+
+.menu-toggle { font-size: 24px; background: rgba(255,255,255,0.12); border: none; cursor: pointer; padding:8px; border-radius:8px; position: relative; top: -6px; transition: background 0.15s ease, transform 0.12s ease; }
+.menu-toggle:active { transform: translateY(-1px); }
+.menu-toggle:hover { background: rgba(255,255,255,0.18); }
+/* Player container injected for topic pages */
+#topic-player { max-width:900px; margin: 18px auto; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+#topic-player .player-wrap { position: relative; padding-top: 56.25%; height:0; overflow:hidden; border-radius:6px; }
+#topic-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+#topic-player .topic-summary { margin-top:12px; color:#1f2937; font-size:15px; line-height:1.5; }
+#topic-player .topic-title { font-size:18px; font-weight:700; margin-bottom:8px; color:#0f172a; }
+
+.menu-toggle .bar {
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  transition: transform var(--menu-speed) ease, opacity var(--menu-speed) ease, top var(--menu-speed) ease;
+}
+.menu-toggle .bar:nth-child(1){ top: 14px; }
+.menu-toggle .bar:nth-child(2){ top: 19px; }
+.menu-toggle .bar:nth-child(3){ top: 24px; }
+
+.menu-toggle.active .bar:nth-child(1){ transform: translateY(5px) rotate(45deg); }
+.menu-toggle.active .bar:nth-child(2){ opacity: 0; }
+.menu-toggle.active .bar:nth-child(3){ transform: translateY(-5px) rotate(-45deg); }
+
+/* Backdrop overlay for opening animation */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--menu-speed) ease;
+  z-index: 45;
+}
+.backdrop.active { opacity: 1; pointer-events: auto; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background-color: #f9fafb;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.12);
+  transform: translateX(-100%);
+  transition: transform var(--menu-speed) ease;
+  z-index: 60;
+  padding: 16px 18px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(0,0,0,0.06);
+}
+
+.sidebar.active { transform: translateX(0); }
+
+.menu-item {
+  margin: 10px 0;
+  font-family: var(--menu-font);
+}
+
+.menu-item a, .menu-item span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #111;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.menu-item small { color: #6b7280; font-size: 12px; display: block; margin-left: 30px; }
+
+.icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex: none;
+}
+
+/* Divider style preserved */
+.menu-item + .menu-item { border-top: 1px dashed rgba(0,0,0,0.06); padding-top: 10px; }
+
+/* Dropdown */
+.menu-item.dropdown > span { cursor: pointer; user-select: none; }
+.menu-item.dropdown > span .chev { margin-left: auto; transition: transform var(--menu-speed) ease; }
+
+.disciplinas-list {
+  list-style: none;
+  padding-left: 30px;
+  margin: 8px 0 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--menu-speed) ease;
+  border-left: 2px solid rgba(0,0,0,0.06);
+}
+.disciplinas-list.open { max-height: 600px; } /* enough for full list */
+
+.menu-item.dropdown.open > span .chev { transform: rotate(180deg); }
+
+/* Staggered reveal for menu items */
+.sidebar.active .menu-item {
+  animation: itemIn 300ms ease both;
+}
+.sidebar.active .menu-item:nth-child(1){ animation-delay: 30ms; }
+.sidebar.active .menu-item:nth-child(2){ animation-delay: 60ms; }
+.sidebar.active .menu-item:nth-child(3){ animation-delay: 90ms; }
+.sidebar.active .menu-item:nth-child(4){ animation-delay: 120ms; }
+.sidebar.active .menu-item:nth-child(5){ animation-delay: 150ms; }
+
+@keyframes itemIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.login-btn {
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.1);
+ border-radius: 8px; background-color: #f8fafc;}
+
+
+/* ===== MENU LATERAL ESTILO MODERNO ===== */
+.sidebar {
+    background-color: #fff;
+    padding: 15px;
+    width: 260px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    height: 100%;
+    overflow-y: auto;
+}
+
+.menu-item {
+    background-color: #f7f9fc;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background-color: #eef2f7;
+    transform: translateX(3px);
+}
+
+.menu-item svg.icon, .menu-item span.emoji {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.menu-section {
+    font-size: 13px;
+    font-weight: bold;
+    color: #888;
+    text-transform: uppercase;
+    margin: 20px 0 8px 5px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #222;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.menu-logo {
+    max-height: 40px;
+}
+
+/* Ajusta o botão de login para ficar destacado */
+.menu-item.login {
+    background-color: #e9f3ff;
+}
+
+.menu-item.login:hover {
+    background-color: #d4e8ff;
+}
+
+
+/* ===== MENU LATERAL ESTILO MODERNO, PROPORÇÕES ORIGINAIS ===== */
+.sidebar {
+    background-color: #fff;
+    padding: 10px;
+    width: 240px; /* Mantendo largura original */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    height: 100%;
+    overflow-y: auto;
+}
+
+.menu-item {
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.menu-item:hover {
+    background-color: #eef2f7;
+    transform: translateX(2px);
+}
+
+.menu-item svg.icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.menu-section {
+    font-size: 12px;
+    font-weight: bold;
+    color: #777;
+    text-transform: uppercase;
+    margin: 18px 0 6px 4px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #222;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.menu-logo {
+    max-height: 38px;
+}
+
+/* Login destacado */
+.menu-item.login {
+    background-color: #e9f3ff;
+}
+
+.menu-item.login:hover {
+    background-color: #d4e8ff;
+}
+
+
+/* ===== DROPDOWN DISCIPLINAS - VERTICAL ===== */
+.menu-item.dropdown {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.menu-item.dropdown > span {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.menu-item.dropdown .submenu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.menu-item.dropdown .submenu a {
+    padding: 8px 10px;
+    border-radius: 8px;
+    background-color: #f7f9fc;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #222;
+    transition: background 0.2s ease;
+}
+
+.menu-item.dropdown .submenu a:hover {
+    background-color: #eef2f7;
+}
+
+.menu-item.dropdown.open .submenu {
+    display: flex;
+}
+
+
+/* ===== ICONES CUSTOM COMO IMG E LAYOUT RESPONSIVO MENOR ===== */
+.menu-item .icon { width: 18px; height: 18px; margin-right: 10px; display: inline-block; }
+.sidebar { width: clamp(200px, 28vw, 240px); padding: 10px; }
+.menu-item { padding: 9px 12px; border-radius: 10px; }
+@media (max-width: 480px) {
+  .sidebar { width: 100%; padding: 8px; }
+  .menu-item { padding: 10px 12px; margin-bottom: 8px; }
+  .menu-item .icon { width: 18px; height: 18px; margin-right: 8px; }
+}
+
+.menu-item img.icon {
+  
+}
+
+/* Tint suave nos ícones do menu (cinza-azulado) */
+.menu-item img.icon {
+    
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* Dropdown disciplinas com animação de descida */
+.menu-item.has-submenu ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.menu-item.has-submenu.open ul {
+    max-height: 500px; /* suficiente para mostrar todas */
+}
+
+
+/* Ícones do menu ligeiramente maiores */
+.menu-item img.icon {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+
+/* Ajuste visual das disciplinas na barra lateral */
+.menu-disciplinas a, 
+.menu-disciplinas button, 
+.menu-disciplinas div {
+    margin-left: 1px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+    padding: 6px !important;
+    display: block !important;
+    background-color: #f5f5f5 !important;
+}
+
+
+/* Aumentar tamanho dos ícones no menu */
+.menu-barra img,
+.menu-barra i {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 48px !important;
+}
+
+
+/* Ajuste máximo à esquerda para disciplinas */
+.menu-disciplinas, 
+.menu-disciplinas a, 
+.menu-disciplinas button, 
+.menu-disciplinas div {
+    margin-left: 0 !important;
+    padding-left: 2px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+    display: block !important;
+    background-color: #f5f5f5 !important;
+}
+
+/* Estilos da seção Novidades */
+.novidades-section {
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+.novidades-container {
+    display: flex;
+    background-color: #4f46e5;
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.novidades-text {
+    max-width: 55%;
+}
+.novidades-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.novidades-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #e0e0ff;
+    margin-bottom: 20px;
+}
+.novidades-buttons a {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.btn-prisma {
+    background-color: #6366f1;
+    color: white;
+}
+.btn-praticar {
+    background-color: #1e1b4b;
+    color: white;
+}
+.novidades-image img {
+    max-width: 250px;
+}
+.novidades-tabs {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.novidades-tabs .tab {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #f0f0ff;
+    color: #4f46e5;
+}
+.novidades-tabs .tab.active {
+    background-color: #4f46e5;
+    color: white;
+}
+
+
+/* ===== Refeito Disciplinas (IDÊNTICO AO PEDIDO): ===== */
+/* 1) Container do dropdown transparente */
+.menu-item.dropdown .disciplinas-list{
+  background: white !important;
+  background-color: white !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 6px !important;
+  margin: 0 !important;
+}
+
+/* 2) Remover qualquer cor/fundo das "caixas" das matérias (ancoras) */
+.menu-item.dropdown .disciplinas-list li,
+.menu-item.dropdown .disciplinas-list a{
+  background: white !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* 3) Layout limpo (texto + quadradinho colorido à esquerda) */
+.menu-item.dropdown .disciplinas-list{
+  display: block;
+}
+.menu-item.dropdown .disciplinas-list li{
+  list-style: none;
+  margin: 6px 2px;
+}
+.menu-item.dropdown .disciplinas-list li a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  color: #111827 !important;
+  text-decoration: none;
+  border-radius: 8px;
+}
+/* hover leve mantendo transparência */
+.menu-item.dropdown .disciplinas-list li a:hover{
+  background: rgba(17,24,39,0.06) !important;
+}
+
+/* 4) Quadradinho colorido à esquerda do texto */
+.menu-item.dropdown .disciplinas-list li a::before{
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: 0 0 12px;
+}
+
+/* 5) Cores apenas no QUADRADINHO, por disciplina (com base no href) */
+.menu-item.dropdown .disciplinas-list a[href*="portugues"]::before{ background:#60A5FA; }   /* Português - azul claro */
+.menu-item.dropdown .disciplinas-list a[href*="ingles"]::before{ background:#3B82F6; }      /* Inglês - azul */
+.menu-item.dropdown .disciplinas-list a[href*="literatura"]::before{ background:#A855F7; }  /* Literatura - roxo */
+.menu-item.dropdown .disciplinas-list a[href*="redacao"]::before{ background:#EF4444; }     /* Redação - vermelho */
+.menu-item.dropdown .disciplinas-list a[href*="historia"]::before{ background:#DC2626; }    /* História - vermelho escuro */
+.menu-item.dropdown .disciplinas-list a[href*="geografia"]::before{ background:#F97316; }   /* Geografia - laranja */
+.menu-item.dropdown .disciplinas-list a[href*="filosofia"]::before{ background:#F59E0B; }   /* Filosofia - laranja claro */
+.menu-item.dropdown .disciplinas-list a[href*="sociologia"]::before{ background:#FDE047; }  /* Sociologia - amarelo */
+.menu-item.dropdown .disciplinas-list a[href*="atualidades"]::before{ background:#FDE68A; } /* Atualidades - amarelo claro */
+.menu-item.dropdown .disciplinas-list a[href*="biologia"]::before{ background:#86EFAC; }    /* Biologia - verde claro */
+.menu-item.dropdown .disciplinas-list a[href*="fisica"]::before{ background:#22C55E; }      /* Física - verde */
+.menu-item.dropdown .disciplinas-list a[href*="quimica"]::before{ background:#16A34A; }     /* Química - verde escuro */
+.menu-item.dropdown .disciplinas-list a[href*="matematica"]::before{ background:#10B981; }  /* Matemática - verde água */
+
+/* 6) Esconder lis vazios que o markup usa como espaçadores */
+.menu-item.dropdown .disciplinas-list li:empty{ display:none !important; }
+
+
+/* === Marca na barra superior (CEPMG + Estude.Vale) === */
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none}
+.brand-logo{height:24px;width:auto;display:block}
+.brand-text{font-weight:800;font-size:22px;letter-spacing:.2px;color:#1f2a44;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+@media (max-width:640px){.brand-text{font-size:20px}}
+.menu-top .brand{margin-right:auto}
+
+
+/* === Logo CEPMG + Estude.Vale dentro da barra === */
+.menu-brand{display:flex;align-items:center;gap:8px;margin-left:8px}
+.menu-brand .brand-logo{height:26px;width:auto;display:block}
+.menu-brand .brand-text{font-weight:800;font-size:20px;letter-spacing:.2px;color:#fff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+@media (max-width:640px){.menu-brand .brand-text{font-size:18px}}
+
+
+
+/* === Logo CEPMG + Estude.Vale como item de menu === */
+.nav-logo-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+}
+.nav-logo-item img {
+    height: 22px;
+    width: auto;
+    display: block;
+}
+.nav-logo-item span {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.2px;
+    color: #fff;
+    font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+}
+
+
+
+/* === Branding no topo da barra lateral === */
+.sidebar-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  margin:6px 8px 10px 8px;
+  border-radius:12px;
+  background:#eef2f7; /* discreto, coerente com seus cards */
+}
+.sidebar-brand-logo{ height:24px; width:auto; display:block; }
+.sidebar-brand-text{
+  font-weight:800;
+  font-size:18px; /* relativamente pequeno */
+  color:#1f2937;
+  letter-spacing:.2px;
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+}
+@media (max-width:640px){
+  .sidebar-brand{ padding:10px 12px; margin:6px 6px 10px 6px }
+  .sidebar-brand-text{ font-size:17px }
+}
+
+
+
+/* === Ajustes solicitados: fundo transparente, maior e 3D === */
+.sidebar-brand{background:transparent !important; padding:8px 14px; margin:6px 8px 12px 8px}
+.sidebar-brand-logo{height:30px !important; width:auto; display:block}
+.sidebar-brand-text{
+  font-weight:900 !important;
+  font-size:22px !important; /* relativamente pequeno, porém maior que antes */
+  letter-spacing:.3px;
+  color:#ffffff; /* preenchimento branco como no exemplo */
+  -webkit-text-stroke: 2px #1c2a74; /* contorno azul escuro */
+  /* extrusão 3D com múltiplas sombras (efeito prisma) */
+  text-shadow:
+    0 1px 0 #162161,
+    0 2px 0 #162161,
+    0 3px 0 #142058,
+    0 4px 0 #121e50,
+    0 5px 0 #101b48,
+    0 6px 4px rgba(0,0,0,.35);
+}
+@media (max-width:640px){
+  .sidebar-brand-logo{height:28px !important}
+  .sidebar-brand-text{font-size:20px !important}
+}
+
+
+
+/* === Ajustes solicitados: fundo transparente, brasão maior, efeito 3D aprimorado === */
+.sidebar-brand{
+  background:transparent !important;
+  padding:10px 14px;
+  margin:8px 8px 14px 8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sidebar-brand-logo{
+  height:48px !important; /* brasão bem maior */
+  width:auto;
+  display:block;
+}
+.sidebar-brand-text{
+  font-weight:900 !important;
+  font-size:26px !important; /* proporcional ao brasão maior */
+  letter-spacing:.5px;
+  color:#ffffff; /* preenchimento branco */
+  -webkit-text-stroke: 2px #1c2a74; /* contorno azul escuro */
+  /* efeito 3D com mais camadas e cores de sombra para maior profundidade */
+  text-shadow:
+    1px 1px 0 #162161,
+    2px 2px 0 #162161,
+    3px 3px 0 #142058,
+    4px 4px 0 #121e50,
+    5px 5px 0 #101b48,
+    6px 6px 0 #0e193f,
+    7px 7px 4px rgba(0,0,0,.5);
+}
+@media (max-width:640px){
+  .sidebar-brand-logo{height:40px !important}
+  .sidebar-brand-text{font-size:22px !important}
+}
+
+
+
+/* === Ajuste: brasão maior + 3D mais profundo (estilo prisma) === */
+.sidebar-brand{background:transparent !important}
+.sidebar-brand-logo{height:38px !important;width:auto;display:block}
+.sidebar-brand-text{
+  font-weight:900 !important;
+  font-size:24px !important;
+  letter-spacing:.25px;
+  color:#ffffff;                 /* preenchimento claro */
+  -webkit-text-stroke: 2.5px #0e1a4f; /* contorno azul marinho */
+  /* extrusão 3D com camadas diagonais (↘), mais profunda */
+  text-shadow:
+    1px 1px 0   #0e1a4f,
+    2px 2px 0   #0e1a4f,
+    3px 3px 0   #0c1949,
+    4px 4px 0   #0a1643,
+    5px 5px 0   #09143d,
+    6px 6px 0   #071238,
+    7px 7px 0   #061032,
+    8px 8px 0   #050d2c,
+    9px 9px 0   #040b26,
+    10px 10px 2px rgba(0,0,0,.45);
+}
+@media (max-width:640px){
+  .sidebar-brand-logo{height:34px !important}
+  .sidebar-brand-text{font-size:22px !important}
+}
+
+
+
+/* === Ajuste: brasão maior como ícone no topo, sem 3D === */
+.sidebar-brand {
+  background: white !important;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.sidebar-brand-logo {
+  height: 48px !important; /* brasão maior */
+  width: auto;
+  display: block;
+  margin-right: 8px;
+}
+.sidebar-brand-text {
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  letter-spacing: .25px;
+  color: #ffffff !important; /* branco puro */
+  -webkit-text-stroke: 0px transparent; /* sem contorno */
+  text-shadow: none !important; /* sem sombra 3D */
+}
+@media (max-width:640px){
+  .sidebar-brand-logo { height: 42px !important; }
+  .sidebar-brand-text { font-size: 20px !important; }
+}
+
+
+
+/* === Ajuste: texto Estude.Vale com cor azul === */
+.sidebar-brand-text {
+  color: #004aad !important; /* azul original */
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  letter-spacing: .25px;
+}
+@media (max-width:640px){
+  .sidebar-brand-text { font-size: 20px !important; }
+}
+
+
+/* estudevale-black */
+.sidebar-brand-text{color:#000 !important;}
+
+/* === Ajuste solicitado: barra sem transparência, fundo branco === */
+.menu-header, .menu-top {
+  background-color: #ffffff !important;
+}
+.menu-top { position: relative; } /* necessário para centralização absoluta do brasão */
+.menu-top .menu-center-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* não interfere nos cliques do menu/hambúrguer */
+}
+.menu-top .menu-center-logo img {
+  display: block;
+  max-height: 40px; /* não altera a altura da barra */
+  height: 40px;
+}
+@media (max-width: 640px){
+  .menu-top .menu-center-logo img { height: 32px; max-height: 32px; }
+}
+/* === Fim do ajuste === */
+
+.menu-top .menu-center-logo { z-index: 1; }
+
+
+/* === Ajuste definitivo: Fundo branco e brasão centralizado na barra === */
+header.menu-header, header.main-header {
+  position: relative !important;
+  background-color: #ffffff !important;
+}
+header.menu-header .brasao-center, header.main-header .brasao-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none; /* não interfere em botões/links */
+}
+header.menu-header .brasao-center img, header.main-header .brasao-center img {
+  display: block;
+  height: 42px;   /* ajustável se você quiser um tamanho diferente */
+  width: auto;
+  max-width: 90vw;
+}
+/* === Fim do ajuste === */
+
+
+
+/* === Restauração do comportamento fixo da barra === */
+header.menu-header, header.main-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 999;
+  background-color: #ffffff !important;
+}
+/* Garantir centralização do brasão sobre a barra */
+header.menu-header .brasao-center, header.main-header .brasao-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none;
+}
+header.menu-header .brasao-center img, header.main-header .brasao-center img {
+  display: block;
+  height: 42px;
+  width: auto;
+  max-width: 90vw;
+}
+
+
+
+/* Ajuste de sobreposição do brasão */
+header.menu-header .brasao-center, header.main-header .brasao-center {
+  z-index: 2 !important; /* abaixo do menu lateral */
+}
+
+
+
+/* Flexbox no header para centralizar brasão */
+header.menu-header, header.main-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky !important;
+  top: 0;
+  z-index: 999;
+  background-color: #ffffff !important;
+}
+header.menu-header .brasao-center img,
+header.main-header .brasao-center img {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+
+
+/* === Correção final: prioridade de camadas e centralização === */
+header.menu-header, header.main-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 500 !important;           /* abaixo do menu lateral */
+  background-color: #ffffff !important;
+}
+
+.sidebar {
+  position: fixed !important;
+  z-index: 5000 !important;           /* acima do header */
+}
+
+.menu-backdrop, .backdrop, #backdrop {
+  position: fixed !important;
+  z-index: 4000 !important;           /* acima do header, abaixo/igual ao sidebar */
+}
+
+/* Centralização do brasão sem alterar layout */
+header.menu-header, header.main-header { /* não definir display para não mover itens */
+  /* mantém layout original */
+}
+header.menu-header .brasao-center, header.main-header .brasao-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* não bloqueia cliques */
+}
+header.menu-header .brasao-center img, header.main-header .brasao-center img {
+  display: block;
+  height: 42px;
+  width: auto;
+}
+/* === Fim === */
+
+
+/* Forçar botão hambúrguer no canto superior esquerdo */
+.hamburger.left-corner {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+}
+
+
+/* === Ajuste solicitado: hambúrguer no canto esquerdo, fora do brasão === */
+header.menu-header, header.main-header { position: relative; min-height: 56px; }
+.menu-top { position: absolute; top: 12px; left: 12px; z-index: 3; }
+.menu-toggle { font-size: 24px; background: rgba(255,255,255,0.12); border: none; cursor: pointer; padding:8px; border-radius:8px; position: relative; top: -6px; transition: background 0.15s ease, transform 0.12s ease; }
+.menu-toggle:active { transform: translateY(-1px); }
+.menu-toggle:hover { background: rgba(255,255,255,0.18); }
+/* Player container injected for topic pages */
+#topic-player { max-width:900px; margin: 18px auto; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+#topic-player .player-wrap { position: relative; padding-top: 56.25%; height:0; overflow:hidden; border-radius:6px; }
+#topic-player iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+#topic-player .topic-summary { margin-top:12px; color:#1f2937; font-size:15px; line-height:1.5; }
+#topic-player .topic-title { font-size:18px; font-weight:700; margin-bottom:8px; color:#0f172a; }
+.menu-toggle .bar { display: block; width: 24px; height: 2px; background: #111; }
+/* Garante que o brasão fique centralizado e abaixo do botão */
+.brasao-center, header.main-header .brasao-center { z-index: 1; pointer-events: none; }
+/* Ajuste ícones inline na barra de menu */
+a .icon { vertical-align: middle; width: 18px; height: 18px; }
+a .icon path { fill: currentColor; }
+
+/* Logo sidebar tight spacing */
+.sidebar-logo{margin:0;padding:0;line-height:0;display:flex;justify-content:center;align-items:center;}
+.sidebar-logo img{display:block;margin:0;padding:0;border:0;max-width:220px;height:auto;}
+.sidebar-brand{margin:0 !important;padding:0 !important;gap:0 !important;background:transparent !important;}
+.sidebar{padding-top:0 !important;padding-bottom:0 !important;}
+.sidebar .menu-section:first-of-type{margin-top:0 !important;}
+
+
+.logo, .brand, .site-logo, .navbar-brand, .app-logo, .sidebar, aside, .menu, #sidebar, .sidenav, .drawer, .container-resumo, .sidebar-logo, .novidades-image, .header-resumo {
+  margin-top: 0;
+  padding-top: 0;
+  gap: 0;
+}
+
+
+.logo img, .brand img, .site-logo img, .navbar-brand img, .app-logo img, .sidebar img, aside img, .menu img, #sidebar img, .sidenav img, .drawer img, .container-resumo img, .sidebar-logo img, .novidades-image img, .header-resumo img {
+  margin-top: 0;
+  padding-top: 0;
+  display: block;
+}

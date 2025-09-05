@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Banco de  Questões - Sebastião do Vale</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+.site-footer{background:#ffffff;border-top:1px solid #e5e7eb;margin-top:40px}
+.site-footer .footer-inner{max-width:1100px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-footer .copyright{color:#4b5563;font:500 14px/1.4 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+.site-footer .footer-social{display:flex;align-items:center;gap:10px}
+.site-footer .footer-social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;border:1px solid #e5e7eb;background:#ffffff;transition:background .2s, transform .2s, box-shadow .2s}
+.site-footer .footer-social a:hover{background:#f3f4f6;transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.site-footer .footer-social svg{width:18px;height:18px;color:#111827}
+@media (max-width:640px){
+  .site-footer .footer-inner{padding:16px 14px}
+  .site-footer .copyright{font-size:13px}
+}
+</style>
+<link href="../css/fix-logo-gap.css" rel="stylesheet"/></head>
+<body>
+<header class="menu-header">
+<div class="menu-top">
+<button class="menu-toggle" id="menu-toggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+</div>
+<div class="brasao-center"><img alt="Brasão CEPMG" src="assets/images/brasao-cepmg.png"/></div></header>
+<style>
+:root{
+  --bg:#f7f9fc; --card:#fff; --muted:#9aa4b2; --text:#1f2937; --primary:#2563eb;
+  --line:#e5e7eb;
+}
+.page-container{max-width:1024px;margin:0 auto;padding:16px;color:var(--text);}
+.tabs{display:flex;gap:16px;border-bottom:1px solid var(--line);margin-bottom:12px;}
+.tab{padding:10px 14px;border-radius:8px 8px 0 0;background:transparent;font-weight:600;cursor:pointer;}
+.tab.active{background:var(--card);box-shadow:0 -1px 0 0 var(--card);}
+.subhead{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.actions{display:flex;gap:12px;align-items:center;margin:8px 0 16px 0;}
+.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-weight:600;}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary);}
+.btn.link{background:transparent;border:none;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;}
+.card h4{margin:0 0 10px 0;font-size:14px;color:#111827;}
+.row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+.radio{display:flex;align-items:center;gap:8px;margin-right:16px;font-size:14px;}
+.select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;appearance:none;}
+.small{font-size:12px;color:var(--muted);}
+.assuntos-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.columns{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.label{font-size:12px;color:var(--muted);margin-bottom:8px;display:block;}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:8px;}
+.topbar .link{font-size:12px;}
+.badge{width:22px;height:22px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;margin-bottom:8px;font-weight:700;color:#6b7280;}
+</style>
+<div class="page-container" id="filtro-questoes-novo">
+<div class="tabs">
+<div class="tab active">Banco de Questões</div>
+<div class="tab">Meu Caderno de Questões</div>
+</div>
+<div class="subhead">
+    Aqui você encontra todas as questões disponíveis na plataforma para praticar quando quiser.<br/>
+    Explore por disciplinas, assuntos ou dificuldade e responda no seu ritmo.
+  </div>
+<div class="actions">
+<button class="btn primary" id="btn-filtrar">Filtrar Questões</button>
+<button class="btn" id="btn-codigo">Código da Questão</button>
+</div>
+<div class="topbar">
+<button class="btn link" id="btn-limpar">🧹 Limpar filtros</button>
+</div>
+<div class="grid">
+<div class="card">
+<h4>Disciplina</h4>
+<div class="small">Selecione uma disciplina para ativar os filtros de assunto.</div>
+<select class="select" disabled="" id="disciplina-select">
+<option value="">Selecione uma disciplina</option>
+</select>
+</div>
+<div class="card">
+<div class="row">
+<div style="flex:1 1 100%"><h4>Status</h4></div>
+<label class="radio"><input checked="" name="status" type="radio" value="todos"/> Todos</label>
+<label class="radio"><input name="status" type="radio" value="nao-respondidas"/> Não respondidas</label>
+<label class="radio"><input name="status" type="radio" value="respondidas"/> Respondidas</label>
+<label class="radio"><input name="status" type="radio" value="corretas"/> Corretas</label>
+<label class="radio"><input name="status" type="radio" value="incorretas"/> Incorretas</label>
+</div>
+<div class="row" style="margin-top:12px;">
+<div style="flex:1 1 100%"><h4>Banca</h4></div>
+<label class="radio"><input checked="" name="banca" type="radio" value="todas"/> Todas</label>
+<label class="radio"><input name="banca" type="radio" value="enem"/> ENEM</label>
+<label class="radio"><input name="banca" type="radio" value="vestibulares"/> Vestibulares</label>
+</div>
+<div class="row" style="margin-top:12px;">
+<div style="flex:1 1 100%"><h4>Nível de Dificuldade</h4></div>
+<label class="radio"><input checked="" name="nivel" type="radio" value="todos"/> Todos</label>
+<label class="radio"><input name="nivel" type="radio" value="facil"/> Fácil</label>
+<label class="radio"><input name="nivel" type="radio" value="medio"/> Médio</label>
+<label class="radio"><input name="nivel" type="radio" value="dificil"/> Difícil</label>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="assuntos-head">
+<h4>Assuntos <span class="small">opcional</span></h4>
+</div>
+<div class="small" style="margin-bottom:12px;">
+      Selecione os assuntos primários e secundários para filtrar questões. Você pode selecionar 1 assunto primário por coluna, e até 3 assuntos secundários para cada assunto primário selecionado.
+      Caso queira filtrar somente por assuntos primários, os assuntos secundários são opcionais.
+    </div>
+<div class="columns">
+<div>
+<div class="badge">1</div>
+<label class="label">Assunto primário</label>
+<select class="select assunto-primario"><option>Selecione o assunto primário</option></select>
+</div>
+<div>
+<div class="badge">2</div>
+<label class="label">Assunto primário</label>
+<select class="select assunto-primario"><option>Selecione o assunto primário</option></select>
+</div>
+<div>
+<div class="badge">3</div>
+<label class="label">Assunto primário</label>
+<select class="select assunto-primario"><option>Selecione o assunto primário</option></select>
+</div>
+</div>
+</div>
+</div>
+<script>
+// Pega disciplinas da barra de menus e preenche o select
+document.addEventListener('DOMContentLoaded', function(){
+  const anchors = document.querySelectorAll('.disciplinas-list a');
+  const nomes = Array.from(anchors).map(a => a.textContent.trim()).filter(Boolean);
+  const select = document.getElementById('disciplina-select');
+  if(select){
+    select.innerHTML = '<option value="">Selecione uma disciplina</option>' + nomes.map(n=>`<option value="${n}">${n}</option>`).join('');
+    select.disabled = false;
+  }
+
+  document.getElementById('btn-limpar')?.addEventListener('click', ()=>{
+    document.querySelectorAll('#filtro-questoes-novo input[type=radio]').forEach(r=>{ 
+      if(r.name==='status' && r.value==='todos') r.checked=true;
+      if(r.name==='banca' && r.value==='todas') r.checked=true;
+      if(r.name==='nivel' && r.value==='todos') r.checked=true;
+    });
+    select.selectedIndex = 0;
+    document.querySelectorAll('.assunto-primario').forEach(s=>s.selectedIndex=0);
+    alert('Filtros limpos');
+  });
+  document.getElementById('btn-filtrar')?.addEventListener('click', ()=>{
+    alert('Filtros aplicados!');
+  });
+  document.getElementById('btn-codigo')?.addEventListener('click', ()=>{
+    const codigo = prompt('Digite o código da questão:');
+    if(codigo){ alert('Buscar questão: ' + codigo); }
+  });
+});
+</script>
+<style>
+#filtro-questoes {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+#filtro-questoes label {
+    color: white;
+    font-weight: bold;
+    margin-right: 5px;
+}
+#filtro-questoes select, #filtro-questoes button {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: none;
+    margin: 5px 0;
+}
+#filtro-questoes select {
+    min-width: 200px;
+}
+#filtro-questoes button {
+    background: #00796B;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#filtro-questoes button:hover {
+    background: #004D40;
+}
+#resultado {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7f9fc;
+    border-radius: 8px;
+}
+</style>
+<div hidden="">
+<object data="assets/icons/icons.svg" type="image/svg+xml"></object>
+</div>
+<header class="menu-header">
+<div class="menu-top">
+</div>
+</header>
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-brand"><div class="sidebar-logo"><img alt="Estude.Vale" src="img/logo_estudevale.png"/></div></div>
+<div class="menu-section">Conta</div>
+<div class="menu-item login">
+<a href="login.html"><span><img alt="Conta" class="icon" src="assets/icons/custom/user.png"/></span>  Cadastrar ou entrar<br/><small>Estude e pratique de graça!</small></a>
+</div>
+<div class="menu-section">Conteúdo</div>
+<div class="menu-item"><a href="index.html"><svg aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vugc61 icon" focusable="false" viewbox="0 0 14 14"><path d="M5.381 13.762a5.283 5.283 0 0 1-3.717-5.415 4.885 4.885 0 0 1 1.559-3.5.668.668 0 0 1 .561-.17c.364.059.242.7.183 1.065a1.762 1.762 0 0 0 1.41 2.089c2 0-1.372-3.992 2.128-7.732a.307.307 0 0 1 .523.247c-.08 2 2.486 4.052 3.312 5.2a5.35 5.35 0 0 1-5.959 8.219Z"></path></svg>  Novidades</a></div>
+<div class="menu-item"><a href="desempenho.html"><svg aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vugc61 icon" focusable="false" viewbox="0 0 14 14"><defs><style>.cls-1{fill:#444a58}</style></defs><g id="Analytics"><path class="cls-1" d="M0 1.492v11.017a1.227 1.227 0 0 0 1.212 1.222H1.7a1.222 1.222 0 0 0 1.22-1.222V1.492A1.222 1.222 0 0 0 1.7.27h-.489A1.227 1.227 0 0 0 0 1.492ZM5.538 7.917v4.592a1.227 1.227 0 0 0 1.212 1.222h.492a1.222 1.222 0 0 0 1.22-1.222V7.917A1.222 1.222 0 0 0 7.242 6.7h-.493a1.227 1.227 0 0 0-1.211 1.217ZM11.076 4.428v8.081a1.227 1.227 0 0 0 1.212 1.222h.492A1.222 1.222 0 0 0 14 12.509V4.428a1.222 1.222 0 0 0-1.22-1.221h-.493a1.226 1.226 0 0 0-1.211 1.221Z"></path></g></svg>  Meu Desempenho</a></div>
+<div class="menu-item"><a href="questoes.html"><svg aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vugc61 icon" focusable="false" viewbox="0 0 14 14"><path d="M3.973 11.774.5 8.3a1.714 1.714 0 0 1 0-2.425 1.716 1.716 0 0 1 2.425 0L5.1 8.048a.234.234 0 0 0 .33 0l5.64-5.64a1.716 1.716 0 0 1 2.425 0 1.714 1.714 0 0 1 0 2.425l-6.94 6.941a1.826 1.826 0 0 1-2.582 0Z"></path></svg>  Questões</a></div>
+<div class="menu-item dropdown">
+<span><img alt="Disciplinas" class="icon" src="assets/icons/custom/grid.png"/>  Disciplinas <svg class="icon chev"><use href="assets/icons/icons.svg#chevron-down"></use></svg></span>
+<div class="disciplinas-container"><ul class="disciplinas-list">
+<li></li>
+<li><a href="fisica.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Fisica</a></li>
+<li><a href="portugues.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Portugues</a></li>
+<li></li>
+<li><a href="ingles.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Ingles</a></li>
+<li></li>
+<li></li>
+<li><a href="historia.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Historia</a></li>
+<li><a href="matematica.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Matematica</a></li>
+<li><a href="biologia.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Biologia</a></li>
+<li></li>
+<li><a href="quimica.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Quimica</a></li>
+<li><a href="geografia.html" style=";margin-left:5px;border:1px solid #ccc;border-radius:5px;padding:6px;display:block;">Geografia</a></li>
+<li></li>
+</ul></div>
+</div>
+</aside>
+<main>
+<section>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</section>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var toggle = document.getElementById('menu-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var backdrop = document.getElementById('backdrop');
+  var dropdown = document.querySelector('.menu-item.dropdown');
+  var disciplinasToggle = dropdown ? dropdown.querySelector('span') : null;
+  var disciplinasList = document.querySelector('.disciplinas-list');
+
+  function closeMenu(){
+    sidebar && sidebar.classList.remove('active');
+    toggle && toggle.classList.remove('active');
+    backdrop && backdrop.classList.remove('active');
+  }
+  function openMenu(){
+    sidebar && sidebar.classList.add('active');
+    toggle && toggle.classList.add('active');
+    backdrop && backdrop.classList.add('active');
+  }
+
+  if(toggle && sidebar){
+    toggle.addEventListener('click', function() {
+      if(sidebar.classList.contains('active')){ closeMenu(); } else { openMenu(); }
+    });
+  }
+  if(backdrop){
+    backdrop.addEventListener('click', closeMenu);
+  }
+  if(disciplinasToggle && disciplinasList && dropdown){
+    disciplinasToggle.addEventListener('click', function() {
+      disciplinasList.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const dropdowns = document.querySelectorAll(".menu-item.dropdown > span");
+    dropdowns.forEach(item => {
+        item.addEventListener("click", function() {
+            this.parentElement.classList.toggle("open");
+        });
+    });
+});
+</script>
+<script>
+document.addEventListener('click', function(e) {
+  const menu = document.querySelector('.menu');
+  const button = document.querySelector('.menu-button');
+  if(menu && button) {
+    if (!menu.contains(e.target) && !button.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var toggle = document.getElementById('menu-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var backdrop = document.getElementById('backdrop');
+  function closeMenu(){
+    sidebar && sidebar.classList.remove('active');
+    toggle && toggle.classList.remove('active');
+    backdrop && backdrop.classList.remove('active');
+  }
+  document.addEventListener('click', function(e){
+    if(sidebar && sidebar.classList.contains('active')){
+      if(!sidebar.contains(e.target) && !toggle.contains(e.target)){
+        closeMenu();
+      }
+    }
+  });
+});
+</script>
+
+<footer class="site-footer"><div class="footer-inner"><div class="footer-left"><span class="copyright">© 2025 - Um produto Estudantes de Atitude</span></div><div class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/estudantes_de_atitude_cepmgsv/" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@CepmgSebasti%C3%A3odoVale" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.1 3.5 12 3.5 12 3.5s-7.1 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.9 20.5 12 20.5 12 20.5s7.1 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5z" fill="currentColor"></path></svg></a></div></div></footer>
+</body>
+</html>
