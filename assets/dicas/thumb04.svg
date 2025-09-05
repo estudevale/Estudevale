@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <rect width="100%" height="100%" fill="#F0FDF4"/>
+  <rect x="44" y="44" width="1112" height="542" rx="28" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <text x="80" y="200" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial"
+        font-size="60" font-weight="800" fill="#111827">Atualidades no dia a dia</text>
+  <circle cx="1060" cy="510" r="90" fill="#6366F1" opacity="0.18"/>
+  <circle cx="980" cy="430" r="54" fill="#6366F1" opacity="0.28"/>
+</svg>
