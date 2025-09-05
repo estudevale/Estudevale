@@ -1,0 +1,17 @@
+/* Centralizar e aumentar a logo APENAS na barra de menu (sidebar) */
+.sidebar-brand, .sidebar-logo {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+.sidebar-logo img {
+    display: block !important;
+    margin: 12px auto !important;
+    max-width: 220px !important; /* aumento controlado da logo */
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Remover regras amplas que estouravam imagens em 100% em toda a UI */

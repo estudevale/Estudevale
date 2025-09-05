@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Portal Sebastião do Vale</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+.site-footer{background:#ffffff;border-top:1px solid #e5e7eb;margin-top:40px}
+.site-footer .footer-inner{max-width:1100px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-footer .copyright{color:#4b5563;font:500 14px/1.4 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+.site-footer .footer-social{display:flex;align-items:center;gap:10px}
+.site-footer .footer-social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;border:1px solid #e5e7eb;background:#ffffff;transition:background .2s, transform .2s, box-shadow .2s}
+.site-footer .footer-social a:hover{background:#f3f4f6;transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.site-footer .footer-social svg{width:18px;height:18px;color:#111827}
+@media (max-width:640px){
+  .site-footer .footer-inner{padding:16px 14px}
+  .site-footer .copyright{font-size:13px}
+}
+
+/* ===== Hero otimizado ===== */
+.novidades-image{position:relative; overflow:visible;}
+.novidades-image img{
+  display:block;
+  height:auto;
+  max-width:none;     /* permite passar do container */
+  width:120%;         /* 20% maior que o container */
+  transform:translateX(5%); /* move um pouco para a direita */
+  will-change:transform;
+}
+/* Responsivo: reduz a expansão em telas pequenas */
+@media (max-width: 768px){
+  .novidades-image img{ width:110%; transform:translateX(3%); }
+}
+
+/* ===== Ajuste vertical da estátua ===== */
+.novidades-image{position:relative; overflow:visible;}
+.novidades-image img{
+  display:block;
+  max-width:100%;    /* largura normal do container */
+  width:100%;
+  height:auto;
+  margin-top:-10%;   /* sobe um pouco para passar do container */
+}
+@media (max-width: 768px){
+  .novidades-image img{ margin-top:-5%; }
+}
+
+/* ===== Hero: imagem absoluta sem alterar o container ===== */
+.novidades-container{ /* não mexe na altura do container roxo */ }
+.novidades-image{
+  position:relative;          /* contexto para position:absolute da img */
+  min-height: 360px;          /* garante área fixa do hero (ajuste se quiser) */
+  overflow: visible;          /* permite a imagem 'vazar' visualmente */
+}
+.novidades-image img{
+  position:absolute;          /* tira a imagem do fluxo para não aumentar o container */
+  top:-16%;                   /* sobe (apenas vertical) */
+  left:-18%;                  /* vai para a esquerda */
+  width:140%;                 /* maior, sem afetar o container */
+  height:auto;
+  max-width:none;
+  display:block;
+  margin:0;
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image{ min-height: 260px; }
+  .novidades-image img{
+    top:-10%;
+    left:-10%;
+    width:125%;
+  }
+}
+
+/* ===== Hero ajustado ===== */
+.novidades-container{}
+.novidades-image{
+  position:relative;
+  overflow:visible;
+}
+.novidades-image img{
+  position:relative;      /* volta ao fluxo relativo para não sumir */
+  display:block;
+  width:100%;             /* ocupa largura total do container */
+  height:auto;
+  max-width:none;
+  margin-left:-8%;        /* move um pouco para a esquerda */
+  margin-top:-8%;         /* sobe um pouco para dar destaque */
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image img{
+    width:100%;
+    margin-left:-5%;
+    margin-top:-5%;
+  }
+}
+
+/* ===== Hero refinado ===== */
+.novidades-image img{
+  position:relative;
+  display:block;
+  width:105%;            /* aumenta um pouco a escala */
+  height:auto;
+  max-width:none;
+  margin-left:-8%;       /* mantém o deslocamento para esquerda */
+  margin-top:-1%;        /* desce um pouco para centralizar melhor */
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image img{
+    width:103%;
+    margin-left:-5%;
+    margin-top:-1%;
+  }
+}
+
+/* ===== Hero com efeito de zoom-in ===== */
+.novidades-image img{
+  animation: zoomInHero 1.8s ease-out forwards;
+  transform-origin: center bottom; /* foco no pé da estátua */
+}
+@keyframes zoomInHero{
+  0% { transform: scale(0.95); opacity: 0; }
+  60% { transform: scale(1.07); opacity: 1; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* ===== Destaques (inspirado no estudeprisma.com/novidades) ===== */
+.destaques-wrap{max-width:1100px;margin:0 auto;padding:18px 16px 28px}
+.destaques-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card-destaque{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease}
+.card-destaque:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.card-thumb{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:10px;top:10px;background:#111827;color:#fff;border-radius:9999px;padding:6px 10px;font:700 11px/1 ui-sans-serif,system-ui;letter-spacing:.2px}
+.card-body{display:flex;flex-direction:column;gap:8px;padding:12px}
+.card-title{font:700 16px/1.25 ui-sans-serif,system-ui;color:#111827}
+.card-desc{font:500 13px/1.35 ui-sans-serif,system-ui;color:#4b5563;min-height:42px}
+.card-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
+.meta-left{display:flex;align-items:center;gap:8px;font:600 12px/1 ui-sans-serif,system-ui;color:#374151}
+.meta-pill{display:inline-flex;align-items:center;gap:6px;background:#eef2f7;color:#1f2937;border-radius:9999px;padding:6px 10px;font:700 11px/1 ui-sans-serif,system-ui}
+.meta-right a{display:inline-flex;align-items:center;gap:8px;border:1px solid #111827;border-radius:9999px;padding:8px 12px;font:700 12px/1 ui-sans-serif,system-ui;color:#111827;text-decoration:none}
+.meta-right a .play{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #111827}
+@media (max-width:640px){
+  .destaques-wrap{padding:14px}
+  .card-title{font-size:15px}
+}
+
+</style>
+<link crossorigin="True" href="https://estudeprisma.com" rel="preconnect"/><link href="../css/fix-logo-gap.css" rel="stylesheet"/><style>
+/* === MAR.IA v2 (widget flutuante + chat) === */
+:root{
+  --maria-bg:#0f172a;         /* slate-900 */
+  --maria-accent:#6366f1;     /* indigo-500 */
+  --maria-accent-2:#8b5cf6;   /* violet-500 */
+  --maria-soft:#f8fafc;       /* slate-50 */
+  --maria-muted:#64748b;      /* slate-500 */
+  --maria-text:#0b1220;       /* near-slate-950 */
+}
+/* FAB redondo com rostinho */
+.maria-fab{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--maria-accent),var(--maria-accent-2));border:none;border-radius:9999px;
+  padding:10px; box-shadow:0 12px 28px rgba(0,0,0,.18); cursor:pointer; transition:box-shadow .2s ease, transform .2s ease}
+.maria-fab:hover{transform:translateY(-1px); box-shadow:0 16px 34px rgba(0,0,0,.22)}
+.maria-face{width:42px;height:42px;border-radius:9999px;background:#fff;display:grid;place-items:center;position:relative}
+.maria-face svg{width:26px;height:26px;color:var(--maria-accent)}
+.maria-fab .maria-label{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;
+  color:#fff;font:800 13px/1 ui-sans-serif,system-ui;padding:0;transition:max-width .25s ease, opacity .2s ease, padding .2s ease}
+.maria-fab:hover .maria-label{max-width:180px;opacity:1;padding:0 8px 0 2px}
+.maria-status{position:absolute;right:4px;bottom:4px;width:9px;height:9px;border-radius:9999px;background:#22c55e;border:2px solid #fff}
+
+/* Painel */
+.maria-panel{position:fixed;right:18px;bottom:78px;width:380px;max-height:76vh;background:#fff;border:1px solid #e6e8ee;
+  border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,.2); overflow:hidden; display:none; flex-direction:column; z-index:9999}
+.maria-header{position:relative;padding:14px 16px;background:
+  linear-gradient(135deg,var(--maria-accent),var(--maria-accent-2));color:#fff}
+.maria-brand{display:flex;align-items:center;gap:10px}
+.maria-brand .dot{width:8px;height:8px;border-radius:9999px;background:#22c55e}
+.maria-title{font:800 14px/1 ui-sans-serif,system-ui;letter-spacing:.2px}
+.maria-sub{font:600 12px/1.2 ui-sans-serif,system-ui;opacity:.9}
+.maria-close{position:absolute;right:10px;top:10px;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);
+  border:0;border-radius:8px;color:#fff;font:800 18px/1 ui-sans-serif,system-ui;padding:6px 10px;cursor:pointer}
+
+.maria-body{display:flex;flex-direction:column;gap:10px;padding:12px;background:var(--maria-soft)}
+.maria-hint{font:600 12px/1.35 ui-sans-serif,system-ui;color:#0b1220;background:#fff;border:1px solid #eef2f7;border-radius:12px;padding:10px 12px}
+.maria-suggestions{display:flex;flex-wrap:wrap;gap:8px}
+.maria-chip{border:1px solid var(--maria-bg);border-radius:9999px;padding:8px 10px;font:700 12px/1 ui-sans-serif,system-ui;color:var(--maria-bg);background:#fff;cursor:pointer}
+
+.maria-chat{display:flex;flex-direction:column;gap:8px;overflow:auto;max-height:40vh;padding-right:4px;scrollbar-width:thin}
+.maria-msg{display:flex;gap:8px}
+.maria-bubble{max-width:82%;padding:10px 12px;border-radius:14px;font:500 13px/1.45 ui-sans-serif,system-ui}
+.maria-msg.user{justify-content:flex-end}
+.maria-msg.user .maria-bubble{background:#e9ecf5;color:var(--maria-text);border-top-right-radius:6px;border:1px solid #dde3f0}
+.maria-msg.bot .maria-bubble{background:#101727;color:#fff;border-top-left-radius:6px;border:1px solid #0b1220}
+
+.maria-input{display:flex;gap:8px}
+.maria-input textarea{flex:1;border:1px solid #e6e8ee;border-radius:12px;padding:10px 12px;font:500 13px/1.35 ui-sans-serif,system-ui;
+  min-height:44px;max-height:120px;background:#fff}
+.maria-input button{border:1px solid var(--maria-bg);border-radius:12px;padding:10px 14px;font:800 13px/1 ui-sans-serif,system-ui;
+  background:var(--maria-bg);color:#fff;cursor:pointer}
+
+.maria-foot{padding:6px 12px;color:var(--maria-muted);font:600 11px/1.2 ui-sans-serif,system-ui;text-align:center}
+
+@media (max-width:480px){
+  .maria-panel{right:10px;left:10px;width:auto}
+}
+</style></head>
+<body>
+<div hidden="">
+<object data="assets/icons/icons.svg" type="image/svg+xml"></object>
+</div>
+<header class="menu-header">
+<div class="menu-top">
+<button class="menu-toggle" id="menu-toggle"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+</div>
+<div class="brasao-center"><img alt="Brasão CEPMG" src="assets/images/brasao-cepmg.png"/></div></header>
+<div class="backdrop" id="backdrop"></div>
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-brand"><div class="sidebar-logo"><img alt="Estude.Vale" src="img/logo_estudevale.png"/></div></div>
+<div class="menu-section">Conta</div>
+<div class="menu-item login">
+<a href="login.html"><span><img alt="Conta" class="icon" src="assets/icons/custom/user.png"/></span>   Cadastrar ou entrar<br/><small>Estude e pratique de graça!</small></a>
+</div>
+<div class="menu-section">Conteúdo</div>
+<div class="menu-item"><a href="index.html"><svg aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vugc61 icon" focusable="false" viewbox="0 0 14 14"><path d="M5.381 13.762a5.283 5.283 0 0 1-3.717-5.415 4.885 4.885 0 0 1 1.559-3.5.668.668 0 0 1 .561-.17c.364.059.242.7.183 1.065a1.762 1.762 0 0 0 1.41 2.089c2 0-1.372-3.992 2.128-7.732a.307.307 0 0 1 .523.247c-.08 2 2.486 4.052 3.312 5.2a5.35 5.35 0 0 1-5.959 8.219Z"></path></svg>   Novidades</a></div>
+<div class="menu-item"><a href="desempenho.html"><svg aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vugc61 icon" focusable="false" viewbox="0 0 14 14"><defs><style>.cls-1{fill:#444a58}</style></defs><g id="Analytics"><path class="cls-1" d="M0 1.492v11.017a1.227 1.227 0 0 0 1.212 1.222H1.7a1.222 1.222 0 0 0 1.22-1.222V1.492A1.222 1.222 0 0 0 1.7.27h-.489A1.227 1.227 0 0 0 0 1.492ZM5.538 7.917v4.592a1.227 1.227 0 0 0 1.212 1.222h.492a1.222 1.222 0 0 0 1.22-1.222V7.917A1.222 1.222 0 0 0 7.242 6.7h-.493a1.227 1.227 0 0 0-1.211 1.217ZM11.076 4.428v8.081a1.227 1.227 0 0 0 1.212 1.222h.492A1.222 1.222 0 0 0 14 12.509V4.428a1.222 1.222 0 0 0-1.22-1.221h-.493a1.226 1.226 0 0 0-1.211 1.221Z"></path></g></svg>   Meu Desempenho</a></div>
+<div class="menu-item"><a href="questoes.html"><svg aria-hidden="true" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vugc61 icon" focusable="false" viewbox="0 0 14 14"><path d="M3.973 11.774.5 8.3a1.714 1.714 0 0 1 0-2.425 1.716 1.716 0 0 1 2.425 0L5.1 8.048a.234.234 0 0 0 .33 0l5.64-5.64a1.716 1.716 0 0 1 2.425 0 1.714 1.714 0 0 1 0 2.425l-6.94 6.941a1.826 1.826 0 0 1-2.582 0Z"></path></svg>   Questões</a></div>
+<div class="menu-item dropdown">
+<span><img alt="Disciplinas" class="icon" src="assets/icons/custom/grid.png"/>   Disciplinas <svg class="icon chev"><use href="assets/icons/icons.svg#chevron-down"></use></svg></span>
+<div class="disciplinas-container"><ul class="disciplinas-list">
+<li></li>
+<li><a href="fisica.html">Fisica</a></li>
+<li><a href="portugues.html">Portugues</a></li>
+<li></li>
+<li><a href="ingles.html">Ingles</a></li>
+<li></li>
+<li></li>
+<li><a href="historia.html">Historia</a></li>
+<li><a href="matematica.html">Matematica</a></li>
+<li><a href="biologia.html">Biologia</a></li>
+<li></li>
+<li><a href="quimica.html">Quimica</a></li>
+<li><a href="geografia.html">Geografia</a></li>
+<li><a href="redacao.html">Redação</a></li>
+</ul></div>
+</div>
+</aside>
+<main>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var toggle = document.getElementById('menu-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var backdrop = document.getElementById('backdrop');
+  var dropdown = document.querySelector('.menu-item.dropdown');
+  var disciplinasToggle = dropdown ? dropdown.querySelector('span') : null;
+  var disciplinasList = document.querySelector('.disciplinas-list');
+
+  function closeMenu(){
+    sidebar && sidebar.classList.remove('active');
+    toggle && toggle.classList.remove('active');
+    backdrop && backdrop.classList.remove('active');
+  }
+  function openMenu(){
+    sidebar && sidebar.classList.add('active');
+    toggle && toggle.classList.add('active');
+    backdrop && backdrop.classList.add('active');
+  }
+
+  if(toggle && sidebar){
+    toggle.addEventListener('click', function() {
+      if(sidebar.classList.contains('active')){ closeMenu(); } else { openMenu(); }
+    });
+  }
+  if(backdrop){
+    backdrop.addEventListener('click', closeMenu);
+  }
+  if(disciplinasToggle && disciplinasList && dropdown){
+    disciplinasToggle.addEventListener('click', function() {
+      disciplinasList.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const dropdowns = document.querySelectorAll(".menu-item.dropdown > span");
+    dropdowns.forEach(item => {
+        item.addEventListener("click", function() {
+            this.parentElement.classList.toggle("open");
+        });
+    });
+});
+</script>
+<section class="novidades-section">
+<div class="novidades-container">
+<div class="novidades-text">
+<h2>Boas-vindas! Vamos estudar?</h2>
+<p>Olá, estamos muito felizes que você está aqui! Saiba mais sobre a nossa missão, nossos valores e por qual motivo queremos lhe ajudar a alcançar a tão sonhada vaga no ensino superior.</p>
+<div class="novidades-buttons">
+<a class="btn-prisma" href="sobre.html">Conheça EstudeVale</a>
+<a class="btn-praticar" href="gerador-cronograma.html">Comece a praticar</a>
+</div>
+</div>
+<div class="novidades-image">
+<img alt="Estátua com efeitos do Estude Prisma" decoding="async" fetchpriority="high" height="2400" loading="eager" sizes="100vw" src="https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=2400" srcset="https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=1080 1080w, https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=1200 1200w, https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=1600 1600w, https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=1920 1920w, https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=2400 2400w, https://estudeprisma.com/_next/image?q=100&amp;url=%2F_next%2Fstatic%2Fmedia%2Fstudent.c80d1d89.png&amp;w=3000 3000w" width="2400"/>
+</div>
+</div>
+<div class="novidades-tabs"><a class="tab active" href="index.html">Destaques</a><a class="tab" href="dicas.html">Dicas de estudo</a><a class="tab" href="falaprofessor.html">Fala Professor</a></div>
+<section aria-labelledby="destaques-heading" class="destaques-wrap">
+<h2 id="destaques-heading" style="font:800 20px/1.2 ui-sans-serif,system-ui;margin:8px 0 14px;color:#111827">Destaques</h2>
+<div class="destaques-grid">
+<article class="card-destaque">
+<a class="card-thumb" href="aula-ditadura-militar-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/1gGIh5rMA14/hqdefault.jpg"/>
+<span class="badge">História</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">História - Ditadura Militar - Aula 1: Ditadura Militar</h3>
+<p class="card-desc">Entenda o período da Ditadura Militar e os principais acontecimentos cobrados no Enem.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Parabólica</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-ditadura-militar-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+        </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-ecologia-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/cpmcIciaIWc/hqdefault.jpg"/>
+<span class="badge">Biologia</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Relações Ecológicas</h3>
+<p class="card-desc">Relações ecológicas na prática: mutualismo, competição, cadeias e teias alimentares.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Samuel Cunha</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-ecologia-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+        </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-embriologia-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/p4DZ9HrOSeE/hqdefault.jpg"/>
+<span class="badge">Biologia</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Biologia - Embriologia - Aula 1: Embriologia</h3>
+<p class="card-desc">Do zigoto ao feto: introdução à embriologia com foco nos pontos mais cobrados.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Samuel Cunha</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-embriologia-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+        </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-citologia-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/N33jWXzV8RU/hqdefault.jpg"/>
+<span class="badge">Biologia</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Introdução à Citologia</h3>
+<p class="card-desc">Conceitos essenciais de citologia para não errar mais questões de organelas.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Samuel Cunha</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-citologia-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+        </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-combinatoria-arranjos-e-permutacoes.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/Xi7I08qcksI/hqdefault.jpg"/>
+<span class="badge">Matemática</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Arranjos e permutações</h3>
+<p class="card-desc">Arranjos e permutações com Ferretto para dominar análise combinatória no Enem.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Professor Ferretto</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-combinatoria-arranjos-e-permutacoes.html">
+<span aria-hidden="true" class="play"></span> Assistir
+        </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-dinamica-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/xDmMr7fj5rI/hqdefault.jpg"/>
+<span class="badge">Física</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">1ª Lei de Newton</h3>
+<p class="card-desc">Entenda a 1ª Lei de Newton e os fundamentos da dinâmica, com exemplos claros do dia a dia.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Professor Coelho</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-dinamica-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+                </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-agricultura-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/-j439Fv8ppo/hqdefault.jpg"/>
+<span class="badge">Geografia</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Agricultura: sistemas agrícolas — agronegócio, tradicionais, alternativas</h3>
+<p class="card-desc">Panorama da agricultura brasileira: sistemas produtivos, agronegócio e alternativas sustentáveis.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Thais Formagio</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-agricultura-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+                </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-aritmetica-multiplos-e-divisores-mdc-e-mmc.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/QCMUMufcK5M/hqdefault.jpg"/>
+<span class="badge">Matemática</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Múltiplos e divisores (MDC e MMC)</h3>
+<p class="card-desc">Reforce a base: aprenda a calcular MDC e MMC com exemplos diretos para provas e concursos.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Professor Ferretto</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-aritmetica-multiplos-e-divisores-mdc-e-mmc.html">
+<span aria-hidden="true" class="play"></span> Assistir
+                </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-botanica-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/EAVhBfwLUhk/hqdefault.jpg"/>
+<span class="badge">Biologia</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Biologia - Botânica - Aula 1</h3>
+<p class="card-desc">Introdução à Botânica: principais grupos vegetais e características essenciais.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Samuel Cunha</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-botanica-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+                </a>
+</div>
+</div>
+</div>
+</article>
+<article class="card-destaque">
+<a class="card-thumb" href="aula-brasil-colonia-01.html">
+<img alt="Thumb da aula" src="https://img.youtube.com/vi/QoSWUeL3fW0/hqdefault.jpg"/>
+<span class="badge">História</span>
+</a>
+<div class="card-body">
+<h3 class="card-title">Colonização do Brasil</h3>
+<p class="card-desc">Descubra como ocorreu a colonização do Brasil e seus impactos iniciais na sociedade.</p>
+<div class="card-meta">
+<div class="meta-left">
+<span class="meta-pill">Parabólica</span>
+</div>
+<div class="meta-right">
+<a aria-label="Assistir aula" href="aula-brasil-colonia-01.html">
+<span aria-hidden="true" class="play"></span> Assistir
+                </a>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+</section>
+
+
+
+
+
+<button aria-label="Abrir assistente MAR.IA" class="maria-fab" id="maria-open">
+<span aria-hidden="true" class="maria-face">
+<svg fill="none" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
+<circle cx="9" cy="10" fill="currentColor" r="1.2"></circle><circle cx="15" cy="10" fill="currentColor" r="1.2"></circle>
+<path d="M8 14c1.2 1 2.4 1.5 4 1.5S14.8 15 16 14" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg>
+<span class="maria-status"></span>
+</span>
+<span class="maria-label">MAR.IA</span>
+</button>
+<section aria-labelledby="maria-heading" aria-modal="true" class="maria-panel" id="maria-panel" role="dialog">
+<header class="maria-header">
+<div class="maria-brand">
+<span aria-hidden="true" class="dot"></span>
+<div>
+<div class="maria-title" id="maria-heading">MAR.IA</div>
+<div class="maria-sub">Assistente de Estudos</div>
+</div>
+</div>
+<button aria-label="Fechar" class="maria-close" id="maria-close">×</button>
+</header>
+<div class="maria-body">
+<div class="maria-hint">
+<strong>Bem-vindo(a)!</strong> Posso conversar e ajudar em Matemática, Física, Química, Biologia, Geografia, História, Português e Redação.
+      <br/><small>Homenagem à Sra. Maria, esposa de Sebastião do Vale (pai do ex-prefeito de Rio Verde) — nome do nosso colégio.</small>
+</div>
+<div class="maria-suggestions" id="maria-sug">
+<span class="maria-chip" data-q="Oi MAR.IA, tudo bem?">Tudo bem?</span>
+<span class="maria-chip" data-q="Explique análise combinatória com exemplos simples.">Combinatória</span>
+<span class="maria-chip" data-q="Resuma as Leis de Newton com aplicações do dia a dia.">Leis de Newton</span>
+<span class="maria-chip" data-q="Como diferenciar mutualismo de comensalismo?">Ecologia</span>
+<span class="maria-chip" data-q="Faça um plano de estudos (1h30 por matéria) para 1 semana.">Cronograma</span>
+<span class="maria-chip" data-q="Esboce a estrutura de uma redação nota 1000 no Enem.">Redação</span>
+</div>
+<div aria-label="Mensagens do chat" aria-live="polite" class="maria-chat" id="maria-chat"></div>
+<div class="maria-input">
+<textarea id="maria-text" placeholder="Pergunte algo. Ex.: 'Como calcular MMC?'"></textarea>
+<button id="maria-send">Enviar</button>
+</div>
+<div class="maria-foot">Dica: peça resolução passo a passo e questões de treino.</div>
+</div>
+</section>
+
+<script>
+(function(){
+  const openBtn = document.getElementById('maria-open');
+  const panel = document.getElementById('maria-panel');
+  const closeBtn = document.getElementById('maria-close');
+  const chat = document.getElementById('maria-chat');
+  const input = document.getElementById('maria-text');
+  const send = document.getElementById('maria-send');
+  const sug = document.getElementById('maria-sug');
+
+  function showPanel(){ panel.style.display='flex'; input && input.focus(); if(chat.children.length===0){ greet(); } }
+  function hidePanel(){ panel.style.display='none'; }
+  openBtn && openBtn.addEventListener('click', showPanel);
+  closeBtn && closeBtn.addEventListener('click', hidePanel);
+
+  function addMsg(role, text){
+    const wrap = document.createElement('div');
+    wrap.className = 'maria-msg ' + (role === 'user' ? 'user':'bot');
+    const bubble = document.createElement('div');
+    bubble.className = 'maria-bubble';
+    bubble.textContent = text;
+    wrap.appendChild(bubble);
+    chat.appendChild(wrap);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function greet(){
+    addMsg('bot', 'Oi! Eu sou a MAR.IA 😊 Tudo bem por aí? Posso bater um papo e também te ajudar a estudar com explicações, cronogramas de 1h30 e questões.');
+  }
+
+  function isGreeting(t){
+    const kws = ['oi','ola','olá','bom dia','boa tarde','boa noite','e aí','fala','tudo bem','como vai','como você está'];
+    return kws.some(k => t.includes(k));
+  }
+
+  function reply(userText){
+    const t = (userText||'').toLowerCase();
+    // Small talk / conversa humana
+    if(isGreeting(t)){
+      addMsg('bot', 'Tudo ótimo por aqui! 💙 E com você? Se quiser, já posso te ajudar com um tópico específico ou montar um mini-plano de estudos.');
+      return;
+    }
+    // Informativo + auxílio (fallbacks)
+    if(t.includes('lei') && t.includes('newton')){
+      addMsg('bot', 'As 3 Leis de Newton: (1) Inércia — repouso/MRU se força resultante = 0. (2) F= m·a. (3) Ação e reação — pares de forças, mesma intensidade e sentidos opostos. Quer um exemplo em ônibus/freio?');
+    } else if(t.includes('mmc') || t.includes('mdc')){
+      addMsg('bot', 'MMC: use a fatoração e pegue os maiores expoentes; MDC: pegue apenas os fatores comuns com menores expoentes. Posso resolver um exercício seu agora.');
+    } else if(t.includes('mutualismo') || t.includes('comensalismo')){
+      addMsg('bot', 'Mutualismo: ambos ganham e podem depender (líquens). Comensalismo: um ganha e o outro não é afetado (rêmoras). Quer 3 exemplos de prova?');
+    } else if(t.includes('cronograma')){
+      addMsg('bot', 'Organizo um cronograma de 1h30 por matéria para 5 dias. Diga seus horários livres e matérias prioritárias que eu monto certinho.');
+    } else if(t.includes('redação')){
+      addMsg('bot', 'Estrutura: Introdução (tema+tese) · Desenvolvimento 1 e 2 (argumento + repertório + análise) · Conclusão (proposta com agente, ação, meio e efeito). Posso sugerir um repertório agora.');
+    } else {
+      addMsg('bot', 'Certo! Posso explicar passo a passo, revisar respostas e sugerir exercícios por assunto. Me diga o tema ou cole o enunciado 😉');
+    }
+  }
+
+  function handleSend(){
+    const text = input.value.trim();
+    if(!text) return;
+    addMsg('user', text);
+    input.value='';
+    reply(text);
+  }
+
+  send && send.addEventListener('click', handleSend);
+  input && input.addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); handleSend(); } });
+  sug && sug.addEventListener('click', (e)=>{
+    const chip = e.target.closest('.maria-chip');
+    if(!chip) return;
+    const q = chip.getAttribute('data-q');
+    if(q){
+      addMsg('user', q);
+      reply(q);
+      // Abre painel se clicado via chip quando painel estiver fechado (caso futuro)
+      if(panel && panel.style.display==='none'){ panel.style.display='flex'; }
+    }
+  });
+})();
+</script>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-left"><span class="copyright">© 2025 - Um produto Estudantes de Atitude</span></div><div class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/estudantes_de_atitude_cepmgsv/" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@CepmgSebasti%C3%A3odoVale" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.1 3.5 12 3.5 12 3.5s-7.1 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.9 20.5 12 20.5 12 20.5s7.1 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5z" fill="currentColor"></path></svg></a></div></div></footer>
+</body>
+</html>

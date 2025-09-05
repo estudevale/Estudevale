@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Gerador de Cronograma Inteligente</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #6b7280;
+      --primary: #635bff;
+      --primary-2: #7a70ff;
+      --border: #e5e7eb;
+      --card: #ffffff;
+      --shape1: #f5f6ff;
+      --shape2: #eef0ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+    .hero {
+      position: relative;
+      padding: 28px 20px 36px;
+      overflow: hidden;
+      background: var(--bg);
+      z-index: 0;
+    }
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 28px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .title { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; margin: 8px 0 6px; text-align: center; }
+    .subtitle { color: var(--muted); font-size: 16px; margin: 0 0 16px; text-align: center; }
+    .grid-area { margin: 10px 0 22px; }
+    .grade { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background:#fff; }
+    .grade th, .grade td { border: 1px solid var(--border); padding: 10px; text-align: center; font-size: 13px; }
+    .grade thead th { background: #fafafe; font-weight: 800; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+    }
+    .layout { display: block; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+    label { font-weight: 600; font-size: 14px; display:block; margin-bottom: 6px; }
+    input[type="number"], select, .days {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; padding: 10px; background:#fff;border-radius:12px;border:1px solid var(--border); width: 100%; }
+    @media (max-width: 640px) { .days { grid-template-columns: repeat(2, 1fr); } }
+    .days label { font-weight: 500; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; display:flex; align-items:center; gap:8px; background:#fff; }
+    .subjects { display: grid; grid-template-columns: 1fr 140px; gap: 10px; margin-top: 12px; }
+    .subject-row { display: contents; }
+    .btns { display:flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: none; cursor: pointer;
+      border-radius: 14px; padding: 12px 16px; font-weight: 700; font-size: 15px;
+      background: var(--primary); color: #fff;
+      box-shadow: 0 8px 24px rgba(99,91,255,0.3);
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover { background: var(--primary-2); box-shadow: 0 10px 28px rgba(99,91,255,0.35); }
+    .btn:active { transform: translateY(1px); }
+    .note { color: var(--muted); margin: 4px 0 0; font-size: 14px; }
+  </style>
+<link href="../css/fix-logo-gap.css" rel="stylesheet"/><style>
+.site-footer{background:#ffffff;border-top:1px solid #e5e7eb;margin-top:40px}
+.site-footer .footer-inner{max-width:1100px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-footer .copyright{color:#4b5563;font:500 14px/1.4 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+.site-footer .footer-social{display:flex;align-items:center;gap:10px}
+.site-footer .footer-social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;border:1px solid #e5e7eb;background:#ffffff;transition:background .2s, transform .2s, box-shadow .2s}
+.site-footer .footer-social a:hover{background:#f3f4f6;transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.site-footer .footer-social svg{width:18px;height:18px;color:#111827}
+@media (max-width:640px){
+  .site-footer .footer-inner{padding:16px 14px}
+  .site-footer .copyright{font-size:13px}
+}
+
+/* ===== Hero otimizado ===== */
+.novidades-image{position:relative; overflow:visible;}
+.novidades-image img{
+  display:block;
+  height:auto;
+  max-width:none;     /* permite passar do container */
+  width:120%;         /* 20% maior que o container */
+  transform:translateX(5%); /* move um pouco para a direita */
+  will-change:transform;
+}
+/* Responsivo: reduz a expansão em telas pequenas */
+@media (max-width: 768px){
+  .novidades-image img{ width:110%; transform:translateX(3%); }
+}
+
+/* ===== Ajuste vertical da estátua ===== */
+.novidades-image{position:relative; overflow:visible;}
+.novidades-image img{
+  display:block;
+  max-width:100%;    /* largura normal do container */
+  width:100%;
+  height:auto;
+  margin-top:-10%;   /* sobe um pouco para passar do container */
+}
+@media (max-width: 768px){
+  .novidades-image img{ margin-top:-5%; }
+}
+
+/* ===== Hero: imagem absoluta sem alterar o container ===== */
+.novidades-container{ /* não mexe na altura do container roxo */ }
+.novidades-image{
+  position:relative;          /* contexto para position:absolute da img */
+  min-height: 360px;          /* garante área fixa do hero (ajuste se quiser) */
+  overflow: visible;          /* permite a imagem 'vazar' visualmente */
+}
+.novidades-image img{
+  position:absolute;          /* tira a imagem do fluxo para não aumentar o container */
+  top:-16%;                   /* sobe (apenas vertical) */
+  left:-18%;                  /* vai para a esquerda */
+  width:140%;                 /* maior, sem afetar o container */
+  height:auto;
+  max-width:none;
+  display:block;
+  margin:0;
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image{ min-height: 260px; }
+  .novidades-image img{
+    top:-10%;
+    left:-10%;
+    width:125%;
+  }
+}
+
+/* ===== Hero ajustado ===== */
+.novidades-container{}
+.novidades-image{
+  position:relative;
+  overflow:visible;
+}
+.novidades-image img{
+  position:relative;      /* volta ao fluxo relativo para não sumir */
+  display:block;
+  width:100%;             /* ocupa largura total do container */
+  height:auto;
+  max-width:none;
+  margin-left:-8%;        /* move um pouco para a esquerda */
+  margin-top:-8%;         /* sobe um pouco para dar destaque */
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image img{
+    width:100%;
+    margin-left:-5%;
+    margin-top:-5%;
+  }
+}
+
+/* ===== Hero refinado ===== */
+.novidades-image img{
+  position:relative;
+  display:block;
+  width:105%;            /* aumenta um pouco a escala */
+  height:auto;
+  max-width:none;
+  margin-left:-8%;       /* mantém o deslocamento para esquerda */
+  margin-top:-1%;        /* desce um pouco para centralizar melhor */
+  pointer-events:none;
+}
+@media (max-width: 768px){
+  .novidades-image img{
+    width:103%;
+    margin-left:-5%;
+    margin-top:-1%;
+  }
+}
+
+/* ===== Hero com efeito de zoom-in ===== */
+.novidades-image img{
+  animation: zoomInHero 1.8s ease-out forwards;
+  transform-origin: center bottom; /* foco no pé da estátua */
+}
+@keyframes zoomInHero{
+  0% { transform: scale(0.95); opacity: 0; }
+  60% { transform: scale(1.07); opacity: 1; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* ===== Destaques (inspirado no estudeprisma.com/novidades) ===== */
+.destaques-wrap{max-width:1100px;margin:0 auto;padding:18px 16px 28px}
+.destaques-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card-destaque{background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease}
+.card-destaque:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.card-thumb{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:10px;top:10px;background:#111827;color:#fff;border-radius:9999px;padding:6px 10px;font:700 11px/1 ui-sans-serif,system-ui;letter-spacing:.2px}
+.card-body{display:flex;flex-direction:column;gap:8px;padding:12px}
+.card-title{font:700 16px/1.25 ui-sans-serif,system-ui;color:#111827}
+.card-desc{font:500 13px/1.35 ui-sans-serif,system-ui;color:#4b5563;min-height:42px}
+.card-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
+.meta-left{display:flex;align-items:center;gap:8px;font:600 12px/1 ui-sans-serif,system-ui;color:#374151}
+.meta-pill{display:inline-flex;align-items:center;gap:6px;background:#eef2f7;color:#1f2937;border-radius:9999px;padding:6px 10px;font:700 11px/1 ui-sans-serif,system-ui}
+.meta-right a{display:inline-flex;align-items:center;gap:8px;border:1px solid #111827;border-radius:9999px;padding:8px 12px;font:700 12px/1 ui-sans-serif,system-ui;color:#111827;text-decoration:none}
+.meta-right a .play{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #111827}
+@media (max-width:640px){
+  .destaques-wrap{padding:14px}
+  .card-title{font-size:15px}
+}
+
+</style>
+</head>
+<body>
+<div id="toast" style="position:fixed;top:16px;right:16px;z-index:9999;background:#111;color:#fff;padding:12px 14px;border-radius:10px;box-shadow:0 10px 20px rgba(0,0,0,.15);font:600 14px/1.3 ui-sans-serif,system-ui;transition:opacity .3s ease, transform .3s ease;opacity:0;transform:translateY(-8px);display:none;"></div>
+<section class="hero">
+<a class="back-arrow" href="index.html">←</a>
+<div class="wrap">
+<h1 class="title">Monte seu cronograma semanal</h1>
+<p class="subtitle">Cronograma inteligente com todas as matérias e horários reais! 🚀</p>
+<div class="grid-area" id="gridArea"><table class="grade" id="gradeTable">
+<thead><tr id="gradeHead"></tr></thead>
+<tbody id="gradeBody"></tbody>
+</table>
+</div>
+<div class="layout">
+<div class="card">
+<div class="form-grid">
+<div>
+<label for="turnoSel">Turno</label>
+<select id="turnoSel">
+<option value="matutino">Matutino (08h - 12h)</option>
+<option value="vespertino">Vespertino (13h - 18h)</option>
+<option value="noturno">Noturno (19h - 23h)</option>
+<option value="vespertino_noturno">Vespertino + Noturno (13h - 23h)</option>
+<option value="matutino_vespertino_noturno">Matutino + Vespertino + Noturno (08h - 23h)</option>
+<option value="matutino_noturno">Matutino + Noturno (08h - 12h, 19h - 23h)</option>
+</select>
+</div>
+<div>
+<label for="horasDia">Horas por dia</label>
+<input id="horasDia" max="12" min="1" type="number" value="3"/>
+</div>
+<div>
+<label for="maiorDif">Maior dificuldade</label>
+<select id="maiorDif"></select>
+</div>
+<div>
+<label>Dias da semana (estudo)</label>
+<div class="days" id="diasWeek"></div>
+</div>
+</div>
+<div style="margin-top:12px;">
+<label>Matérias &amp; dificuldade</label>
+<div class="subjects" id="listaMaterias"></div>
+</div>
+<div class="btns">
+<button class="btn" id="btnGerar">Gerar ZIP + PDF</button>
+</div>
+<p class="note">Agora o cronograma é realmente balanceado!</p>
+</div>
+</div>
+</div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const SUBJECTS = ["Biologia","Sociologia","Filosofia","Física","Geografia","História","Inglês","Matemática","Português","Química","Redação"];
+const dias = ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado","Domingo"];
+const checkDays = ["Segunda","Terça","Quarta","Quinta","Sexta"];
+
+const maiorDifSel=document.getElementById("maiorDif");
+const listaMaterias=document.getElementById("listaMaterias");
+const diasWeek=document.getElementById("diasWeek");
+const horasDiaInput=document.getElementById("horasDia");
+const turnoSel=document.getElementById("turnoSel");
+const gradeHead=document.getElementById("gradeHead");
+const gradeBody=document.getElementById("gradeBody");
+
+const turnosHorarios={
+ "matutino":["08:00","09:00","10:00","11:00","12:00"],
+ "vespertino":["13:00","14:00","15:00","16:00","17:00","18:00"],
+ "noturno":["19:00","20:00","21:00","22:00","23:00"],
+ "vespertino_noturno":["13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"],
+ "matutino_noturno":["08:00","09:00","10:00","11:00","12:00","19:00","20:00","21:00","22:00","23:00"],
+ "matutino_vespertino_noturno":["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"]
+};
+
+function mountForm(){
+ maiorDifSel.innerHTML=SUBJECTS.map(s=>`<option value="${s}">${s}</option>`).join("");
+ diasWeek.innerHTML=dias.map(d=>`<label><input type="checkbox" value="${d}" ${checkDays.includes(d)?'checked':''}/> ${d}</label>`).join("");
+ listaMaterias.innerHTML=SUBJECTS.map(s=>`
+   <div class="subject-row"><div style="padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;">${s}</div>
+   <select data-subj="${s}">
+     <option value="1">Fácil</option>
+     <option value="2" selected>Médio</option>
+     <option value="3">Difícil</option>
+   </select></div>
+ `).join("");
+}
+
+function getConfig(){
+ const horas=Math.max(1,parseInt(horasDiaInput.value||"1",10));
+ const checked=Array.from(diasWeek.querySelectorAll('input[type=checkbox]')).filter(i=>i.checked).map(i=>i.value);
+ const diffs={};
+ listaMaterias.querySelectorAll('select').forEach(sel=>{diffs[sel.dataset.subj]=parseInt(sel.value,10);});
+ return {horas,checkedDays:checked,diffs,maior:maiorDifSel.value,turno:turnoSel.value};
+}
+
+function buildWeights(diffs,maior){
+ const weights={};
+ SUBJECTS.forEach(s=>{let w=diffs[s]||1;if(s===maior)w+=2;weights[s]=w;});
+ return weights;
+}
+
+// Distribui garantindo todas matérias
+function distribute(cfg){  const slotCount = getHorario(cfg.turno, cfg.horas).length;
+
+const weights = buildWeights(cfg.diffs, cfg.maior);
+  const subjects = SUBJECTS.slice();
+  const checked = cfg.checkedDays.slice();
+  const perDay = {};
+  dias.forEach(d => { perDay[d] = Array(slotCount).fill(""); });
+  if (checked.length === 0) return perDay;
+
+  // Build slot list in order across selected days
+  const slots = [];
+  checked.forEach(d => { for (let i=0; i<slotCount; i++) slots.push([d, i]); });
+
+  // Pass 1: guarantee each subject at least once overall
+  let pos = 0;
+  for (const s of subjects) {
+    if (pos >= slots.length) break;
+    const [d, i] = slots[pos++];
+    perDay[d][i] = s;
+  }
+
+  // Build weighted bag (difficulty + focus weight for "maior")
+  const bag = [];
+  Object.entries(weights).forEach(([s, w]) => { for (let k = 0; k < w; k++) bag.push(s); });
+  let bi = 0;
+
+  function nextSubject(prev) {
+    if (bag.length === 0) return prev || (subjects[0] || "");
+    let tries = bag.length;
+    while (tries--) {
+      const s = bag[bi % bag.length]; bi++;
+      if (s !== prev) return s;
+    }
+    return bag[0];
+  }
+
+  // Pass 2: fill remaining
+  for (; pos < slots.length; pos++) {
+    const [d, i] = slots[pos];
+    const prev = i > 0 ? perDay[d][i - 1] : "";
+    if (!perDay[d][i]) perDay[d][i] = nextSubject(prev);
+  }
+
+  return perDay;
+}
+
+
+function getHorario(turno,horas){
+  const arr = (turnosHorarios[turno]||[]);
+  // helpers
+  function toMin(s){const [H,M]=s.split(":").map(Number);return H*60+M;}
+  function fmt(m){const H=Math.floor(m/60)%24, M=m%60; return String(H).padStart(2,"0")+":"+String(M).padStart(2,"0");}
+
+  // derive window start/end from turno map
+  const startStr = arr.length ? arr[0] : "08:00";
+  const lastStr  = arr.length ? arr[arr.length-1] : "23:00";
+  const windowStart = toMin(startStr);
+  // assume each item in arr represent start times of 1h slots; end is last + 60min
+  const windowEnd   = toMin(lastStr) + 60;
+
+  const out = [];
+  let i = 0;
+  while (i < horas){
+    const a = windowStart + i*90;
+    const b = a + 90;
+    if (b > windowEnd) break; // don't exceed turno window
+    out.push(fmt(a)+"–"+fmt(b));
+    i++;
+  }
+  return out;
+}
+function renderGrid(perDay,cfg){
+ const horarios=getHorario(cfg.turno,cfg.horas);
+ gradeHead.innerHTML="";const th0=document.createElement("th");th0.textContent="Horário";gradeHead.appendChild(th0);
+ dias.forEach(d=>{const th=document.createElement("th");th.textContent=d;gradeHead.appendChild(th);});
+ gradeBody.innerHTML="";
+ for (let i=0; i<horarios.length; i++){
+   const tr=document.createElement("tr");const th=document.createElement("th");th.textContent=horarios[i]||"";tr.appendChild(th);
+   dias.forEach(d=>{const td=document.createElement("td");td.textContent=perDay[d][i]||"—";tr.appendChild(td);});
+   gradeBody.appendChild(tr);
+ }
+}
+
+async function generatePDFs(perDay,cfg){
+ const horarios=getHorario(cfg.turno,cfg.horas);
+ const zip=new JSZip();const {jsPDF}=window.jspdf;
+ const doc=new jsPDF("l","pt","a4");
+ doc.setFontSize(18);doc.text("Cronograma semanal",40,40);
+ const head=[["Horário"].concat(dias)];const body=[];
+ for(let i=0;i<cfg.horas;i++){const row=[horarios[i]||""];dias.forEach(d=>row.push(perDay[d][i]||""));body.push(row);}
+ doc.autoTable({head,body,startY:60,styles:{fontSize:10,halign:"center",valign:"middle"},headStyles:{fillColor:[250,250,254],textColor:[0,0,0]},tableLineColor:[229,231,235],tableLineWidth:1});
+ zip.file("cronograma-semanal.pdf",doc.output("blob"));
+ for(const d of dias){
+   const ddoc=new jsPDF("p","pt","a4");
+   ddoc.setFontSize(18);ddoc.text("Cronograma - "+d,40,40);
+   const bodyDay=perDay[d].map((s,i)=>[horarios[i]||"",s||"—"]);
+   ddoc.autoTable({head:[["Horário","Matéria"]],body:bodyDay,startY:70,styles:{fontSize:11,halign:"center",valign:"middle"},tableLineColor:[229,231,235],tableLineWidth:1});
+   zip.file(d+".pdf",ddoc.output("blob"));
+ }
+ const blob=await zip.generateAsync({type:"blob"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cronograma.zip";a.click();
+}
+
+function updateGrid(){const cfg=getConfig();const maxSlots=getHorario(cfg.turno,cfg.horas).length;if(cfg.horas>maxSlots){  showToast("⚠️ O turno escolhido comporta no máximo "+maxSlots+" blocos de 1h30. Ajustamos automaticamente.");}const perDay=distribute(cfg);renderGrid(perDay,cfg);return{cfg,perDay};}
+
+mountForm();updateGrid();
+document.addEventListener("change",(e)=>{if(e.target.closest('.days')||e.target.id==='horasDia'||e.target.matches('#listaMaterias select')||e.target.id==='maiorDif'||e.target.id==='turnoSel')updateGrid();});
+document.getElementById("btnGerar").addEventListener("click",async()=>{const {cfg,perDay}=updateGrid();await generatePDFs(perDay,cfg);});
+
+function showToast(msg){
+  const el = document.getElementById('toast');
+  if(!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  // force reflow to apply transition
+  void el.offsetWidth;
+  el.style.opacity = '1';
+  el.style.transform = 'translateY(0)';
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=>{
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-8px)';
+    setTimeout(()=>{ el.style.display='none'; }, 300);
+  }, 3500);
+}
+
+</script>
+
+<footer class="site-footer"><div class="footer-inner"><div class="footer-left"><span class="copyright">© 2025 - Um produto Estudantes de Atitude</span></div><div class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/estudantes_de_atitude_cepmgsv/" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@CepmgSebasti%C3%A3odoVale" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.1 3.5 12 3.5 12 3.5s-7.1 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.9 20.5 12 20.5 12 20.5s7.1 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5z" fill="currentColor"></path></svg></a></div></div></footer>
+</body>
+</html>
