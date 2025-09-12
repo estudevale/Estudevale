@@ -328,7 +328,2625 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 </script>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-left"><span class="copyright">© 2025 - Um produto Estudantes de Atitude</span></div><div class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/estudantes_de_atitude_cepmgsv/" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@CepmgSebasti%C3%A3odoVale" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.1 3.5 12 3.5 12 3.5s-7.1 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.9 20.5 12 20.5 12 20.5s7.1 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5z" fill="currentColor"></path></svg></a></div></div>
+<!-- ===== ENEM CARDS (Auto + Gabaritos + Sanitização) ===== -->
+<style>
+html, body { height: 100%; }
+body { min-height: 100vh; display: flex; flex-direction: column; }
+/* container acima do rodapé com folga */
+#enem-modulo { margin: 32px auto 120px; max-width: 960px; width: min(960px, 94vw); }
+/* rodapé sempre no fim */
+#rodape, footer { margin-top: auto !important; }
 
-<footer class="site-footer"><div class="footer-inner"><div class="footer-left"><span class="copyright">© 2025 - Um produto Estudantes de Atitude</span></div><div class="footer-social"><a aria-label="Instagram" href="https://www.instagram.com/estudantes_de_atitude_cepmgsv/" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM18 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" fill="currentColor"></path></svg></a><a aria-label="YouTube" href="https://www.youtube.com/@CepmgSebasti%C3%A3odoVale" rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.1 3.5 12 3.5 12 3.5s-7.1 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12a31.7 31.7 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.9 20.5 12 20.5 12 20.5s7.1 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.7 31.7 0 0 0 24 12a31.7 31.7 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5z" fill="currentColor"></path></svg></a></div></div></footer>
-</body>
+.enem-card{ background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:18px;
+             box-shadow: 0 6px 24px rgba(0,0,0,.05); }
+.enem-head{ display:flex; justify-content:space-between; align-items:center; gap:8px;
+             margin-bottom:12px; color:#374151; border-bottom:1px solid #e5e7eb; padding-bottom:10px; }
+.enem-nav{ display:flex; gap:10px; align-items:center }
+.enem-nav a{ color:#6b7280; text-decoration:none; font-weight:600 }
+.enem-title{ font-weight:700 }
+.enem-code{ font-size:12px; color:#6b7280 }
+
+.enem-stem-wrap { background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:14px; margin:14px 0; }
+.enem-stem-title { font-size:12px; font-weight:700; letter-spacing:.02em; color:#6b7280; text-transform:uppercase; margin-bottom:6px; }
+.enem-stem { white-space:pre-wrap; font-size:16px; line-height:1.65; color:#111827; }
+
+.enem-opts-title { font-size:12px; font-weight:700; letter-spacing:.02em; color:#6b7280; text-transform:uppercase; margin:10px 0 6px; }
+.enem-options { display:grid; gap:10px; }
+.enem-option { display:flex; align-items:flex-start; gap:12px; border:1px solid #e5e7eb; border-radius:12px; padding:12px; background:#fff; transition: background .2s, border-color .2s; }
+.enem-option input { margin-top:3px; }
+.alt-letter { width:28px; height:28px; border-radius:9999px; border:1px solid #cbd5e1; display:flex; align-items:center; justify-content:center; font-weight:700; }
+.alt-text { line-height:1.6; word-wrap:break-word; overflow-wrap:anywhere; }
+
+.enem-actions{ display:flex; justify-content:space-between; align-items:center; margin-top:14px; flex-wrap:wrap; gap:10px}
+.btn{ display:inline-flex; gap:8px; align-items:center; border:1px solid #d1d5db; border-radius:10px; padding:10px 14px; background:#f9fafb; cursor:pointer; transition: box-shadow .2s }
+.btn:hover{ box-shadow: 0 2px 10px rgba(0,0,0,.08) }
+.enem-feedback{ display:inline-block; margin-top:10px; padding:6px 10px; border-radius:8px; background:#f3f4f6; color:#111827; font-weight:600 }
+.enem-feedback.ok{ background:#ecfdf5; color:#065f46 }
+.enem-feedback.no{ background:#fef2f2; color:#991b1b }
+
+.enem-option.is-correct { background:#ecfdf5; border-color:#10b981; }
+.enem-option.is-wrong   { background:#fef2f2; border-color:#ef4444; }
+
+.copy-code{ cursor:pointer; color:#6b7280 }
+</style>
+<section id="enem-modulo">
+<div class="enem-card">
+<div class="enem-head">
+<div class="enem-nav">
+<a href="#" id="enem-prev">◀ Anterior</a>
+<span class="enem-title" id="enem-pos">Questão 1 de 50</span>
+<a href="#" id="enem-next">Próxima ▶</a>
+</div>
+<div class="enem-code">CÓDIGO: <strong id="enem-id">ENEM-XXXX</strong> <span class="copy-code" id="enem-copy" title="Copiar código">📋</span></div>
+</div>
+<div class="enem-stem-wrap">
+<div class="enem-stem-title">Pergunta</div>
+<div class="enem-stem" id="enem-stem"></div>
+</div>
+<div class="enem-opts-title">Alternativas</div>
+<div class="enem-options" id="enem-options"></div>
+<div class="enem-actions">
+<div>
+<button class="btn" id="enem-answer">Responder</button>
+<span class="enem-feedback" id="enem-feedback"></span>
+</div>
+<div>
+<label style="display:inline-flex;gap:8px;align-items:center;">
+<input id="enem-save" type="checkbox"/> Adicionar ao meu caderno
+        </label>
+</div>
+</div>
+</div>
+</section>
+<script>
+(function(){
+  // ===== Dados embutidos =====
+  const DATA = [
+  {
+    "id": "ENEM2023-D1-Caderno-Q38",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "O mais antigo grupo de rap indígena do país, Brô MCs,\nsurgiu em 2009, na aldeia Jaguapiru, em Dourados, Mato\nGrosso do Sul. Os integrantes conheceram o rap pelo rádio,\nouvindo um programa que apresentava cantores e grupos\nbrasileiros desse gênero musical. O Brô MCs conseguiu\ninfluenciar\t outros\ta\tfazerem\t rap\te\ta\tlutarem\tpelas\tcausas\nindígenas. Um dos nomes do movimento, Kunumí MC,\né um jovem de 16 anos, da aldeia Krukutu, em São Paulo.\nO adolescente enxerga o rap como uma cultura da defesa\ne começou a fazer rimas quando percebeu que a poesia,\npela qual sempre se interessou, podia virar música.\nNas letras que cria, inspiradas tanto pelo rap quanto pelos\nritmos indígenas, tenta incluir sempre assuntos aos quais\nacha importante dar voz, principalmente, a questão da\ndemarcação de terras.\nDisponível\tem:\twww.correiobraziliense.com.br.\tAcesso\tem:\t13\tnov.\t2021\t(adaptado).\nO movimento rap dos povos originários do Brasil revela o(a)",
+    "alternativas": [
+      "A) fusão de manifestações artísticas urbanas contemporâneas com a cultura indígena.",
+      "B) contraposição das temáticas socioambientais indígenas às questões urbanas.",
+      "C) rejeição da indústria radiofônica às músicas indígenas.",
+      "D) distanciamento da realidade social indígena.",
+      "E) estímulo ao estudo da poesia indígena.*010175AZ16* 17 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 39"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q25",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "PALAVRA – As gramáticas classificam as palavras\nem substantivo, adjetivo, verbo, advérbio, conjunção,\npronome, numeral, artigo e preposição. Os poetas\nclassificam as palavras pela alma porque gostam de\nbrincar com elas, e para brincar com elas é preciso ter\nintimidade primeiro. É a alma da palavra que define,\nexplica, ofende ou elogia, se coloca entre o significante\ne o significado para dizer o que quer, dar sentimento às\ncoisas, fazer sentido. A palavra nuvem chove. A palavra\ntriste chora. A palavra sono dorme. A palavra tempo\npassa. A palavra fogo queima. A palavra faca corta.",
+    "alternativas": [
+      "A) palavra carro corre. A palavra “palavra” diz. O que quer. E nunca desdiz depois. As palavras têm corpo e alma, mas são diferentes das pessoas em vários pontos. As palavras dizem o que querem, está dito, e pronto. FALCÃO, A. Pequeno dicionário de palavras ao vento . São Paulo: Salamandra, 2013 (adaptado). Esse texto, que simula um verbete para a palavra “palavra’’, constitui-se como um poema porque",
+      "B) utiliza o recurso expressivo da metáfora, como em “As palavras têm corpo e alma”.",
+      "C) valoriza a gramática da língua, como em “substantivo, adjetivo, verbo, advérbio, conjunção”.",
+      "D) estabelece comparações, como em “As palavras têm corpo e alma, mas são diferentes das pessoas”.",
+      "E) apresenta informações pertinentes acerca do conceito de “palavra”, como em “As gramáticas classificam as palavras”."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q01",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "The average american tosses 300 pounds of food\neach year, making food the number one contributor to\nAmerica’s landfills. Eat your leftovers and keep your\nperishables in the fridge – the Earth is counting on it.\nDisponível\tem:\thttps://mir-s3-cdn-cf.behance.net.\tAcesso\tem:\t29\tout.\t2021\t(adaptado).\nEsse cartaz de campanha sugere que",
+    "alternativas": [
+      "A) os lixões precisam de ampliação.",
+      "B) o desperdício degrada o ambiente.",
+      "C) os mercados doam alimentos perecíveis.",
+      "D) a desnutrição compromete o raciocínio.",
+      "E) as residências carecem de refrigeradores."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q26",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) escravidão Esses meninos que aí andam jogando peteca não viram nunca um escravo... Quando crescerem, saberão que já houve no Brasil uma raça triste, votada à escravidão e ao desespero; e verão nos museus a coleção hedionda dos\ttroncos,\tdos\tvira-mundos \te\tdos\tbacalhaus; \te\tterão notícias\tdos\ttrágicos\thorrores\t de\tuma\tépoca\tmaldita:\tfilhos arrancados ao seio das mães, virgens violadas em pranto, homens assados lentamente em fornos de cal, mulheres nuas recebendo na sua mísera nudez desvalida o duplo ultraje das chicotadas e dos olhares do feitor bestial. [...] Mas a sua indignação nunca poderá ser tão grande como a daqueles que nasceram e cresceram em pleno horror, no meio desse horrível drama de sangue e lodo, sentindo dentro do ouvido e da alma, numa arrastada e contínua melopeia, o longo gemer da raça mártir — orquestração satânica de todos os soluços, de todas as impressões, de todos os lamentos que a tortura e a injustiça podem arrancar a gargantas humanas. BILAC, O. Disponível em: www.escritas.org. Acesso em: 29 out. 2021. Publicado em 1902, o texto de Olavo Bilac enfatiza as mazelas da escravidão no Brasil ao",
+      "B) contrapor a infância privilegiada das crianças da época à infância violentada das crianças escravizadas.",
+      "C) antecipar o futuro apagamento das marcas da escravidão no contexto social.",
+      "D) criticar a atenuação da violência contra os povos escravizados nas memórias retratadas pelos museus.",
+      "E) imaginar a reação de indiferença de seus contemporâneos com os escravizados libertos.QUESTÃO 27"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q34",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nLogo no início de Gira , um grupo de sete bailarinas\nocupa o centro da cena. Mãos cruzadas sobre a lateral\nesquerda do quadril, olhos fechados, troncos que pendulam\nsobre si mesmos em vaguíssimas órbitas, tudo nelas\nsugere o transe. Está estabelecido o caráter volátil do que\nse\tpassará\tno\tpalco\tdali\tpara\tfrente.\tMas\tengana-se\t quem\npensa que vai assistir a uma representação mimética dos\ncultos\tafro-brasileiros.\nTEXTO II\nDisponível em: www.grupocorpo.com.br. Acesso em: 2 jul. 2019.\nNo\tdiálogo\tque\testabelece\t com\treligiões\t afro-brasileiras,\nsintetizado na descrição e na imagem do espetáculo,\na dança exprime uma",
+    "alternativas": [
+      "A) crítica aos movimentos padronizados do balé clássico.",
+      "B) representação contemporânea de rituais ancestrais extintos.",
+      "C) reelaboração estética erudita de práticas religiosas populares.",
+      "D) releitura irônica da atmosfera mística presente no culto a entidades.",
+      "E) oposição entre o resgate de tradições e a efemeridade da vida humana.*010175AZ15* 16 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 35"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q05",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Que quede claro\nCómo es posible que se cierren\ntantas bocas, tantos ojos,\ntantas puertas, muchas mentes ante un\nacto xenofóbico sin precedentes.\nPresidentes, ministros, cancilleres,\nautoridades,  responsables.\n¿Quién pagará el daño causado a familiares?\nPor un loco del estrada sin modales. [...]\nSe alejó de aquel lugar donde su color era\nmucho más que su color, era su raza.\nPersiguiendo un sueño que desapareció,\nque se fusionó y terminó en una pesadilla. [...]\nDéjame que te cuente esta historia\nque sucedió en el metro de Barcelona,\ncuando aquella mañana la injusticia\ny xenofobia se juntaron de la mano,\nprotagonizando una de las más feas escenas de racismo.\nEn aquel vagón viajaba un ángel de color diferente,\nen su camino se interpuso aquel inconsciente,\nque aún sabiendo lo que hacía,\nseguía hablando con su gente.\nLe dio al ángel dos patadas en su cara,\nse rió de ella  sin cambiar la mirada.\nY aún anda suelto, aún anda suelto.. .\nORISHAS. In: Cosita buena . Delaware: Suerte Publishing LLC, 2008 (fragmento).",
+    "alternativas": [
+      "A) letra da canção Que quede claro , da banda cubana Orishas, revela o(a)",
+      "B) violência característica das grandes metrópoles.",
+      "C) preconceito da sociedade com relação ao misticismo.",
+      "D) descuido da população com os sonhos dos imigrantes.",
+      "E) falta de segurança existente no transporte público urbano.*010175AZ5* 6 –LC • 1 º DIA • CADERNO 1 • AZUL –LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS Questões de 06 a 45"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q14",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) senhora manifestava-se por atos, por gestos, e sobretudo por um certo silêncio, que amargava, que esfolava. Porém desmoralizar escancaradamente o marido, não era com ela. [...] As negras receberam ordem para meter no serviço a gente do tal compadre Silveira: as cunhadas, ao fuso; os cunhados, ao campo, tratar do gado com os vaqueiros; a mulher e as irmãs, que se ocupassem da ninhada. Margarida não tivera filhos, e como os desejasse com a força de suas vontades, tratava sempre bem aos pequenitos e às mães que os estavam criando. Não era isso uma sentimentalidade cristã, uma ternura, era o egoísta e cru instinto da maternidade, obrando por mera simpatia carnal. Quanto ao pai do lote (referia-se ao Antônio), esse que fosse ajudar ao vaqueiro das bestas. Ordens dadas, o Quinquim referendava. Cada um moralizava o outro, para moralizar-se. PAIVA, M. O. Dona Guidinha do Poço . Rio de Janeiro: Tecnoprint, s/d.No trecho do romance naturalista, a forma como o narrador julga comportamentos e emoções das personagens femininas revela influência do pensamento",
+      "B) liberal, buscando a igualdade entre pessoas escravizadas e livres.",
+      "C) científico, considerando o ser humano como um fenômeno biológico.",
+      "D) religioso, fundamentado na fé e na aceitação dos dogmas do cristianismo.",
+      "E) afetivo, manifesto na determinação de acolher familiares e no respeito mútuo."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q11",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Maio foi colorido de amarelo, e o foi porque\nmundialmente amarelo é a cor convencionada para as\nadvertências. No trânsito, essas advertências têm sido\nfatais. A estimativa, caso nada seja feito, é a de que se\natinjam assustadoras 2,4 milhões de mortes no trânsito\nem\t2030\tem\ttodo\to\tmundo.",
+    "alternativas": [
+      "A) pressa constante, o sentimento de invencibilidade, a certeza de invulnerabilidade, a necessidade de poder, a falta de civilidade, a certeza de impunidade, a ausência de solidariedade, a inexistência de compaixão e o desrespeito por si próprio são circunstâncias reais que, não raro, concorrem para o comportamento violento no trânsito. O Maio Amarelo, que preconiza a atenção pela vida, é uma das iniciativas nesse sentido. E é precisamente a atenção pela vida que está esquecida. Essa atenção, por certo, requer menos pressa, mais civilidade, limites assegurados, consciência de vulnerabilidade, solidariedade, compaixão e respeito por si e pelo outro. Reafirmar \te\tpraticar\tesses\tprincípios \te\tvalores\ttalvez\tseja um caminho mais seguro e menos violento, que garanta a vida e não celebre a morte. Disponível\tem:\thttp://portaldotransito.com.br.\tAcesso\tem:\t11\tdez.\t2018\t(adaptado). Considerando os procedimentos argumentativos utilizados,\tinfere-se\tque\to\tobjetivo\tdesse\ttexto\té",
+      "B) contextualizar a campanha de advertência no cenário mundial.",
+      "C) divulgar dados numéricos alarmantes sobre acidentes de trânsito.",
+      "D) sensibilizar o público para a importância de uma direção responsável.",
+      "E) restringir os problemas da violência no trânsito a aspectos emocionais.*010175AZ7* 8 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 12 Ainda daquela vez pude constatar a bizarrice dos costumes que constituíam as leis mais ou menos constantes do seu mundo: ao me aproximar, verifiquei que o Sr. Timóteo, gordo e suado, trajava um vestido de franjas e lantejoulas que pertencera a sua mãe. O corpete descia-lhe\t excessivamente\t justo\tna\tcintura,\t e\taqui e ali rebentava através da costura um pouco da carne aprisionada, esgarçando a fazenda e tornando o prazer de vestir-se\t daquele\tmodo\tuma\tautêntica\t espécie\tde\tsuplício. Movia-se\t ele\tcom\tlentidão,\t meneando\t todas\tas\tsuas\tfranjas e\tabanando-se\t vigorosamente\t com\tum\tdesses\tleques\tde madeira de sândalo, o que o envolvia numa enjoativa onda de perfume. Não sei direito o que colocara sobre a cabeça, assemelhava-se\t mais\ta\tum\tturbante \tou\ta\tum\tchapéu sem abas de onde saíam vigorosas mechas de cabelos alourados. Como era costume seu também, trazia o rosto pintado — e para isto, bem como para suas vestimentas, apoderara-se\t de\ttodo\to\tguarda-roupa\t deixado\tpor\tsua\tmãe, também em sua época famosa pela extravagância com que se\tvestia\t—\to\tque\tsem\tdúvida\tfazia\tsobressair-lhe\t o\tnariz enorme, tão característico da família Meneses. CARDOSO, L. Crônica da casa assassinada . São Paulo: Círculo do Livro, s.d. Pela voz de uma empregada da casa, a descrição de\tum\tdos\tmembros\t da\tfamília\texemplifica\t a\trenovação da\tficção\turbana\tnos\tanos\t1950,\taqui\tobservada\tna"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q28",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nProjeto Mural Eletrônico desenvolvido no INT,\nsemelhante a um totem, promete tornar o acesso à\ninformação disponível para todos",
+    "alternativas": [
+      "A) inclusão de pessoas com deficiência se constituiu um dos principais desafios e preocupações para a sociedade ao longo das últimas décadas. E o uso da tecnologia tem se revelado um aliado fundamental em muitas iniciativas voltadas para essa área. Exemplo disso é uma das recentes criações do Instituto Nacional de Tecnologia (INT) — unidade de pesquisa do Ministério da Ciência, Tecnologia, Inovações e Comunicações (MCTIC). Ali, com o objetivo de que as diferenças entre pessoas não sejam sinônimo de obstáculos no acesso à informação ou na comunicação, engenheiros e tecnólogos vêm trabalhando no desenvolvimento do projeto Mural Eletrônico. O Mural Eletrônico nasceu da necessidade de promover a inclusão nas escolas. Com interface multimídia e interativa, todos têm a possibilidade de acessar o Mural Eletrônico. Por meio do equipamento, podem ser disponibilizados vídeos com Libras, leitura sonora de textos, que também estarão acessíveis em uma plataforma de braille dinâmico, ao lado do teclado. KIFFER, D. Inclusão ampla e irrestrita. Rio Pesquisa, n. 36, set. 2016 (adaptado).TEXTO II Projeto Surdonews, desenvolvido na UFRJ, garante acesso de surdos à informação e contribui para sua “inclusão científica” Para não permitir que a falta de informação seja um fator para o isolamento e a inacessibilidade da comunidade surda, a jornalista e pesquisadora Roberta Savedra Schiaffino criou o projeto “Surdonews : montando os quebra-cabeças das notícias para o surdo”. Trata-se de uma página no Facebook, com notícias constantemente atualizadas e apresentadas por surdos em Libras, e veiculadas por meio de vídeos.",
+      "B) foram criados por uma pesquisadora surda.",
+      "C) tiveram origem em um curso de pós-graduação.",
+      "D) estão circunscritos ao espaço institucional da escola.",
+      "E) têm como objetivo a disseminação do conhecimento ."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q08",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "O bebê de tarlatana rosa\n— [...] Na terça desliguei-me do grupo e caí no mar alto\nda depravação, só, com uma roupa leve por cima da pele e\ntodos os maus instintos fustigados. De resto a cidade inteira\nestava assim. É o momento em que por trás das máscaras\nas meninas confessam paixões aos rapazes, é o instante\nem que as ligações mais secretas transparecem, em que\na virgindade é dúbia, e todos nós a achamos inútil, a honra\numa caceteação, o bom senso uma fadiga. Nesse momento\ntudo é possível, os maiores absurdos, os maiores crimes;\nnesse momento há um riso que galvaniza os sentidos e o\nbeijo se desata naturalmente.\nEu estava trepidante, com uma ânsia de acanalhar-me,\nquase mórbida. Nada de raparigas do galarim perfumadas\ne por demais conhecidas, nada do contato familiar,\nmas o deboche anônimo, o deboche ritual de chegar,\npegar, acabar, continuar. Era ignóbil. Felizmente muita\ngente sofre do mesmo mal no carnaval.\nRIO, J. Dentro da noite . São Paulo: Antiqua, 2002.No texto, o personagem vincula ao carnaval atitudes e\nreações coletivas diante das quais expressa",
+    "alternativas": [
+      "A) consagração da alegria do povo.",
+      "B) atração e asco perante atitudes libertinas.",
+      "C) espanto com a quantidade de foliões nas ruas.",
+      "D) intenção de confraternizar com desconhecidos.",
+      "E) reconhecimento da festa como manifestação cultural."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q11",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nEL GRECO. Laocoonte. Óleo sobre tela, 1,37cm x 1,72cm.\nNational Gallery of Art, Washington, Estados Unidos, circa 1610-1614.\nDisponível em: https://images.nga.gov. Acesso em: 28 jun. 2019 (adaptado) .TEXTO II\nEssa impressionante obra apresenta o sacerdote\nLaocoonte sendo punido pelos deuses por tentar alertar\nos troianos da ameaça do Cavalo de Troia, que escondia\num grupo de soldados gregos. Enviadas pelos deuses,\nserpentes marinhas são vistas matando Laocoonte e\nseus dois filhos como forma de punição.\nKAY, A. In: FARTHING, S. (Org.). Tudo sobre arte.\nRio de Janeiro: Sextante, 2011 (adaptado).\nProduzida no início do século XVII, a obra maneirista\ndistingue-se pela",
+    "alternativas": [
+      "A) representação da nudez masculina.",
+      "B) distorção ao representar a figura humana.",
+      "C) evocação de um fato da cultura clássica grega.",
+      "D) presença do tema da morte como punição da família.",
+      "E) utilização da perspectiva para integrar os diferentes planos."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q33",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nSEGALL, L. Eternos caminhantes .\tÓleo\tsobre\ttela,\t138\tx\t184\tcm.\nMuseu Lasar Segall, IbramMinc, São Paulo, 1919.\nTEXTO II\nEm\t1933,\ta\tobra\t Eternos caminhantes  ingressou\nem uma das primeiras edições das exposições de Arte\nDegenerada , promovida por membros do partido nazista\nalemão. Nos anos seguintes, ela voltaria a ser exibida na\nmostra denominada Exposição da Vergonha , promovida\npor\tpequenos \tgrupos\tabastados. \tEm\t1937,\tessa\tobra\tfoi\nconfiscada \tpelo\tMinistério \tda\tPropaganda \tdaquele\tpaís,\tna\ngrande\tação\tnacional-socialista\t contra\ta\t“Arte Degenerada ”.\nSCHWARTZ, J.  Perseguição à Arte Moderna em tempos de\nguerra . São Paulo: Museu Lasar Segall, 2018 (adaptado).Quase\tcinquenta\t obras\tde\tLasar\tSegall\tforam\tconfiscadas\npelo regime totalitário alemão na primeira metade do\nséculo XX, entre elas a obra Eternos caminhantes ,\nconsiderada degenerada por",
+    "alternativas": [
+      "A) representar uma estética tida como inconveniente para o ideário político vigente.",
+      "B) manifestar \tum\tposicionamento \tpolítico-cultural concebido por grupos de oposição.",
+      "C) expressar a cultura artística por meio da representação parcial do corpo humano.",
+      "D) apresentar uma composição que antecipa o imaginário artístico germânico.",
+      "E) estimular discussões sobre o papel da arte na construção coletiva de cultura."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q10",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Se a interferência de contas falsas em discussões\npolíticas nas redes sociais já representava um perigo\npara\tos\tsistemas \tdemocráticos, \tsua\tsofisticação \te\tmaior\nsemelhança com pessoas reais têm agravado o problema\npelo mundo.\nO perigo cresceu porque a tecnologia e os métodos\nevoluíram dos robôs, os “ bots” — softwares com tarefas\non-line\tautomatizadas\t —,\tpara\tos\t“ciborgues”\t ou\t“trolls ”,\ncontas controladas diretamente por humanos com ajuda\nde um pouco de automação.\nMas pesquisadores começam agora a observar outros\npadrões de comportamento: quando mensagens não são\nprogramadas, sua publicação se concentra só em horários\nde\ttrabalho,\t já\tque\té\tcontrolada\t por\tpessoas\t cuja\tprofissão\né\texatamente\t essa,\tadministrar\t um\tperfil\tfalso\tdurante\to\tdia.\nOutra pista: a pobreza vocabular das mensagens\npublicadas por esses perfis. Um funcionário de uma\nempresa que supostamente produzia e vendia perfis\nfalsos explica que às vezes “faltava criatividade” para criar\nmensagens\t distintas\t controlando\t tantos\tperfis\tfalsos\tao\nmesmo tempo.\nGRAGNANI, J. Disponível em: www.bbc.com. Acesso em: 16 dez. 2017.De acordo com o texto, a análise de características da\nlinguagem\t empregada\t por\tperfis\tautomatizados\t contribui\npara o(a)",
+    "alternativas": [
+      "A) controle\tda\tatuação\tdos\tprofissionais\tde\tTI.",
+      "B) desenvolvimento de tecnologias como os “ trolls ”.",
+      "C) flexibilização\t dos\tturnos\tde\ttrabalho\tdos\tcontroladores.",
+      "D) necessidade de regulamentação do funcionamento dos “ bots”.",
+      "E) identificação de padrões de disseminação de informações inverídicas."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q31",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "É ruivo? Tem olhos azuis? É homem ou mulher?\nUsa chapéu? Quem jogou Cara a Cara na infância sabe\nde cor o roteiro de perguntas para adivinhar quem é o\npersonagem misterioso do seu oponente.\nAgora, o jogo está prestes a ganhar uma nova\nversão. A designer polonesa Zuzia Kozerska-Girard está\ndesenvolvendo uma variação do Guess Who? (nome\ndo Cara a Cara em inglês), em que as personalidades do\ntabuleiro são, na verdade, mulheres notáveis da história\ne da atualidade, como a artista Frida Kahlo, a ativista\nMalala Yousafzai, a astronauta Valentina Tereshkova e a\naviadora Amelia Earhart. O Who’s She? (“Quem é ela?”,\nem português) traz, no total, 28 mulheres que representam\ndiversas profissões, nacionalidades e idades.A ideia é que, em vez de perguntar sobre a aparência\ndas personagens, as questões sejam direcionadas aos\nfeitos delas: ganhou algum Nobel, fez alguma descoberta?\nPara cada personagem há um cartão com fatos divertidos\ne interessantes sobre sua vida. Uma campanha entrou no\nar com o objetivo de arrecadar dinheiro para desenvolver\no Who’s She?. A meta inicial era reunir 17 mil dólares.\nOito dias antes de a campanha acabar, o projeto já\nangariou quase 350 mil dólares.",
+    "alternativas": [
+      "A) chegada do jogo à casa do comprador varia de acordo com a quantia doada — quanto mais você doou, mais rápido vai poder jogar. Disponível em: www.super.abril.com.br. Acesso em: 4 dez. 2018 (adaptado). Ao divulgar a adaptação do jogo para questões relativas a ações e habilidades de mulheres notáveis, o texto busca",
+      "B) refutar modelos estereotipados de beleza e elegância.",
+      "C) estimular a competitividade entre potenciais compradores.",
+      "D) exemplificar estratégias de arrecadação financeira pela internet.",
+      "E) desenvolver conhecimentos lúdicos específicos dos tempos atuais."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q01",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\n?PorQUÉ ME CUESTA TANTO ESTUDIAR?\npORQUÉ ME CUESTA TANTO CONCENTRARME?\nPoRQUÉ......\npORQUÉ......?\n???......\nPORQUé NO CONSIGO APRENDER COMO LOS DEMÁS?\n?QUÉ ME  PASA?:\nDisponível em: www.otrasvoceseneducacion.org. Acesso em: 8 nov. 2022.\nTEXTO II\nIshaan Awashi es un niño de 8 años cuyo mundo está\nplagado de maravillas que nadie más parece apreciar:\ncolores, peces, perros y cometas, que simplemente no son\nimportantes en la vida de los adultos, que parecen más\ninteresados en cosas como los deberes, las notas o la\nlimpieza. E Ishaan parece no poder hacer nada bien en clase.\nCuando los problemas que ocasiona superan a sus padres,\nes internado en un colegio para que le disciplinen. Las cosas\nno mejoran en el nuevo colegio, donde Ishaan tiene además\nque aceptar estar lejos de sus padres. Hasta que un día,\nel nuevo profesor de arte, Ram Shankar Nikumbh, entra en\nescena, se interesa por el pequeño Ishaan y todo cambia.\nDisponível\tem:\thttps://elfinalde.com.\tAcesso\tem:\t26\tout.\t2021\t(adaptado).\nO\tfilme\t Como estrellas en la tierra aborda o tema da\ndislexia.\t Relacionando\t o\tcartaz\tdo\tfilme\tcom\ta\tsinopse,\nconstata-se\tque\to(a)",
+    "alternativas": [
+      "A) olhar diferenciado para com o outro gera mudanças.",
+      "B) estudante com dislexia apresenta um tom questionador.",
+      "C) abordagem para lidar com a dislexia é pautada na disciplina.",
+      "D) contato com os pais prejudica o acompanhamento da dislexia.",
+      "E) mudança de interesses ocorre na transição da infância para a vida adulta.QUESTÃO 02 Me niego rotundamente"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q22",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nSILVEIRA, R. In absentia, 1983. Instalação, 17ª Bienal de São Paulo.\nDisponível em: www.bienal.org.br. Acesso em: 1 set. 2016 (adaptado).TEXTO II\nO termo ready-made foi criado por Marcel Duchamp\n(1887-1968) para designar um tipo de objeto, por ele\ninventado, que consiste em um ou mais artigos de uso\ncotidiano, produzidos em massa, selecionados sem\ncritérios estéticos e expostos como obras de arte em\nespaços especializados (museus e galerias). Seu primeiro\nready-made , de 1912, é uma roda de bicicleta montada\nsobre um banquinho (Roda de bicicleta ). Ao transformar\nqualquer objeto em obra de arte, o artista realiza uma\ncrítica radical ao sistema da arte.\nDisponível em: www.bienal.org.br. Acesso em: 1 set. 2016 (adaptado).",
+    "alternativas": [
+      "A) instalação In absentia propõe um diálogo com o ready-made Roda de bicicleta, demonstrando que",
+      "B) a recorrência de temas marca a arte do final do século XX.",
+      "C) as criações desmistificam os valores estéticos estabelecidos.",
+      "D) o distanciamento temporal permite a transformação dos referenciais estéticos.",
+      "E) o objeto ausente sugere a degradação da forma superando o modelo artístico."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q01",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Pequeño hermano\nEs, no cabe duda, el instrumento más presente y más\npoderoso de todos los que entraron en nuestras vidas. Ni la\ntelevisión ni el ordenador, no hablemos ya del obsoleto fax o\nde las agendas o los libros electrónicos, ha tenido tal influencia,\ntal predicamento sobre nosotros. El móvil somos nosotros\nmismos. Todo desactivado e inerte, inocuo, ya les digo. Y de\nrepente, tras un viaje y tres o cuatro imprudentes fotos, salta\nun aviso en la pantalla. Con sonido, además, pese a que\ntengo también todas las alertas desactivadas. Y mi monstruo\ndoméstico me dice: tienes un recuerdo nuevo. Lo repetiré:\ntienes un recuerdo nuevo. ¿Y tú qué sabes? ¿Y a ti, máquina\ndemoníaca, qué te importa? ¿Cómo te atreves a decirme qué\nson o no son mis recuerdos? ¿Qué es esta intromisión, este\ndescaro? El pequeño hermano lo sabe casi todo. Sólo hay\nuna esperanza: que la obsolescencia programada mate antes\nal pequeño hermano y que nosotros sigamos vivos, con los\nrecuerdos que nos dé la gana.\nFERNÁNDEZ, D. Disponível em: www.lavanguardia.com.\nAcesso em: 5 dez. 2018 (adaptado).\nNo texto, o autor faz uma crítica ao(à)",
+    "alternativas": [
+      "A) conhecimento das pessoas sobre as tecnologias.",
+      "B) uso do celular alheio por pessoas desautorizadas.",
+      "C) funcionamento de recursos tecnológicos obsoletos.",
+      "D) ingerência do celular sobre as escolhas dos usuários.",
+      "E) falta de informação sobre a configuração de alertas no celular."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q32",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "DETRAN  ESCausar um acidente\né algo que você leva\npro resto da vida.\nNão beba se for dirigir.ArrependimentoArrependimentoCausar um acidente\né algo que você leva\npro resto da vida.\nNão beba se for dirigir.\nDETRAN  ES\nDisponível em: www.portaldapropaganda.com.br. Acesso em: 29 out. 2013 (adaptado).\nPara convencer o público-alvo sobre a necessidade de\num trânsito mais seguro, essa peça publicitária apela\npara o(a)",
+    "alternativas": [
+      "A) sentimento de culpa provocado no condutor causador de acidentes.",
+      "B) dano psicológico causado nas vítimas da violência nas estradas.",
+      "C) importância do monitoramento do trânsito pelas autoridades competentes.",
+      "D) necessidade de punição a motoristas alcoolizados envolvidos em acidentes.",
+      "E) sofrimento decorrente da perda de entes queridos em acidentes automobilísticos.*010275AM14* LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação 15 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 33 São vários os fatores, internos e externos, que influenciam os hábitos das pessoas no acesso à internet, assim como nas práticas culturais realizadas na rede."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q02",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "I tend the mobile now\nlike an injured bird\nWe text, text, text\nour significant words.\nI re-read your first,\nyour second, your third,\nLook for your small xx,\nfeeling absurd.\nThe codes we send\narrive with a broken chord.\nI try to picture your hands,\ntheir image is blurred.\nNothing my thumbs press\nwill ever be heard.\n DUFFY, C. Disponível em: www.independent.co.uk. Acesso em: 27 out. 2021.\nNesse poema, o eu lírico evidencia um sentimento de",
+    "alternativas": [
+      "A) contentamento com a interação virtual.",
+      "B) zelo com o envio de mensagens.",
+      "C) preocupação com a composição de textos.",
+      "D) mágoa com o comportamento de alguém.",
+      "E) insatisfação com uma forma de comunicação.QUESTÃO 03 Two hundred years ago, Jane Austen lived in a world where single men boasted vast estates; single ladies were expected to speak several languages, sing and play the piano. In both cases, it was, of course, advantageous if you looked good too. So, how much has — or hasn’t — changed? Dating apps opaquely outline the demands of today’s relationship market; users ruminate long and hard over their choice of pictures and what they write in their biographies to hook in potential lovers, and that’s just your own profile. What do you look for in a future partner’s profile — potential signifiers of a popular personality, a good job, a nice car? These apps are a poignant reminder of the often classist attitudes we still adopt, as well as the financial and aesthetic expectations we demand from potential partners. GALER, S. Disponível em: www.bbc.com. Acesso em: 8 dez. 2017 (adaptado). O texto aborda relações interpessoais com o objetivo de"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q21",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Um\tgrupo\tde\tpesquisadores\t da\tUniversidade\t Federal\ndo Ceará desenvolveu um dicionário para traduzir sintomas\nde doenças da linguagem popular para os termos médicos.\nDefruço, chanha e piloura, por exemplo, podem ser termos\nconhecidos para muitos, mas, durante uma consulta médica,\no\tdesconhecimento\t pode\tsignificar\t um\tdiagnóstico\t errado.\n“Isso é um registro histórico e pode ser muito útil para\nestudos dessas comunidades, na abordagem médica delas.\nÉ de certa forma pioneiro no Brasil e, sem dúvida, um instrumento\nde trabalho importante, porque a comunicação é fundamental\nna\trelação\tmédico-paciente”,\tavalia\to\treitor\tda\tinstituição.\nDisponível\tem:\thttps://g1.globo.com.\tAcesso\tem:\t1\tnov.\t2021\t(adaptado).\nAo registrarem usos regionais de termos da área médica,\npesquisadores",
+    "alternativas": [
+      "A) apontaram erros motivados pelo desconhecimento da variedade linguística local.",
+      "B) explicaram problemas  provocados pela incapacidade de comunicação.",
+      "C) descobriram novos sintomas de doenças existentes na comunidade.",
+      "D) propiciaram melhor compreensão dos sintomas dos pacientes.",
+      "E) divulgaram um novo rol de doenças características da localidade.*010175AZ11* 12 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 22 Alguém muito recentemente cortara o mato, que na época das chuvas crescia e rodeava a casa da mãe de Ponciá Vicêncio e de Luandi. Havia também vestígios de que a terra fora revolvida, como se ali fosse plantar uma pequena roça. Luandi sorriu. A mãe devia estar bastante forte, pois ainda labutava a terra. Cantou alto uma cantiga que aprendera com o pai, quando eles trabalhavam na terra dos brancos. Era uma canção que os negros mais velhos ensinavam aos mais novos. Eles diziam ser uma cantiga de voltar, que os homens, lá na África, entoavam sempre, quando estavam regressando da pesca, da caça ou de algum lugar. O pai de Luandi, no dia em que queria agradar à mulher, costumava entoar aquela cantiga ao se aproximar de casa. Luandi não entendia as palavras do canto; sabia, porém, que era uma língua que alguns negros falavam ainda, principalmente os velhos. Era uma cantiga alegre. Luandi, além de cantar, acompanhava o ritmo batendo com as palmas das mãos em um atabaque imaginário. Estava de regresso à terra. Voltava em casa. Chegava cantando, dançando a doce e vitoriosa cantiga de regressar. EVARISTO, C. Ponciá Vicêncio . Rio de Janeiro: Pallas, 2018."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q19",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Ser cronista\nSei que não sou, mas tenho meditado ligeiramente\nno assunto.\nCrônica é um relato? É uma conversa? É um resumo\nde um estado de espírito? Não sei, pois antes de começar\na escrever para o Jornal do Brasil, eu só tinha escrito\nromances e contos.",
+    "alternativas": [
+      "E) também sem perceber, à medida que escrevia para aqui, ia me tornando pessoal demais, correndo o risco de em breve publicar minha vida passada e presente, o que não pretendo. Outra coisa notei: basta eu saber que estou escrevendo para o jornal, isto é, para algo aberto facilmente por todo o mundo, e não para um livro, que só é aberto por quem realmente quer, para que, sem mesmo sentir, o modo de escrever se transforme. Não é que me desagrade mudar, pelo contrário. Mas queria que fossem mudanças mais profundas e interiores que não viessem a se refletir no escrever. Mas mudar só porque isso é uma coluna ou uma crônica? Ser mais leve só porque o leitor assim o quer? Divertir? Fazer passar uns minutos de leitura? E outra coisa: nos meus livros quero profundamente a comunicação profunda comigo e com o leitor. Aqui no jornal apenas falo com o leitor e agrada-me que ele fique agradado. Vou dizer a verdade: não estou contente. LISPECTOR, C. In: A descoberta do mundo . Rio de Janeiro: Rocco, 1999.No texto, ao refletir sobre a atividade de cronista, a autora questiona características do gênero crônica, como",
+      "A) relação distanciada entre os interlocutores.",
+      "B) articulação de vários núcleos narrativos.",
+      "C) brevidade no tratamento da temática.",
+      "D) descrição minuciosa dos personagens."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q07",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Mais iluminada que outras\nTenho dois seios, estas duas coxas, duas mãos que me\nsão muito úteis, olhos escuros, estas duas sobrancelhas que\npreencho com maquiagem comprada por dezenove e noventa\ne orelhas que não aceitam bijuterias. Este corpo é um corpo\nfaminto, dentado, cruel, capaz e violento. Movo os braços\ne multidões correm desesperadas. Caminho no escuro com\no rosto para baixo, pois cada parte isolada de mim tem sua\nprópria\tvida\te\tnão\tquero\tdomá-las. \tAnimal\tda\tcaatinga. \tForte\ndemais. Engolidora de espadas e espinhos.\nDizem e eu ouvi, mas depois também li, que o estado\ndo Ceará aboliu a escravidão quatro anos antes do restante\ndo país. Todos aqueles corpos que eram trazidos com\nseus dedos contados, seus calcanhares prontos e seus\numbigos em fogo, todos eles foram interrompidos no\nporto. Um homem — dizem e eu ouvi e depois também\nli — liderou o levante. E todos esses corpos foram buscar\noutros\tincômodos.\tForam\tser\tincomodados.\nARRAES, J. Redemoinho em dia quente . São Paulo: Alfaguara, 2019.\nNesse texto, os recursos expressivos usados pela narradora",
+    "alternativas": [
+      "A) revelam as marcas da violência de raça e de gênero na construção da identidade.",
+      "B) questionam o pioneirismo do estado do Ceará no enfrentamento à escravidão.",
+      "C) reproduzem padrões estéticos em busca da valorização da autoestima feminina.",
+      "D) sugerem uma atmosfera onírica alinhada ao desejo de resgate da espiritualidade.",
+      "E) mimetizam, na paisagem, os corpos transformados pela violência da escravidão.QUESTÃO 08 De quem é esta língua? Uma pequena editora brasileira, a Urutau, acaba de lançar em Lisboa uma “antologia antirracista de poetas estrangeiros em Portugal”, com o título Volta para a tua terra . O livro denuncia as diversas formas de racismo a que os imigrantes estão sujeitos. Alguns dos poetas brasileiros antologiados\t queixam-se\t do\tdesdém\t com\tque\tum\tgrande número de portugueses acolhe o português brasileiro. É uma queixa frequente. “Aqui\tem\tPortugal\t eles\tdizem\t/\t—\teles\tdizem\t—\t/\tque nosso português é errado, que nós não falamos português”, escreve a poetisa paulista Maria Giulia Pinheiro, para concluir:\t“Se\ta\tsua\tlinguagem, \ta\tlusitana,\t/\tainda\tconserva a\tpalavra\tda\topressão\t /\tela\tnão\té\ta\tmais\tbonita\tdo\tmundo./ Ela é uma das mais violentas”. AGUALUSA,\tJ.\tE.\tDisponível\tem:\thttps://oglobo.globo.com. Acesso em: 22 nov. 2021 (adaptado). O texto de Agualusa tematiza o preconceito em relação ao português brasileiro. Com base no trecho citado pelo autor,\tinfere-se\tque\tesse\tpreconceito\tse\tdeve"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q06",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) sessão do Comitê Olímpico Internacional (COI) aprovou uma mudança histórica e inédita no lema olímpico, criado em 1894 pelo Barão Pierre de Coubertin para expressar os valores e a excelência do esporte. Mais de 120 anos depois, o lema tem sua primeira alteração para ressaltar a solidariedade e incluir a palavra “juntos”: mais rápido, mais alto, mais forte — juntos. A mudança foi aprovada por unanimidade pelos membros do COI e celebrada pelo presidente da entidade. Disponível\tem:\thttps://ge.globo.com.\tAcesso\tem:\t10\tnov.\t2021\t(adaptado). De acordo com o texto, a alteração do lema olímpico teve como objetivo a",
+      "B) aproximação entre o lema olímpico e o COI.",
+      "C) junção do lema olímpico com os princípios esportivos.",
+      "D) associação entre o lema olímpico e a cooperatividade.",
+      "E) vinculação entre o lema olímpico e os eventos atléticos."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q36",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "O\tMarabaixo\t é\tuma\texpressão\t artístico-cultural\nformada\t nas\ttradições\t e\tna\tidentificação\t cultural\tentre\tas\ncomunidades negras do Amapá. O nome remonta às mortes\nde escravizados em navios negreiros que eram jogados na\nágua. Em sua homenagem, hinos de lamento eram cantados\nmar abaixo, mar acima. Posteriormente, o Marabaixo se\nintegrou à vivência das comunidades negras em um ciclo\nde danças, cantorias com tambores e festas religiosas,\nrecebendo, em 2018, o título de Patrimônio Cultural do Brasil.\nDisponível\tem:\thttp://portal.iphan.gov.br.\tAcesso\tem:\t15\tnov.\t2021\t(adaptado).",
+    "alternativas": [
+      "A) manifestação do Marabaixo se constituiu em expressão de arte e cultura, exercendo função de",
+      "B) adaptar\tcoreografias \tcomo\timitação \tdos\tmovimentos do mar.",
+      "C) lembrar dos mortos no passado escravista como forma de lamento.",
+      "D) perpetuar uma narrativa de apagamento dos fatos históricos traumáticos.",
+      "E) ritualizar a passagem de atos fúnebres nas produções coletivas com espírito festivo.QUESTÃO 37 O uso das redes sociais como forma de ampliar universos foi uma descoberta recente para o artista Wolney Fernandes,\t que\tcomeçou\t a\tcriar\tquando\to\tambiente\t em Goiás era mais árido em relação às artes visuais. “Hoje, ser diferente é uma potência e quem sabe o que quer com a própria arte encontra espaço”, diz. As colagens artísticas do goiano aparecem em capas de obras literárias pelo Brasil e exterior. Disponível\tem:\thttps://opopular.com.br.\tAcesso\tem:\t15\tnov.\t2021\t(adaptado). O\tartista\tgoiano\tWolney\t Fernandes\t busca\texpor\tseu trabalho por meio de plataformas virtuais com o objetivo de"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q15",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Era o êxodo da seca de 1898. Uma ressurreição de\ncemitérios antigos — esqueletos redivivos, com o aspecto\nterroso e o fedor das covas podres.\nOs fantasmas estropiados como que iam dançando,\nde tão trôpegos e trêmulos, num passo arrastado de\nquem leva as pernas, em vez de ser levado por elas.\nAndavam devagar, olhando para trás, como quem\nquer voltar. Não tinham pressa em chegar, porque não\nsabiam aonde iam. Expulsos de seu paraíso por espadas\nde fogo, iam, ao acaso, em descaminhos, no arrastão dos\nmaus fados.\nFugiam do sol e o sol guiava-os nesse forçado\nnomadismo.\nAdelgaçados na magreira cômica, cresciam, como se\no vento os levantasse. E os braços afinados desciam-lhes\naos joelhos, de mãos abanando.\nVinham escoteiros. Menos os hidrópicos — de ascite\nconsecutiva à alimentação tóxica — com os fardos das\nbarrigas alarmantes.\nNão tinham sexo, nem idade, nem condição nenhuma.\nEram os retirantes. Nada mais.\nALMEIDA, J. A. A bagaceira. Rio de Janeiro: J. Olympio, 1978 .\nOs recursos composicionais que inserem a obra no\nchamado “Romance de 30” da literatura brasileira\nmanifestam-se aqui no(a)",
+    "alternativas": [
+      "A) desenho cru da realidade dramática dos retirantes.",
+      "B) indefinição dos espaços para efeito de generalização.",
+      "C) análise psicológica da reação dos personagens à seca.",
+      "D) engajamento político do narrador ante as desigualdades.",
+      "E) contemplação lírica da paisagem transformada em alegoria.*010275AM8* 9 LC - 1° dia | Caderno 2 - AMARELO - 1ª AplicaçãoQUESTÃO 16 MANUAL DE ORIENTAÇÃO O primeiro guia prático da Sociedade Brasileira de Pediatria para ajudar pais e pediatras no desafio de educar nativos digitais TRABALHO DE BASE Até 2 anos De 2 a 5 anos Até 10 anos"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q26",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Morte lenta ao luso infame que inventou a calçada\nportuguesa. Maldito D. Manuel I e sua corja de tenentes\nEusébios. Quadrados de pedregulho irregular socados à\nmão. À mão! É claro que ia soltar, ninguém reparou que\nia soltar? Branco, preto, branco, preto, as ondas do mar\nde Copacabana. De que me servem as ondas do mar de\nCopacabana? Me deem chão liso, sem protuberâncias\ncalcárias. Mosaico estúpido. Mania de mosaico. Joga\nconcreto em cima e aplaina. Buraco, cratera, pedra\nsolta, bueiro-bomba. Depois dos setenta, a vida se\ntransforma numa interminável corrida de obstáculos.",
+    "alternativas": [
+      "A) queda é a maior ameaça para o idoso. “Idoso”, palavra odienta. Pior, só “terceira idade”. A queda separa a velhice da senilidade extrema. O tombo destrói a cadeia que liga a cabeça aos pés. Adeus, corpo. Em casa, vou de corrimão em corrimão, tateio móveis e paredes, e tomo banho sentado. Da poltrona para a janela, da janela para a cama, da cama para a poltrona, da poltrona para a janela. Olha aí, outra vez, a pedrinha traiçoeira atrás de me pegar. Um dia eu caio, hoje não. TORRES, F. Fim. São Paulo: Cia. das Letras, 2013. O recurso que caracteriza a organização estrutural desse texto é o(a)",
+      "B) mudança de eventos resultante do jogo temporal.",
+      "C) uso de adjetivos qualificativos na descrição do cenário.",
+      "D) encadeamento semântico pelo uso de substantivos sinônimos.",
+      "E) inter-relação entre orações por elementos linguísticos lógicos.*010275AM12* LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação 13 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 27"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q31",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Migalhas\nEntre a toalha branca e um bule de café\nseria inapropriado dizer\neu não te amo mais.\nEra necessário algo mais solene,\num jardim japonês\npara as perdas pensadas,\num noturno de tempestade\npara arrebentar de dor,\numa praia de pedras para chorar\nem silêncio, uma cama alta\npara o incenso da despedida,\numa janela\ndando para o abismo.\nNo entanto você abaixa os olhos\ne recolhe lentamente as migalhas de pão\nsobre a mesa posta para dois.\nMARQUES, A. M. A vida submarina . São Paulo: Cia. das Letras, 2021.\nNesse poema, a representação do sentimento amoroso\nrecupera a tradição lírica, mas se ajusta à visão\ncontemporânea ao",
+    "alternativas": [
+      "A) invocar o interlocutor para uma tomada de posição.",
+      "B) questionar a validade do envolvimento romântico.",
+      "C) diluir em banalidade a comoção de um amor frustrado.",
+      "D) transformar \tem\tpaz\tas\temoções \tconflituosas \tdo\tcasal.",
+      "E) condicionar a existência da paixão a espaços idealizados.*010175AZ14* 15 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 32 O sol começa a descer por trás da vegetação da Ilha da Restinga, na outra margem do rio Paraíba, colorindo o céu de amarelo, laranja e lilás. Então se ouvem as primeiras notas do Bolero , do compositor francês Maurice Ravel, executadas pelo saxofonista Jurandy. É assim o pôr do sol da praia do Jacaré, em Cabedelo (Grande João Pessoa). Depois do Bolero , Jurandy toca Asa branca , de Luiz Gonzaga, e Meu sublime torrão , de Genival Macedo,\tespécie\tde\thino\tnão\toficial\tda\tParaíba. PINHEIRO, A. Sol se põe embalado pelo Bolero de Ravel . Disponível em: http://tools.folha.com.br.\tAcesso\tem:\t16\tset.\t2012\t(adaptado)."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q30",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Enquanto estivemos entretidos com os urubus outras\ncoisas andaram acontecendo na cidade. A Companhia\nbaixou novas proibições, umas inteiramente bobocas, só\npelo prazer de proibir (ninguém podia cuspir pra cima, nem\ncarregar água em jacá, nem tapar o sol com peneira, como\nse todo mundo estivesse abusando dessas esquisitices);\nmas outras bem irritantes, como a de pular muro pra cortar\ncaminho, tática que quase todo mundo que não sofria de\nreumatismo vinha adotando ultimamente, principalmente\nos\tmeninos. \tE\tnão\tconfiando \tna\tproibição \tsó,\tnem\tna\tforça\ndos castigos, que eram rigorosos, a Companhia ainda\nmandou\tfincar\tcacos\tde\tgarrafa\tnos\tmuros.\tAchei\tisso\tum\nexagero, e comentei o assunto com mamãe. Meu pai ouviu\nlá do quarto e veio explicar. Disse que em épocas normais\nbastava uma coisa ou outra; mas agora a Companhia\nnão podia admitir nenhuma brecha em suas ordens; se\nalguém desobedecesse à proibição podia se cortar nos\ncacos; se alguém conseguisse pular um muro quebrando\no corte de alguns cacos, ou jogando um couro por cima,\nera apanhado pela proibição, nhoc — e fez o gesto de\nquem torce o pescoço de um frango.\nVEIGA, J. J. Sombras de reis barbudos . Rio de Janeiro: Civilização Brasileira, 1978.Sob\ta\tperspectiva\t do\tmenino\tque\tnarra,\tos\tfatos\tficcionais\noferecem um esboço do momento político vigente na\ndécada de 1970, aqui representado pelo",
+    "alternativas": [
+      "A) culto\tao\tmedo,\tinfiltrado\tem\tsituações\tdo\tcotidiano.",
+      "B) sentimento de dúvida quanto à veracidade das informações.",
+      "C) ambiente de sonho, delineado por imagens perturbadoras.",
+      "D) incentivo ao desenvolvimento econômico com a iniciativa privada.",
+      "E) espaço urbano marcado por uma política de isolamento das crianças."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q17",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Notas\nSoluços, lágrimas, casa armada, veludo preto nos portais, um homem que veio vestir o cadáver, outro que\ntomou a medida do caixão, caixão, essa, tocheiros, convites, convidados que entravam, lentamente, a passo surdo,\ne apertavam a mão à família, alguns tristes, todos sérios e calados, padre e sacristão, rezas, aspersões d’água benta,\no fechar do caixão, a prego e martelo, seis pessoas que o tomam da essa, e o levantam, e o descem a custo pela\nescada, não obstante os gritos, soluços e novas lágrimas da família, e vão até o coche fúnebre, e o colocam em cima\ne traspassam e apertam as correias, o rodar do coche, o rodar dos carros, um a um... Isto que parece um simples\ninventário eram notas que eu havia tomado para um capítulo triste e vulgar que não escrevo.\nASSIS, M. Memórias póstumas de Brás Cubas . Disponível em: www.dominiopublico.gov.br.\nAcesso em: 25 jul. 2022.\nO recurso linguístico que permite a Machado de Assis considerar um capítulo de Memórias póstumas de Brás Cubas\ncomo inventário é a",
+    "alternativas": [
+      "A) enumeração de objetos e fatos.",
+      "B) predominância de linguagem objetiva.",
+      "C) ocorrência de período longo no trecho.",
+      "D) combinação de verbos no presente e no pretérito.",
+      "E) presença de léxico do campo semântico de funerais. *010275AM9* 10 LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 18 Criado há cerca de 20 anos na Califórnia, o mountainboard  é um esporte de aventura que utiliza uma espécie de skate off-road  para realizar manobras similares às das modalidades de snowboard , surf e do próprio skate. A atividade chegou ao Brasil em 1997 e hoje possui centenas de praticantes, um circuito nacional respeitável e mais de uma dezena de pistas espalhadas pelo país. Segundo consta na história oficial, o mountainboard  foi criado por praticantes de snowboard  que sentiam falta de praticar o esporte nos períodos sem neve. Para isso, eles desenvolveram um equipamento bem simples: uma prancha semelhante ao modelo utilizado na neve (menor e um pouco menos flexível), com dois eixos bem resistentes, alças para encaixar os pés e quatro pneus com câmaras de ar para regular a velocidade que pode ser alcançada em diferentes condições. Com essa configuração, o esporte se mostrou possível em diversos tipos de terreno: grama, terra, pedras, asfalto e areia. Além desses pisos, também é possível procurar pelas próprias trilhas para treinar as manobras. Disponível em: www.webventure.com.br. Acesso em: 19 jun. 2019."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q04",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Técnicas de manipulación y el resultado\nManipular es sembrar en la conciencia y en la mente\nde la gente ideas, actitudes, conceptos y aspiraciones\n— incluso falsas e inmorales — que sirvan a los objetivos\nde sus manipuladores.\nManipular es una de las primeras cosas que\naprendemos en la vida. A muy temprana edad, los bebés\ndescubren el poder del llanto, el berrinche, los pataleos,\nla risa o alguna “gracia” como recursos para demandar\natención, exigir comida, pedir ayuda o simplemente\nmantener ocupada a la gente. Nuestras actitudes de\nadultos\treflejan\tlo\tmucho\to\tpoco\tque\talgunos\t maduraron,\nprocesaron y rebasaron ese periodo.\nPara que exista un manipulador, debe haber una\nbase de ciudadanos indefensos, dóciles, desinformados.\nEl manipulador es celoso, a veces casi paranoico;\nno admite cuestionamientos ni quiere que nadie ocupe\nsu espacio, sabe que su vigencia depende de presencia\ncontroladora. Todos los días, hay que marcar la línea de\ndiscurso, incidir en el debate. El ridículo vale la pena si\ncon ello se logra una cortina de humo.\nDisponível em: www.forbes.com.mx. Acesso em: 7 out. 2021 (adaptado).Nesse texto, a expressão “ cortina de humo ” revela que o\nmanipulador",
+    "alternativas": [
+      "A) amadurece tardiamente.",
+      "B) busca mascarar a verdade.",
+      "C) rejeita questionamentos alheios.",
+      "D) aproxima-se\tde\tpessoas\tindefesas.",
+      "E) faz-se\tpresente\tde\tforma\tcontroladora."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q01",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) Teen’s View of Social Media Instagram is made up of all photos and videos. There is the home page that showcases the posts from people you follow, an explore tab which offers posts from accounts all over the world, and your own page, with a notification tab to show who likes and comments on your posts. It has some downsides though. It is known to make many people feel insecure or down about themselves because the platform showcases the highlights of everyone’s lives, while rarely showing the negatives. This can make one feel like their life is not going as well as others, contributing to the growing rates of anxiety or depression in many teens today. There is an underlying desire for acceptance through the number of likes or followers one has. Disponível em: https://cyberbullying.org. Acesso em: 29 out. 2021. O termo “downsides ” introduz a ideia de que o Instagram é responsável por",
+      "B) divulgar problemas dos usuários.",
+      "C) estimular aceitação dos seguidores.",
+      "D) provocar ansiedade nos adolescentes.",
+      "E) aproximar pessoas ao redor do mundo."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q20",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "No princípio era o verbo. A frase que abre o primeiro\ncapítulo do Evangelho de João e remete à criação do\nmundo, assim como também faz o Gênesis, é a mais\nfamosa da Bíblia. A ideia de que o mundo é criado pela\npalavra, porém, é tão estruturante que está presente\nem outras religiões, para muito além das fundadas no\ncristianismo. Como humanos, a linguagem é o mundo que\nhabitamos. Basta tentar imaginar um mundo em que não\npodemos usar palavras para dizer de nós e dos outros\npara\tcompreender\t o\tque\tisso\tsignifica. \tOu\tum\tmundo\nem que aquilo que você diz não é entendido pelo outro,\ne o que o outro diz não é entendido por você.O que acontece então quando a palavra é destruída\ne, com ela, a linguagem?\nDurante séculos, em diferentes sociedades e\nlínguas, é importante lembrar, a linguagem serviu\n— e ainda serve — para manter privilégios de grupos de\npoder e deixar todos os outros de fora. Quem entende\nlinguagem de advogados, juízes e promotores, linguagem\nde médicos, linguagem de burocratas, linguagem de\ncientistas? A maior parte da população foi submetida à\nviolência de propositalmente ser impedida de compreender\na linguagem daqueles que determinam seus destinos.\nSe\to\tprincípio \té\to\tverbo,\to\tfim\tpode\tser\to\tsilenciamento.\nMesmo que ele seja cheio de gritos entre aqueles que já não\ntêm linguagem comum para compreender uns aos outros.\nBRUM,\tE.\tDisponível\tem:\thttps://brasil.elpais.com.\tAcesso\tem:\t5\tnov.\t2021.\nNesse texto, a estratégia usada para convencer o leitor de\nque uma grande parcela da população não compreende\na linguagem daqueles que detêm o poder foi",
+    "alternativas": [
+      "A) revelar a origem religiosa da linguagem.",
+      "B) questionar o temor sobre o futuro da linguagem.",
+      "C) descrever a relação entre sociedade e linguagem.",
+      "D) apresentar as consequências do esfacelamento da linguagem.",
+      "E) criticar o obstáculo promovido pelos usos especializados da linguagem."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q20",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Projeto na Câmara de BH quer a vacinação gratuita\nde cães contra a leishmaniose",
+    "alternativas": [
+      "A) doença é grave e vem causando preocupação na região metropolitana da capital mineira Ela é uma doença grave, transmitida pela picada do mosquito-palha, e afeta tanto os seres humanos quanto os cachorros: a leishmaniose. Por ser um problema de saúde pública, a doença pode ganhar uma ação preventiva importante, caso um projeto de lei seja aprovado na Câmara Municipal de Belo Horizonte (CMBH). Diante do alto número de casos da doença na Grande BH, a Comissão de Saúde e Saneamento da CMBH aprovou a proposta de realização de campanhas públicas de vacinação gratuita de cães contra a leishmaniose, tema do PL 404/17, apreciado pelo colegiado em reunião ordinária, no dia 6 de dezembro. Disponível em: https://revistaencontro.com.br. Acesso em: 11 dez. 2017. Essa notícia, além de cumprir sua função informativa, assume o papel de",
+      "B) defender os serviços gratuitos de atendimento à população.",
+      "C) conscientizar a população sobre grave problema de saúde pública.",
+      "D) propor campanhas para a ampliação de acesso aos serviços públicos.",
+      "E) responsabilizar os agentes públicos pela demora na tomada de decisões.*010275AM10* LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação 11 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 21 Vanda vinha do interior de Minas Gerais e de dentro de um livro de Charles Dickens. Sem dinheiro para criá-la, sua mãe a dera, com seus sete anos, a uma conhecida. Ao recebê-la, a mulher perguntou o que a garotinha gostava de comer. Anotou tudo num papel. Mal a mãe virou as costas, no entanto, a fulana amassou a lista e, como uma vilã de folhetim, decretou: “A partir de hoje, você não vai mais nem sentir o cheiro dessas comidas!”. Vanda trabalhou lá até os quinze anos, quando recebeu a carta de uma prima com uma nota de cem cruzeiros, saiu de casa com a roupa do corpo e fugiu num ônibus para São Paulo. Todas as vezes que eu e minha irmã a importunávamos com nossas demandas de criança mimada, ela nos contava histórias da infância de gata-borralheira, fazia-nos apertar seu nariz quebrado por uma das filhas da “patroa” com um rolo de amassar pão e nos expulsava da cozinha: “Sai pra lá, peste, e me deixa acabar essa janta”. PRATA, A. Nu de botas. São Paulo: Cia. das Letras, 2013 (adaptado). Pela ótica do narrador, a trajetória da empregada de sua casa assume um efeito expressivo decorrente da"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q28",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) garganta é a gruta que guarda o som",
+      "B) refletir\tsobre\ta\tcensura\tà\tsua\tvoz.",
+      "C) expressar\ta\tdificuldade\tde\tcomunicação.",
+      "D) ressaltar a existência de pressões externas.",
+      "E) manifestar as dores do processo de criação.*010175AZ13* 14 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 29 Era um gato preto, como convinha a um cultor das boas letras, que já lera Poe traduzido por Baudelaire. Preto e gordo. E lerdo. Tão gordo e lerdo que a certa altura observei que ia perdendo inteiramente as qualidades características da raça, que são em suma o ódio de morte aos ratos. Já nem os afugentava! Os ratos de Ouro Preto são também dignos e solenes — não ria — tradicionalistas... descendentes de outros ratos que naqueles mesmos casarões presenciaram acontecimentos importantes da nossa história... No sobrado do desembargador Tomás Antônio Gonzaga, imagine o senhor\tuma\treunião\tdos\tsonhadores\t inconfidentes,\t com os antepassados daqueles ratos a passearem pelo sótão ou mesmo pelo assoalho por entre as pernas dos homens absortos na esperança da independência nacional! E depois, os ancestres daqueles roedores que eu via agora deslizar sutilmente no meu quarto podiam ter subido pelo poste da ignomínia colonial, onde estava exposta a cabeça do Tiradentes! E quando as órbitas se descarnaram ignominiosamente, podiam até ter penetrado no recesso daquele crânio onde verdadeiramente ardera a literatura, com a simplicidade do heroísmo, a febre nacionalista... ALPHONSUS, J. Contos e novelas . Rio de Janeiro: Imago; Brasília: INL, 1976. Descrevendo seu gato, o narrador remete ao contexto e\ta\tprotagonistas\t da\tInconfidência\t para\tcriar\tum\tefeito desconcertante centrado no"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q23",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nZapeei os canais, como há dezenas de anos faço, e pá:\nparei num que exibia um episódio daquela velha família do\nfuturo, Os Jetsons .\nNesse episódio em particular, a Jane Jetson, esposa\ndo George, tratava de dirigir aquele veículo voador\ndeles. Meu queixo foi caindo à medida que as piadinhas\nmachistas sobre mulheres dirigirem foram se acumulando.\nImpressionante! Que futuro careta aqueles roteiristas\nimaginavam! Seriam incapazes de projetar algo melhor, e não\napenas em termos de tecnologias, robôs e carros voadores?\nSerá que nossa máxima visão de futuro só atinge as coisas,\ne\tjamais\tas\tpessoas?\t Como\ta\tJane,\tuma\tmulher\tde\t33\tanos\nno desenho, poderia ser o que foram as minhas bisavós?\nO futuro, naquele desenho, se esqueceu de ser melhor\nnas relações entre as pessoas. Aliás... tão parecido com a vida.\nFiquei\tde\tcara,\tcomo\tdizemos\t aqui,\tou\tcomo\tdizíamos\nna minha adolescência, pobre adolescência, aprendendo,\nsem querer e sem muita defesa, um futuro tão besta quanto\no passado.\nRIBEIRO, A. E. Disponível em: www.rascunho.com br. Acesso em: 21 out. 2021 (adaptado).TEXTO II\nMasculino e feminino são campos escorregadios que\nsó\tse\tdefinem\tpor\toposição, \tsempre\tincompleta, \tum\tdo\noutro. São formações imaginárias que buscam produzir\numa diferença radical e complementar onde só existem,\nde fato, mínimas diferenças. O resto é questão de estilo.\nAté pelo menos a segunda metade do século 19, o divisor\nde águas era claro: os homens ocupavam o espaço público.\nAs mulheres tratavam da vida privada. Privada de quê?\nDe visibilidade, diria Hannah Arendt. De visibilidade pública.\nDo que as mulheres estiveram privadas até o século 20\nfoi de presença pública manifesta não em imagem, mas\nem palavra. A palavra feminina, reservada ao espaço\ndoméstico, não produzia diferença na vida social.\nKHEL,\tM.\tR.\tDisponível\tem:\thttps://alias.estadao.com.br.\nAcesso em: 19 out. 2021 (adaptado).",
+    "alternativas": [
+      "A) representação da mulher apresentada no Texto I pode ser explicada pelo Texto II no que diz respeito à(às)",
+      "B) ausência\tda\tfigura\tfeminina\tna\tvida\tpública.",
+      "C) construções imaginárias cristalizadas na sociedade.",
+      "D) limitações \tinerentes \tàs\tfiguras\tfemininas \te\tmasculinas.",
+      "E) dificuldade na atribuição de papéis masculinos e femininos."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q09",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) conquista da medalha de prata por Rayssa Leal, no skate street nos Jogos Olímpicos, é exemplo da representatividade feminina no esporte, avalia a âncora do jornal da rede de televisão da CNN. A apresentadora, que também anda de skate, celebrou a vitória da brasileira, que entrou para a história como a atleta mais nova a subir num pódio defendendo o Brasil. “Essa representatividade do esporte nos Jogos faz pensarmos que não temos que ficar nos encaixando em nenhum lugar. Posso gostar de passar notícia e, mesmo assim, gostar de skate, subir montanha, mergulhar, andar de bike, fazer yoga. Temos que parar de ficar enquadrando as pessoas dentro de regras. A gente vive num padrão no qual a menina ganha boneca, mas por que também não fazer um esporte de aventura? Por que o homem pode se machucar, cair de joelhos, e a menina tem que estar sempre lindinha dentro de um padrão? Acabamos limitando os talentos das pessoas”, afirmou a jornalista, sobre a prática do skate por mulheres. Disponível em: www.cnnbrasil.com.br. Acesso em: 31 out. 2021 (adaptado). O discurso da jornalista traz questionamentos sobre a relação da conquista da skatista com a",
+      "B) inserção das mulheres na modalidade skate street.",
+      "C) desconstrução da noção do skate como modalidade masculina.",
+      "D) vanguarda de ser a atleta mais jovem a subir no pódio olímpico.",
+      "E) conquista de medalha nos Jogos Olímpicos de Tóquio.*010275AM6* LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação 7 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 10 “Vida perfeita” em redes sociais pode afetar a saúde mental Nas várias redes sociais que povoam a internet, os chamados digital influencers  estão sempre felizes e pregam a felicidade como um estilo de vida. Essas pessoas espalham conteúdo para milhares de seguidores, ditando tendência e mostrando um estilo de vida sonhado por muitos, como o corpo esbelto, viagens incríveis, casas deslumbrantes, carros novos e alegria em tempo integral, algo bem improvável de ocorrer o tempo todo, aponta Carla Furtado, mestre em psicologia e fundadora do Instituto Feliciência."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q12",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nJUDD, D. Sem título . 1969.\nDisponível em: https://dasartes.com.br. Acesso em: 16 jun. 2022.\nTEXTO II\nEmbora não fosse um grupo ou um movimento\norganizado, o Minimalismo foi um dos muitos rótulos\n(incluindo estruturas primárias, objetos unitários, arte\nABC e Cool Art) aplicados pelos críticos para descrever\nestruturas aparentemente simples que alguns artistas\nestavam criando. Quando a arte minimalista começou\na surgir, muitos críticos e um público opinativo\njulgaram-na fria, anônima e imperdoável. Os materiais\nindustriais pré-fabricados frequentemente usados não\npareciam “arte”.\nDEMPSEY, A. Estilos, escolas e movimentos. São Paulo: Cosac & Naify, 2003 (adaptado).\nDe acordo com os textos I e II, compreende-se que a obra\nminimalista é uma",
+    "alternativas": [
+      "A) representação da simplicidade pelo artista.",
+      "B) exploração da técnica da escultura cubista.",
+      "C) valorização do cotidiano por meio da geometria.",
+      "D) utilização da complexidade dos elementos formais.",
+      "E) combinação de formas sintéticas no espaço utilizado.*010275AM7* 8 LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 13 Esaú e Jacó Bárbara entrou, enquanto o pai pegou da viola e passou ao patamar de pedra, à porta da esquerda. Era uma criaturinha leve e breve, saia bordada, chinelinha no pé. Não se lhe podia negar um corpo airoso. Os cabelos, apanhados no alto da cabeça por um pedaço de fita enxovalhada, faziam-lhe um solidéu natural, cuja borla era suprida por um raminho de arruda. Já vai nisto um pouco de sacerdotisa. O mistério estava nos olhos. Estes eram opacos, não sempre nem tanto que não fossem também lúcidos e agudos, e neste último estado eram igualmente compridos; tão compridos e tão agudos que entravam pela gente abaixo, revolviam o coração e tornavam cá fora, prontos para nova entrada e outro revolvimento. Não te minto dizendo que as duas sentiram tal ou qual fascinação. Bárbara interrogou-as; Natividade disse ao que vinha e entregou-lhe os retratos dos filhos e os cabelos cortados, por lhe haverem dito que bastava. — Basta, confirmou Bárbara. Os meninos são seus filhos? — São. ASSIS, M. Obra completa. Rio de Janeiro: Nova Aguilar, 1994. No relato da visita de duas mulheres ricas a uma vidente no Morro do Castelo, a ironia — um dos traços mais representativos da narrativa machadiana — consiste no"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q42",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "O\tacesso\tàs\tPráticas\tCorporais/Atividades \tFísicas\n(PC/AF)\t é\tdesigual\t no\tBrasil,\tà\tsemelhança\t de\toutros\nindicadores\t sociais\te\tde\tsaúde.\tEm\tgeral,\tPC/AF\tprazerosas,\ndiversificadas, mais afeitas ao período de lazer estão\nconcentradas nas populações mais abastadas. As atividades\nfísicas de deslocamento, trajetos a pé ou de bicicleta para\nestudar ou trabalhar, por exemplo, são mais frequentes\nna classe social menos favorecida. Aqui, há uma relação\ninversa e perversa entre variáveis socioeconômicas de acesso\nàs\tPC/AF.\tAs\tmaiores\tprevalências \tde\tinatividade \tfísica\tforam\nem mulheres, pessoas com 60 anos ou mais, negros, pessoas\ncom autoavaliação de saúde ruim ou muito ruim, com renda\nfamiliar de até quatro salários mínimos por pessoa, pessoas\nque\tdesconhecem\t programas\t públicos\tde\tPC/AF\te\tresidentes\nem áreas sem locais públicos para a prática.\nKNUTH, A. G.; ANTUNES, P. C. Saúde e Sociedade, n. 2, 2021 (adaptado).\nO fator central que impacta a realização de práticas\ncorporais/atividades \tfísicas\tno\ttempo\tde\tlazer\tno\tBrasil\té\ta",
+    "alternativas": [
+      "A) diferença entre homens e mulheres.",
+      "B) inexistência de políticas públicas.",
+      "C) diversidade de faixa etária.",
+      "D) variação de condição étnica.",
+      "E) desigualdade entre classes sociais.*010175AZ17* 18 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 43 Mestre e companheiro, disse eu que nos íamos despedir. Mas disse mal. A morte não extingue: transforma; não aniquila: renova; não divorcia: aproxima. Um dia supuseste “morta e separada” a consorte dos teus sonhos e das tuas agonias, que te soubera “pôr um mundo inteiro no recanto” do teu ninho; e, todavia, nunca ela te esteve mais presente, no íntimo de ti mesmo e na expressão do teu canto, no fundo do teu ser e na face de tuas ações. Esses catorze versos inimitáveis, em que o enlevo dos teus discípulos resume o valor de toda uma literatura, eram a aliança de ouro do teu segundo noivado, um anel de outras núpcias, para a vida nova do teu renascimento e\tda\ttua\tglorificação, \tcom\ta\tsócia\tsem\tnódoa\tdos\tteus\tanos de\tmocidade\t e\tmadureza,\t da\tflorescência\t e\tfrutificação\t de tua alma. Para os eleitos do mundo das ideias a miséria está na decadência, e não na morte. A nobreza de uma nos preserva das ruínas da outra. Quando eles atravessavam essa passagem do invisível, que os conduz à região da verdade sem mescla, então é que entramos a sentir o começo do seu reino, o reino dos mortos sobre os vivos. BARBOSA, R. O adeus da Academia a Machado de Assis . Rio de Janeiro: Agir, 1962. Esse é um trecho do discurso de Rui Barbosa na Academia Brasileira de Letras em homenagem a Machado de Assis por ocasião de sua morte. Uma das características desse discurso de homenagem é a presença de"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q24",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Em tempos de isolamento\nsocial por conta da pandemia de\ncovid-19, a Defensoria Pública\nalerta para o aumento da\nviolência contra a mulher!\nNão se cale! Denuncie!A Defensoria não para!#JuntasSomosMaisFortes\nDisque 180\nDisponível em: www.defensoriapublica.mt.gov.br. Acesso em: 29 out. 2021 (adaptado).\nEsse anúncio publicitário, veiculado durante o contexto\nda\tpandemia\tde\tcovid-19,\ttem\tpor\tfinalidade",
+    "alternativas": [
+      "A) divulgar o canal telefônico de atendimento a casos de violência contra a mulher.",
+      "B) informar sobre a atuação de uma entidade defensora da mulher vítima de violência.",
+      "C) evidenciar o trabalho da Defensoria Pública em relação ao problema do abuso contra a mulher.",
+      "D) alertar a sociedade sobre o aumento da violência contra a mulher em decorrência do coronavírus.",
+      "E) incentivar o público feminino a denunciar crimes de violência contra a mulher durante o período de isolamento.*010175AZ12* 13 –LC • 1 º DIA • CADERNO 1 • AZUL –QUESTÃO 25 Passado muito tempo, resolvi tentar falar, porque estava sozinha me embrenhando na mesma vereda que Donana costumava entrar. Ainda recordo da palavra que escolhi: arado. Me deleitava vendo meu pai conduzindo o arado velho da fazenda carregado pelo boi, rasgando a terra para depois lançar grãos de arroz em torrões marrons e vermelhos revolvidos. Gostava do som redondo, fácil e ruidoso que tinha ao ser enunciado. “Vou trabalhar no arado.” “Vou arar a terra.” “Seria bom ter um arado novo, esse arado tá troncho e velho.” O som que deixou minha boca era uma aberração, uma desordem, como se no lugar do pedaço perdido da língua tivesse um ovo quente. Era um arado torto, deformado, que penetrava a terra de tal\tforma\ta\tdeixá-la\tinfértil,\tdestruída,\tdilacerada. VIEIRA JR., I. Torto arado . São Paulo: Todavia, 2019. Com a perda de parte da língua na infância, a narradora tenta voltar a falar. Essa tentativa revela uma experiência que"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q29",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Mas seu olhar verde, inconfundível, impressionante,\niluminava com sua luz misteriosa as sombrias arcadas\nsuperciliares, que pareciam queimadas por ela, dizia logo\na sua origem cruzada e decantada através das misérias\ne dos orgulhos de homens de aventura, contadores de\nhistórias fantásticas, e de mulheres caladas e sofredoras,\nque acompanhavam os maridos e amantes através\ndas matas intermináveis, expostas às febres, às feras,\nàs cobras do sertão indecifrável, ameaçador e sem fim, que\nelas percorriam com a ambição única de um “pouso” onde\npudessem viver, por alguns dias, a vida ilusória de família\ne de lar, sempre no encalço dos homens, enfebrados pela\nprocura do ouro e do diamante.\nPENNA, C. Fronteira. Rio de Janeiro: Tecnoprint, s/d.\nAo descrever os olhos de Maria Santa, o narrador\nestabelece correlações que refletem a",
+    "alternativas": [
+      "A) caracterização da personagem como mestiça.",
+      "B) construção do enredo de conquistas da família.",
+      "C) relação conflituosa das mulheres e seus maridos.",
+      "D) nostalgia do desejo de viver como os antepassados.",
+      "E) marca de antigos sofrimentos no fluxo de consciência.*010275AM13* 14 LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 30 TEXTO I EI... ME LEVE PARA SUA CASA!!! ADOTE UM ANIMAL DE RUA14ª FEIRA DE ADOÇÃO DE CÃES E GATOS DOCUMENTOS OBRIGATÓRIOS PARA ADOÇÃO CARTEIRA DE IDENTIDADE   CPF   COMPROVANTE DE RESIDÊNCIA"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q18",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I\nAlegria, alegria\nO sol nas bancas de revista\nMe enche de alegria e preguiça\nQuem lê tanta notícia\nEu vou\nPor entre fotos e nomes\nOs olhos cheios de cores\nO peito cheio de amores vãos\nEu vou\nPor que não, por que não?\nVELOSO, C. Alegria, alegria . Rio de Janeiro: Polygram, 1990 (fragmento).\nTEXTO II\nAnjos tronchos\nUns anjos tronchos do Vale do Silício\nDesses que vivem no escuro em plena luz\nDisseram vai ser virtuoso no vício\nDas telas dos azuis mais do que azuis\nAgora a minha história é um denso algoritmo\nQue vende venda a vendedores reais\nNeurônios meus ganharam novo outro ritmo",
+    "alternativas": [
+      "E) mais, e mais, e mais, e mais, e mais VELOSO, C. Meu coco . Rio de Janeiro: Sony, 2021 (fragmento). Embora oriundas de momentos históricos diferentes, essas letras de canção têm em comum a",
+      "A) referência às cores como elemento de crítica a hábitos contemporâneos.",
+      "B) percepção da profusão de informações gerada pela tecnologia.",
+      "C) contraposição entre os vícios e as virtudes da vida moderna.",
+      "D) busca constante pela liberdade de expressão individual."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q17",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "Como é bom reencontrar os leitores da Revista da\nCultura  por meio de uma publicação com outro visual,\nconteúdo de qualidade e interesses ampliados! ]cultura[ ,\neste nome simples, e eu diria mesmo familiar, nasce entre\ndois colchetes voltados para fora. E não é por acaso:\nsão sinais abertos, receptivos, propícios à circulação de\nideias.\tO\tDNA\tda\tpublicação\t se\tmantém\t o\tmesmo,\t afinal,\npor longos anos montamos nossas edições com assuntos\nsaídos das estantes de uma grande livraria — e assim\ncontinuará\t sendo.\tLiteratura,\t sociologia,\t filosofia,\t artes...\nnunca será difícil montar a pauta da revista porque os\nlivros nos ensinam que monotonia é só para quem não lê.\nHERZ, P. ]cultura[ , n. 1, jun. 2018 (adaptado).O uso não padrão dos colchetes para nomear a revista\natribui-lhes\t uma\tnova\tfunção\te\testá\tcorrelacionado\t ao(à)",
+    "alternativas": [
+      "A) perfil\tde\tpúblico-alvo,\t constituído\t por\tleitores\texigentes e especializados em leitura acadêmica.",
+      "B) propósito do editor, chamando a atenção para o rigor normativo nos textos da revista.",
+      "C) exclusividade na seleção temática, direcionada para a área das ciências humanas.",
+      "D) identidade da revista, voltada para a recepção e a promoção de ideias circulantes em livros.",
+      "E) padrão editorial dos artigos, organizados em torno de uma proposta de design inovador."
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q34",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "TEXTO I",
+    "alternativas": [
+      "A) língua não é uma nomenclatura, que se apõe a uma realidade pré-categorizada, ela é que classifica a realidade. No léxico, percebe-se, de maneira mais imediata, o fato de que a língua condensa as experiências de um dado povo. FIORIN, J. L. Língua, modernidade e tradição. Diversitas , n. 2, mar.-set. 2014. TEXTO II As expressões coloquiais ainda estão impregnadas de discriminação contra os negros. Basta recordar algumas delas, como passar um “dia negro”, ter um “lado negro”, ser a “ovelha negra” da família ou praticar “magia negra”. Disponível em: https://brasil.elpais.com. Acesso em: 22 maio 2018.O Texto II exemplifica o que se afirma no Texto I, na medida em que defende a ideia de que as escolhas lexicais são resultantes de um",
+      "B) ato inventivo de nomear novas realidades que surgem diante de uma comunidade de falantes de uma língua.",
+      "C) mecanismo de apropriação de formas linguísticas que estão no acervo da formação do idioma nacional.",
+      "D) processo de incorporação de preconceitos que são recorrentes na história de uma sociedade.",
+      "E) recurso de expressão marcado pela objetividade que se requer na comunicação diária."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q04",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "As my official bio reads, I was made in Cuba, assembled\nin Spain, and imported to the United States — meaning my\nmother, seven months pregnant, and the rest of my family\narrived as exiles from Cuba to Madrid, where I was born.\nLess than two months later, we emigrated once more and\nsettled in New York City, then eventually in Miami, where\nI was raised and educated. Although technically we lived\nin the United States, the Cuban community was culturally\ninsular in Miami during the 1970s, bonded together by the\ntrauma of exile. What’s more, it seemed that practically\neveryone was Cuban: my teachers, my classmates, the\nmechanic, the bus driver. I didn’t grow up feeling different\nor treated as a minority. The few kids who got picked on\nin my grade school were the ones with freckles and funny\nlast names like Dawson and O’Neil.\nBLANCO, R. Disponível em: http://edition.cnn.com.  Acesso em: 9 dez. 2017 (adaptado).\nAo relatar suas vivências, o autor destaca o(a)",
+    "alternativas": [
+      "A) qualidade da educação formal em Miami.",
+      "B) prestígio da cultura cubana nos Estados Unidos.",
+      "C) oportunidade de qualificação profissional em Miami.",
+      "D) cenário da integração de cubanos nos Estados Unidos.",
+      "E) fortalecimento do elo familiar em comunidades estadunidenses .*010275AM2* LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação 3 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 05"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q06",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "10 de maio\nFui na delegacia e falei com o tenente. Que homem\namavel! Se eu soubesse que ele era tão amavel, eu teria\nido na delegacia na primeira intimação. [...] O tenente\ninteressou-se pela educação dos meus filhos. Disse-me\nque a favela é um ambiente propenso, que as pessoas\ntem mais possibilidade de delinquir do que tornar-se util\na patria e ao país. Pensei: se ele sabe disto, porque não\nfaz um relatorio e envia para os politicos? O senhor Janio\nQuadros, o Kubstchek e o Dr. Adhemar de Barros?\nAgora falar para mim, que sou uma pobre lixeira.\nNão posso resolver nem as minhas dificuldades.\n... O Brasil precisa ser dirigido por uma pessoa que já\npassou fome. A fome tambem é professora.\nQuem passa fome aprende a pensar no próximo,\ne nas crianças.\nJESUS, C. M. Quarto de despejo: diário de uma favelada.  São Paulo: Ática, 2014.",
+    "alternativas": [
+      "A) partir da intimação recebida pelo filho de 9 anos, a autora faz uma reflexão em que transparece a",
+      "B) predisposição materna para se emocionar.",
+      "C) atividade política marcante da comunidade.",
+      "D) resposta irônica ante o discurso da autoridade.",
+      "E) necessidade de revelar seus anseios mais íntimos. *010275AM5* 6 LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 07 Firmo, o vaqueiro No dia seguinte, à hora em que saía o gado, estava eu debruçado à varanda quando vi o cafuzo que preparava o animal viajeiro: — Raimundinho, como vai ele?... De longe apontou a palhoça. — Sim. O braço caiu-lhe, olhou-me algum tempo comovido; depois, saltando para o animal, levou o polegar à boca fazendo estalar a unha nos dentes: “Às quatro horas da manhã... Atirei um verso e disse, para bulir com ele: Pega, velho! Não respondeu. Tio Firmo, mesmo velho e doente, não era homem para deixar um verso no chão... Fui ver, coitado!... estava morto”. E deu de esporas para que eu não lhe visse as lágrimas. NETTO, C. In: MARCHEZAN, L. G. (Org.). O conto regionalista. São Paulo: Martins Fontes, 2009 ."
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q40",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "",
+    "alternativas": [
+      "A) neozelandesa Laurel Hubbard fez história nos Jogos Olímpicos.\t Apesar\tde\tter\tficado\tde\tfora\tda\tdisputa\tpor medalhas, a levantadora de peso deixou sua marca na edição de Tóquio por ser a primeira mulher abertamente transgênero a participar de uma competição olímpica. No início da carreira, na década de 1990, a neozelandesa participava de disputas na categoria masculina. Em\t2001,\taos\t23\tanos,\tela\tse\tafastou\t da\tatividade. “A pressão de tentar me encaixar em um mundo que talvez não tenha sido feito para pessoas como eu se tornou um fardo muito grande para suportar.” Em 2012, Laurel começou sua transição de gênero por meio de terapias hormonais e, em\t2013,\tdeclarou\tabertamente \tser\tuma\tmulher\ttrans.\tPara o Comitê Olímpico Internacional, a participação de mulheres trans nos Jogos é permitida caso o nível de testosterona, hormônio que aumenta a massa muscular, esteja abaixo de 10 nanomols por litro por pelo menos 12 meses. Disponível\tem:\thttps://revistagalileu.globo.com.\tAcesso\tem:\t18\tnov.\t2021\t(adaptado). No texto, os limites do potencial inclusivo do esporte são dados pela",
+      "B) dependência de características biológicas padronizadas.",
+      "C) inexistência de uma categoria para pessoas transgênero.",
+      "D) necessidade de afastamento temporário das competições.",
+      "E) impossibilidade de uso controlado de substâncias exógenas.QUESTÃO 41 “Ganhei 25 medalhas em mundiais, sete em Jogos Olímpicos, e sou uma sobrevivente de abuso sexual.” Foi\tassim\tque\tSimone\tBiles\tse\tapresentou\t ao\tcomitê\tdo Senado\tnorte-americano\t que\tinvestiga\t as\tsupostas \tfalhas do\tFBI\tno\tcaso\tLarry\tNassar.\tBiles\te\toutras\ttrês\tatletas, vítimas\tdos\tabusos\tdo\tex-médico\t da\tequipe\tde\tginástica feminina dos EUA, exigiram que os agentes da investigação sejam processados por falta de ação prévia contra Nassar, agora preso. Biles esclareceu que culpa Larry Nassar e “todo o sistema que o permitiu e o perpetrou”, acusando a\tFederação \tde\tGinástica \te\to\tComitê\tOlímpico \tdos\tEstados Unidos de saberem “muito antes” que ela havia sofrido abusos. A melhor ginasta do mundo é um ícone. Nos Jogos Olímpicos de Tóquio, uma lesão psicológica a impediu de competir como previa. No entanto, ela chegou ao topo como uma líder no trabalho de acabar com o preconceito com os problemas de saúde mental. “Não quero que nenhum outro atleta olímpico sofra o horror que eu e outras centenas suportamos\te\tcontinuamos\tsuportando\taté\thoje”,\tafirmou. Disponível\tem:\thttps://brasil.elpais.com.\tAcesso\tem:\t31\tout.\t2021\t(adaptado). O fato relatado na notícia chama a atenção acerca da necessidade \tde\treflexão\tsobre\ta\trelação\tentre\to\tesporte\te"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2023-D1-Caderno-Q02",
+    "ano": 2023,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "No man is an island,\nEntire of itself;\nEvery man is a piece of the continent,",
+    "alternativas": [
+      "A) part of the main. [...] Any man’s death diminishes me, Because I am involved in mankind. DONNE, J. The Works of John Donne .\tLondres:\tJohn\tW.\tParker,\t1839\t(fragmento). Nesse poema, a expressão “ No man is an island  ” ressalta o(a)",
+      "B) ideia de conexão.",
+      "C) conceito de solidão.",
+      "D) risco de devastação.",
+      "E) necessidade de empatia.QUESTÃO 03 Things We Carry on the Sea We\tcarry\ttears\tin\tour\teyes:\tgood-bye\t father,\tgood-bye [mother We carry soil in small bags: may home never fade in our [hearts We\tcarry\tcarnage\tof\tmining,\tdroughts,\t floods,\tgenocides We carry dust of our families and neighbors incinerated [in mushroom clouds We carry our islands sinking under the sea We carry our hands, feet, bones, hearts and best minds [for a new life We carry diplomas: medicine, engineer, nurse, [education, math, poetry, even if they mean [nothing to the other shore We carry railroads, plantations, laundromats, [bodegas, taco trucks, farms, factories, nursing [homes, hospitals, schools, temples... built on [our ancestors’ backs We carry old homes along the spine, new dreams in our [chests We carry yesterday, today and tomorrow We’re orphans of the wars forced upon us We’re refugees of the sea rising from industrial wastes And we carry our mother tongues [...] As we drift... in our rubber boats... from shore... to shore... [to shore.. . PING,\tW.\tDisponível\tem:\thttps://poets.org.\tAcesso\tem:\t1\tjun.\t2023\t(fragmento). Ao retratar a trajetória de refugiados, o poema recorre à imagem de viagem marítima para destacar o(a)"
+    ],
+    "correta": "",
+    "fonte": "2023_PV_impresso_D1_CD1.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q02",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "En los suburbios de La Habana, llaman al amigo mi\ntierra o mi sangre . En Caracas, el amigo es mi pana  o mi\nllave: pana, por panadería, la fuente del buen pan para las\nhambres del alma; y llave por... — Llave , por llave  — me\ndice Mario Benedetti. Y me cuenta que cuando vivía en\nBuenos Aires, en los tiempos del terror, él llevaba cinco\nllaves ajenas en su llavero: cinco llaves, de cinco casas,\nde cinco amigos: las llaves que lo salvaron.\nGALEANO, E. El libro de los abrazos . Madri: Siglo Veintiuno, 2015.\nNesse texto, o autor demonstra como as diferentes\nexpressões existentes em espanhol para se referir a\n“amigo ” variam em função",
+    "alternativas": [
+      "A) das peculiaridades dos subúrbios hispano-americanos.",
+      "B) da força da conexão espiritual entre os amigos.",
+      "C) do papel da amizade em diferentes contextos.",
+      "D) do hábito de reunir amigos em torno da mesa.",
+      "E) dos graus de intimidade entre os amigos.*010275AM3* 4 LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 03 Las lenguas originarias de nuestra nación guardan gran parte de la riqueza cultural. Son parte viva de nuestro país. Si se hablan, son reconocidas y todos las respetamos, protegemos nuestro patrimonio nacional.Diidxagola Binnigula’ sa’ Nisa ri’ biraru’ mani’ Duxhu’dxa’ ndaani (Proverbio zapoteco) Te gustó?? INSTITUTO NACIONAL DE LENGUAS INDÍGENAS www.inali.gob.mxContigo es posible SEPSECRETARÍA DE EDUCACIÓN PÚBLICA Disponível em: www.inali.gob.mx. Acesso em: 2 dez. 2018. Esse cartaz tem a função social de"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q23",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "O Recife fervilhava no começo da década de 1990, e\nos artistas trabalhavam para resgatar o prestígio da cultura\npernambucana. Era preciso se inspirar, literalmente, nas\nraízes sobre as quais a cidade se construiu. Foi aí que,\nem 1992, com a publicação de um manifesto escrito\npelo músico e jornalista Fred Zero Quatro, da banda\nMundo Livre S/A, nasceu o manguebeat. O nome vem\nde “mangue”, vegetação típica da região, e “beat”, para\nrepresentar as batidas e as influências musicais que o\nmovimento abraçaria a partir dali. Era a hora e a vez\nde os caranguejos — aos quais os músicos recifenses\ngostavam de se comparar — mostrarem as caras:\no maracatu e suas alfaias se misturaram com as batidas\ndo hip-hop, as guitarras do rock, elementos eletrônicos e\no sotaque recifense de Chico Science. A busca pelo novo\nrendeu uma perspectiva diferente do Brasil ao olhar para o\nRecife. A cidade deixou de ser o lugar apenas do frevo\ne do carnaval, transformando-se na ebulição musical\nque continua a acontecer mesmo após os 25 anos do\nlançamento do primeiro disco da Nação Zumbi, Da lama\nao caos.\nFORCIONI, G. et al. O mangue está de volta. Revista Esquinas, n. 87, set. 2019 (adaptado).\nChico Science foi fundamental para a renovação da\nmúsica pernambucana, fato que se deu pela",
+    "alternativas": [
+      "A) utilização de aparelhos musicais eletrônicos em lugar dos instrumentos tradicionais.",
+      "B) ocupação de espaços da natureza local para a produção de eventos musicais memoráveis.",
+      "C) substituição de antigas práticas musicais, como o frevo, por melodias e harmonias inovadoras.",
+      "D) recuperação de composições tradicionais folclóricas e sua apresentação em grandes festivais.",
+      "E) integração de referenciais culturais de diferentes origens, criando uma nova combinação estética.*010275AM11* 12 LC - 1° dia | Caderno 2 - AMARELO - 1ª Aplicação ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022 ENEM 2022QUESTÃO 24 Ela era linda. Gostava de dançar, fazia teatro em São Paulo e sonhava ser atriz em Hollywood. Tinha 13 anos quando ganhou uma câmera de vídeo — e uma irmã. As duas se tornaram suas companheiras de experimentações. Adolescente, Elena vivia a criar filminhos e se empenhava em dirigir a pequena Petra nas cenas que inventava. Era exigente com a irmã. E acreditava no potencial da menina para satisfazer seus arroubos de diretora precoce. Por cinco anos, integrou algumas das melhores companhias paulistanas de teatro e participou de preleções para filmes e trabalhos na TV. Nunca foi chamada. No início de 1990, Elena tinha 20 anos quando se mudou para Nova York para cursar artes cênicas e batalhar uma chance no mercado americano. Deslocada, ansiosa, frustrada após alguns testes de elenco malsucedidos, decepcionada com a ausência de reconhecimento e vitimada por uma depressão que se agravava com a falta de perspectivas, Elena pôs fim à vida no segundo semestre. Petra tinha 7 anos. Vinte anos depois, é ela, a irmã caçula, que volta a Nova York para percorrer os últimos passos da irmã, vasculhar seus arquivos e transformar suas memórias em imagem e poesia. Elena é um filme sobre a irmã que parte e sobre a irmã que fica. É um filme sobre a busca, a perda, a saudade, mas também sobre o encontro, o legado, a memória. Um filme sobre a Elena de Petra e sobre a Petra de Elena, sobre o que ficou de uma na outra e, essencialmente, um filme sobre a delicadeza. VANUCHI, C. Época, 19 out. 2012 (adaptado). O texto é exemplar de um gênero discursivo que cumpre a função social de"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2022-D1-Caderno-Q06",
+    "ano": 2022,
+    "dia": 1,
+    "caderno": "Caderno",
+    "area": "Linguagens",
+    "enunciado": "NOW THAT YOU ARE MY\nBRIDE, YOU WILL NEVER\nLEAVE THIS CASTLE!\nWOW! YOUR\nLIBRARY IS\nAMAZING!BEYOND THE CASTLE IS",
+    "alternativas": [
+      "A) HIGH WALL WITH NO GATE, AND BEYOND THAT IS A DEEP, DARK FOREST WITH NO PATH. I SUPPOSE IT´ S MY LIBRARY TOO, NOW WE‛ RE MARRIED. THE FOREST IS CRAWLING WITH RAVENOUS WOLVES, MALIGNANT BIRDS AND THE SPIRITS OF LONG- DEAD TRAVELLERS. SO MANY BOOKS! I CAN´T BELIEVE MY LUCK!WHEN THE SUN SETS, I TRANSFORM INTO A WILD BEAST AND SOAR INTO THE NIGHT, SEIZED BY",
+      "B) gosto pela prática da leitura.",
+      "C) receio pelo futuro do casamento.",
+      "D) entusiasmo com os livros de terror.",
+      "E) rejeição ao novo tipo de residência.Questões de 01 a 05 (opção: espanhol)"
+    ],
+    "correta": "",
+    "fonte": "2022_PV_impresso_D1_CD2.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q91",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 91 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q92",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 92 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q93",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 93 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q94",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 94 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q95",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 95 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q96",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 96 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q97",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 97 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q98",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 98 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q99",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 99 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q100",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 98 Apesar de os animais representados no cladograma compartilharem um mesmo ancestral, eles se caracterizam por distintos padrões de reprodução ou de nutrição dos embriões e descendentes. DIXSON, A. F. Mammalian Sexuality : The Act of Mating and the Evolution of Reproduction. Disponível em: www.cambridge.org. Acesso em: 2 jul. 2024 (adaptado). Ao longo do processo evolutivo, percebem-se, entre esses animais, perdas e ganhos nos padrões citados que envolvem o(a) A aumento no número de descendentes por ninhada. B mudança no tipo de fecundação de externa para interna. C redução da versatilidade de reprodução, que se torna unicamente sexuada. D desenvolvimento embrionário, que passa do meio aquático para o terrestre. E diminuição da vesícula vitelínica, associada ao desenvolvimento da lactação. QUESTÃO 100 Mirascópio 3D: produtor de ilusão instantânea O equipamento ilustrado na figura, de dimensões apresentadas no esquema, é composto por dois espelhos côncavos E 1 e E 2 , apoiados um sobre o outro por suas bordas, de tal forma que o vértice de E 1 coincide com o foco de E 2 e vice-versa. Na abertura circular de E 2 , é formada uma imagem tridimensional de um objeto posicionado sobre o vértice de E 1 . Essa imagem é formada a partir dos raios procedentes do objeto, refletidos por E 2 e E 1 , respectivamente, conforme o esquema. Os observadores julgam visualizar o objeto quando estão, de fato, visualizando sua imagem. O efeito só é possível porque as superfícies de ambos os espelhos são de extrema qualidade. ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q100.png",
+    "legendaImagem": "QUESTÃO 10 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q101",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 110 O Cerrado e a Amazônia abrigam grande número de serpentes popularmente conhecidas como cobras-corais. Na Amazônia predominam as corais-verdadeiras, que são peçonhentas, enquanto no Cerrado prevalecem as falsas-corais, que não possuem peçonha. Essas espécies apresentam um padrão de coloração muito semelhante. Essa similaridade traz uma vantagem tanto para as corais falsas como para as verdadeiras. FRANÇA, F. G. R. [...] serpentes corais em ambientes campestres, savânicos e florestais da América do Sul . Brasília: UnB, 2008 (adaptado). Nas fotografias, são apresentados exemplos dessas serpentes: uma coral-verdadeira e uma falsa-coral. SILVA, L. C.; COTTA, G. A.; RESENDE, F. C. Cobra-coral: aplicativo educativo para reconhecimento das cobras-corais do estado de Minas Gerais, Brasil. Herpetologia Brasileira , n. 1, 2021 (adaptado). Qual é a vantagem dessa similaridade para as falsas-corais? A Facilita a captura de presas. B Diminui a competição por recursos. C Possibilita a geração de indivíduos híbridos. D Reduz a possibilidade de sofrerem predação. E Otimiza o encontro de parceiros reprodutivos. QUESTÃO 112 Um dos exemplos mais conhecidos de herança recessiva ligada ao cromossomo X é o daltonismo. Como em qualquer distúrbio recessivo ligado ao cromossomo X, existem muito mais homens apresentando o fenótipo com esse tipo de daltonismo do que mulheres. Um casal formado por um homem não daltônico e por uma mulher gestante também não daltônica, mas portadora do gene recessivo para esse tipo de daltonismo, está esperando um bebê. Em uma das consultas de pré-natal, o casal recebeu um heredograma que contém todas as possibilidades de genótipo para esse bebê. Considere a legenda: Mulher heterozigota portadora do gene para daltonismo Mulher não daltônica Mulher daltônica Homem não daltônico Homem daltônico GRIFFITHS, A. et al. Introdução à genética . Rio de Janeiro: Guanabara Koogan, 2016 (adaptado). Qual heredograma foi recebido pelo casal? A B ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q101.png",
+    "legendaImagem": "QUESTÃO 11 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q102",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 119 Para os circuitos de maratonas aquáticas realizadas em mares calmos e próximos à praia, é montado um sistema de boias que determinam o trajeto a ser seguido pelos nadadores. Uma das dificuldades desse tipo de circuito é compensar os efeitos da corrente marinha. O diagrama contém o circuito em que deve ser realizada uma volta no sentido anti-horário. As quatro boias estão numeradas de 1 a 4. Existe uma corrente marinha de velocidade υ c → , cujo módulo é 30 metros por minuto, paralela à praia em toda a área do circuito. Nas arestas mais longas, o nadador precisará nadar na direção apontada pelos vetores υ n → dos pontos 1 até 2 e de 3 até 4. Considere que a velocidade do nadador é de 50 metros por minuto, em relação à água, durante todo o circuito. Nessa situação, em quantos minutos o nadador completará a prova? A 42 B 65 C 72 D 105 E 120 QUESTÃO 121 Na tirinha, Calvin se divertia em um balanço antes de soltar-se dele e cair ao chão. Em sua fala, ele demonstra ter imaginado que permaneceria em movimento circular. Porém, a força gravitacional, que permanece atuando no garoto, modifica a direção de sua velocidade, fazendo com que ele chegue ao chão da maneira ilustrada no último quadrinho. WATTERSON, B. Disponível em: https://tiras-do-calvin.tumblr.com. Acesso em: 19 nov. 2021 (adaptado). Qual vetor representa a força resultante exercida pelo chão sobre Calvin no exato momento em que ele toca o chão? ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q102.png",
+    "legendaImagem": "QUESTÃO 12 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q103",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 128 Placas solares comuns dependem de dias ensolarados para gerar energia. Mas podemos gerar eletricidade com a ajuda de gotas de chuva, revestindo placas solares com uma fina camada de grafeno. Os íons dissociados a partir da água da chuva (A m + e B n − ) tornam a combinação grafeno e água da chuva um par perfeito para geração de energia. O processo requer apenas uma camada de grafeno para que grande quantidade de elétrons (e − ) se movimente ao longo da superfície. TANG, Q. et al. A Solar Cell that is Triggered by Sun and Rain. Angewandte Chemie International Edition , n. 55, 2016 (adaptado). Ao produzir eletricidade em dias chuvosos, o grafeno A oxida os cátions dissolvidos na água da chuva. B impede a difusão da água através das placas solares. C diminui a energia de ativação da reação no pseudocapacitor. D forma um compósito não metálico com os íons na água da chuva. E gera uma diferença de potencial pela interação dos elétrons com os cátions. QUESTÃO 130 O diagrama P-V a seguir representa o ciclo de Otto para um motor de combustão interna, como os motores a gasolina ou a etanol, utilizados nos automóveis. As etapas representadas no diagrama estão descritas no quadro. Etapa Processo Descrição I 0 a 1 Admissão isobárica da mistura ar-combustível no cilindro do motor. II 1 a 2 Compressão adiabática da mistura. III 2 a 3 Introdução de energia na forma de calor da combustão. IV 3 a 4 Expansão adiabática. V 4 a 1 Liberação de energia na forma de calor. VI 1 a 0 Liberação dos gases resultantes da combustão. Disponível em: www.mspc.eng.br. Acesso em: 24 fev. 2013 (adaptado). ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q103.png",
+    "legendaImagem": "QUESTÃO 13 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q104",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 139 Um artesão utiliza dois tipos de componentes, X e Y, nos enfeites que produz. Ele sempre compra todos os componentes em uma mesma loja. O quadro apresenta os preços dos dois tipos de componentes nas lojas I e II. Lojas Preços dos componentes (R$) X Y I 3,00 1,00 II 2,00 4,00 Ele confeccionará enfeites formados por duas unidades do componente X e uma unidade do componente Y e efetuará a compra na loja que oferecer o menor valor total para a confecção de um enfeite. O artesão efetuará a compra na loja A I, pois o valor é R$ 7,00. B I, pois o valor é R$ 4,00. C II, pois o valor é R$ 6,00. D I, pois anuncia o componente com o menor preço. E II, pois o componente X, que é o mais utilizado, tem menor preço. QUESTÃO 141 Três grandezas (I, II e III) se relacionam entre si. Os gráficos a seguir, formados por segmentos de reta, descrevem as relações de dependência existentes entre as grandezas I e II, e entre as grandezas II e III. ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q104.png",
+    "legendaImagem": "QUESTÃO 14 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q105",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 150 Uma sala com piso no formato retangular, com lados de medidas 3 m e 6 m, será dividida em dois ambientes. Para isso, serão utilizadas colunas em formato cilíndrico, dispostas perpendicularmente ao piso e representadas na figura pelos círculos de cor azul. Os centros desses círculos estarão sobre uma reta paralela aos lados de menor medida do piso da sala. Os vãos entre duas colunas e entre uma coluna e a parede não poderão ser superiores a 15 cm. Para efetuar a compra dessas colunas, foram feitos orçamentos com base em dados fornecidos por cinco lojas. Loja Raio (cm) Preço por unidade (R$) I 5 60 II 10 70 III 12 75 IV 15 90 V 20 120 A compra será realizada na loja cujo orçamento resulte no menor valor total possível. A compra será realizada na loja A I. B II. C III. D IV. E V. QUESTÃO 152 O gráfico apresenta o valor total de exportações e o valor total de importações, ao longo de um período, em bilhão de dólares. O saldo da balança comercial brasileira é dado pelo valor total de exportações menos o valor total de importações num mesmo período. Valor total de exportações e importações Disponível em: http://blogs.estadao.com.br. Acesso em: 20 fev. 2013 (adaptado). Considere que os saldos da balança comercial brasileira, nos três meses destacados no gráfico, sejam representados por: • S 1 : saldo em junho de 2009; • S 2 : saldo em janeiro de 2010; • S 3 : saldo em junho de 2010. A ordenação dos saldos S 1 , S 2 e S 3 , do maior para o menor, é A S 1 , S 3 e S 2 . B S 2 , S 1 e S 3 . C S 2 , S 3 e S 1 . D S 3 , S 1 e S 2 . ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q105.png",
+    "legendaImagem": "QUESTÃO 15 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q106",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Sabe-se que 1 litro de defensivo do Tipo A é suficiente para aplicação em 0,5 hectare (ha), enquanto que 1 litro de defensivo do Tipo B é suficiente para aplicação em 0,4 ha. Um agricultor precisa comprar, nessa loja, uma quantidade de litros de defensivo suficiente para aplicar em uma área de 20 ha, além de levar uma máscara para aplicação. O valor mínimo, em real, a ser gasto pelo agricultor é A 147,00. B 150,00. C 162,50. D 165,75. E 168,00. QUESTÃO 160 Uma piscina tem capacidade de 2 500 000 litros. Seu sistema de abastecimento foi regulado para ter uma vazão constante de 6 000 litros de água por minuto. O mesmo sistema foi instalado em uma segunda piscina, com capacidade de 2 750 000 litros, e regulado para ter uma vazão, também constante, capaz de enchê-la em um tempo 20% maior que o gasto para encher a primeira piscina. A vazão do sistema de abastecimento da segunda piscina, em litro por minuto, é A 8 250. B 7 920. C 6 545. D 5 500. E 5 280. ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM20E4ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024 ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024 22 MATEMÁTICA E SUAS TECNOLOGIAS • 2 º DIA • CADERNO 7 • AZUL •",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q106.png",
+    "legendaImagem": "QUESTÃO 16 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q107",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "QUESTÃO 170 Em uma região com grande incidência de terremotos, observou-se que dois terremotos ocorridos apresentaram magnitudes M 1 e M 2 , medidos segundo a escala Richter, e liberaram energias iguais a E 1 e E 2 , respectivamente. Entre os estudiosos do assunto, é conhecida uma expressão algébrica relacionando esses valores dada por M M E E 2 1 2 1 2 3 � � � � � � � � log Estudos mais abrangentes observaram que o primeiro terremoto apresentou a magnitude M 1 = 6,9 e a energia liberada foi um décimo da observada no segundo terremoto. O valor aproximado da magnitude M 2 do segundo terremoto, expresso com uma casa decimal, é igual a A 5,4. B 6,2. C 7,6. D 8,2. E 8,4. ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM20E4ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024 27 • MATEMÁTICA E SUAS TECNOLOGIAS • 2 º DIA • CADERNO 7 • AZUL",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q107.png",
+    "legendaImagem": "QUESTÃO 17 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q108",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "A umidade relativa do ar é um dos indicadores utilizados na meteorologia para fazer previsões sobre o clima. O quadro apresenta as médias mensais, em porcentagem, da umidade relativa do ar em um período de seis meses consecutivos em uma cidade. Meses Maio Jun. Jul. Ago. Set. Out. Média mensal da umidade relativa do ar (%) 66 64 54 46 60 64 Nessa cidade, a mediana desses dados, em porcentagem, da umidade relativa do ar no período considerado foi A 56. B 58. C 59. D 60. E 62. QUESTÃO 180 Um hospital tem 7 médicos cardiologistas e 6 médicos neurologistas em seu quadro de funcionários. Para executar determinada atividade, a direção desse hospital formará uma equipe com 5 médicos, sendo, pelo menos, 3 cardiologistas. A expressão numérica que representa o número máximo de maneiras distintas de formar essa equipe é A 7 4 6 4 ! ! ! ! × B 7 3 4 6 2 4 ! ! ! ! ! ! × × × C 7 3 4 6 2 4 5 1 4 ! ! ! ! ! ! ! ! ! � � � � � D 7 3 4 6 2 4 7 4 3 6 1 5 7 5 2 6 0 6 ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! � � � � � � � � � � � � � � � � � � � � � � � ! � � � � � � E 7 3 4 6 2 4 7 4 3 6 1 5 7 5 2 6 0 6 ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! � � � � � � � � � � � � � � � � � � � � � � � ! � � � � � � ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM20E4ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024 ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024ENEM2024 31 • MATEMÁTICA E SUAS TECNOLOGIAS • 2 º DIA • CADERNO 7 • AZUL",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf",
+    "imagem": "assets/enem/2024/ENEM2024-D2-AZUL-Q108.png",
+    "legendaImagem": "QUESTÃO 18 — Caderno Azul (ENEM 2024)"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q109",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 109 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q110",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 110 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q111",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 111 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q112",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 112 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q113",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 113 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q114",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 114 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q115",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 115 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q116",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 116 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q117",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 117 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q118",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 118 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q119",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 119 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q120",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 120 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q121",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 121 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q122",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 122 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q123",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 123 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q124",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 124 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q125",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 125 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q126",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 126 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q127",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 127 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q128",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 128 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q129",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 129 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q130",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 130 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q131",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 131 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q132",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 132 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q133",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 133 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q134",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 134 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q135",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Ciências da Natureza",
+    "enunciado": "Questão 135 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q136",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 136 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q137",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 137 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q138",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 138 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q139",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 139 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q140",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 140 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q141",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 141 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q142",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 142 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q143",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 143 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q144",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 144 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q145",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 145 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q146",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 146 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q147",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 147 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q148",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 148 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q149",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 149 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q150",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 150 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q151",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 151 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q152",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 152 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q153",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 153 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q154",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 154 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q155",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 155 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q156",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 156 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q157",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 157 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q158",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 158 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q159",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 159 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q160",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 160 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q161",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 161 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q162",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 162 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q163",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 163 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q164",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 164 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q165",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 165 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q166",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 166 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q167",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 167 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q168",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 168 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q169",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 169 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q170",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 170 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q171",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 171 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q172",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 172 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q173",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 173 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q174",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 174 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q175",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 175 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q176",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 176 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q177",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 177 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q178",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 178 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q179",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 179 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  },
+  {
+    "id": "ENEM2024-D2-AZUL-Q180",
+    "ano": 2024,
+    "dia": 2,
+    "caderno": "Azul",
+    "area": "Matemática",
+    "enunciado": "Questão 180 (texto não localizado no PDF).",
+    "alternativas": [
+      "A) ",
+      "B) ",
+      "C) ",
+      "D) ",
+      "E) "
+    ],
+    "correta": "",
+    "fonte": "2024_PV_impresso_D2_CD7.pdf"
+  }
+];  // 50 questões reais mescladas 2022/2023 (Dia 1)
+  let idx = 0;
+
+  // ===== Gabaritos oficiais (Fonte: INEP PDFs) =====
+  // 2023 1º DIA Caderno 1 (Azul)
+  const G23 = {
+    1:'B',2:'B',3:'D',4:'A',5:'B',
+    6:'D',7:'A',8:'C',9:'E',10:'E',11:'D',12:'C',13:'C',14:'D',15:'B',
+    16:'A',17:'D',18:'B',19:'D',20:'E',21:'D',22:'C',23:'C',24:'E',25:'B',
+    26:'C',27:'A',28:'C',29:'E',30:'A',31:'C',32:'A',33:'A',34:'C',35:'A',
+    36:'A',37:'C',38:'A',39:'C',40:'B',41:'B',42:'E',43:'A',44:'A',45:'E'
+  };
+  // 2022 1º DIA Caderno 2 (Amarelo)
+  const G22 = {
+    1:'D',2:'E',3:'C',4:'D',5:'B',
+    6:'D',7:'D',8:'B',9:'C',10:'A',11:'B',12:'E',13:'D',14:'C',15:'A',
+    16:'A',17:'A',18:'D',19:'C',20:'C',21:'E',22:'C',23:'E',24:'E',25:'B',
+    26:'A',27:'B',28:'E',29:'E',30:'A',31:'A',32:'A',33:'B',34:'D',35:'B',
+    36:'C',37:'C',38:'C',39:'A',40:'B',41:'E',42:'E',43:'C',44:'B',45:'B'
+  };
+
+  // ===== Util =====
+  const $ = (id)=>document.getElementById(id);
+  const pos = $('enem-pos'), qid = $('enem-id'), copyBtn = $('enem-copy');
+  const stem = $('enem-stem'), opts = $('enem-options'), fb = $('enem-feedback');
+  const prev = $('enem-prev'), next = $('enem-next'), answerBtn = $('enem-answer');
+  const save = $('enem-save');
+
+  function stripNoise(html){
+    if(!html) return '';
+    let t = html;
+    // corta cabeçalhos que vazaram
+    const cuts = [
+      /(?:^|\s)(QUEST(Ã|A)O|QUESTAO)\s+\d{1,3}.*$/is,
+      /LINGUAGENS,?\s+C[ÓO]DIGOS.*$/is,
+      /CI[ÊE]NCIAS\s+HUMANAS.*$/is,
+      /1[ºo]\s+DIA.*$/is
+    ];
+    cuts.forEach(re => t = t.replace(re, ''));
+    // remove duplicação de letra (ex: "A A texto")
+    t = t.replace(/^([A-E])\s[A-E]\s*/i, '$1) ');
+    return t.trim();
+  }
+
+  function getNumeroFromId(id){
+    const m = (id||'').match(/Q(\d{2})/);
+    return m ? parseInt(m[1],10) : null;
+  }
+
+  function corretaDe(q){
+    const n = getNumeroFromId(q.id);
+    if(!n) return '';
+    if(q.ano==2023) return G23[n] || '';
+    if(q.ano==2022) return G22[n] || '';
+    // fallback por id
+    if(/ENEM2023/.test(q.id)) return G23[n] || '';
+    if(/ENEM2022/.test(q.id)) return G22[n] || '';
+    return '';
+  }
+
+  function render(){
+    const total = DATA.length;
+    const q = DATA[idx];
+
+    // Prepara gabarito
+    q.correta = q.correta && q.correta.length===1 ? q.correta : corretaDe(q);
+
+    pos.textContent = `Questão ${idx+1} de ${total}`;
+    qid.textContent = q.id || `ENEM${q.ano||''}-Q${idx+1}`;
+
+    // Enunciado
+    stem.innerHTML = stripNoise(q.enunciado||'');
+
+    // Alternativas
+    opts.innerHTML = '';
+    const base = Array.isArray(q.alternativas) ? q.alternativas.slice(0,5) : [];
+    base.forEach((raw,i)=>{
+      // aceita formato "A) texto" ou só texto
+      const letra = ['A','B','C','D','E'][i];
+      let texto = String(raw||'');
+      // remove prefixos repetidos
+      texto = texto.replace(/^([A-E])\)\s*/i, '');
+      texto = stripNoise(texto);
+
+      const block = document.createElement('label');
+      block.className = 'enem-option';
+      const inp = document.createElement('input');
+      inp.type='radio'; inp.name='enem-alt'; inp.value=letra;
+      const ltr = document.createElement('div'); ltr.className='alt-letter'; ltr.textContent=letra;
+      const txt = document.createElement('div'); txt.className='alt-text'; txt.innerHTML = texto;
+      block.appendChild(inp); block.appendChild(ltr); block.appendChild(txt);
+      opts.appendChild(block);
+    });
+
+    // feedback/reset
+    fb.textContent = '';
+    fb.classList.remove('ok','no');
+    Array.from(opts.querySelectorAll('.enem-option')).forEach(el=>el.classList.remove('is-correct','is-wrong'));
+
+    // caderno
+    const saved = JSON.parse(localStorage.getItem('enem_card_'+q.id) || 'null');
+    save.checked = !!saved;
+  }
+
+  prev.addEventListener('click', (e)=>{ e.preventDefault(); if(idx>0){ idx--; render(); } });
+  next.addEventListener('click', (e)=>{ e.preventDefault(); if(idx<DATA.length-1){ idx++; render(); } });
+
+  answerBtn.addEventListener('click', ()=>{
+    const sel = document.querySelector('input[name=enem-alt]:checked');
+    if(!sel){ fb.textContent='Selecione uma alternativa.'; fb.classList.remove('ok','no'); return; }
+    const q = DATA[idx];
+    const chosen = sel.value;
+    const correta = q.correta || '';
+    // limpa classes
+    Array.from(opts.querySelectorAll('.enem-option')).forEach(el=>el.classList.remove('is-correct','is-wrong'));
+    // aplica realces
+    Array.from(opts.querySelectorAll('.enem-option')).forEach(el=>{
+      const r = el.querySelector('input[type=radio]');
+      if(!r) return;
+      if (r.value === correta) el.classList.add('is-correct');
+      if (r.value === chosen && chosen !== correta) el.classList.add('is-wrong');
+    });
+    // feedback textual
+    const ok = correta && chosen === correta;
+    fb.textContent = ok ? '✔ Resposta correta.' : '✖ Resposta incorreta.';
+    fb.classList.remove('ok','no');
+    fb.classList.add(ok ? 'ok' : 'no');
+  });
+
+  save.addEventListener('change', ()=>{
+    const q = DATA[idx];
+    if(save.checked) localStorage.setItem('enem_card_'+q.id, 'true');
+    else localStorage.removeItem('enem_card_'+q.id);
+  });
+
+  copyBtn.addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText(qid.textContent.trim()); copyBtn.textContent = '✅'; setTimeout(()=>copyBtn.textContent='📋', 800); }catch{}
+  });
+
+  // Render inicial
+  render();
+
+  // Expor globalmente (debug)
+  window.DATA = DATA;
+})();
+</script>
+<!-- ===== /ENEM CARDS ===== -->
+</footer></body>
 </html>
